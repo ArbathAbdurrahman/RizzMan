@@ -53,16 +53,16 @@ pip install -r requirements.txt
    - Database: db_rizzman
    - Port: 5432
 
-### Langkah 6: Membuat Superuser Django
+### Langkah 6: Menjalankan Migrasi
+```bash
+python manage.py migrate
+```
+
+### Langkah 7: Membuat Superuser Django
 ```bash
 python manage.py createsuperuser
 ```
 Ikuti petunjuk untuk membuat akun admin.
-
-### Langkah 7: Menjalankan Migrasi
-```bash
-python manage.py migrate
-```
 
 ### Langkah 8: Menjalankan Server Development
 ```bash
