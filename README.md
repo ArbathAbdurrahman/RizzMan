@@ -1,1 +1,1 @@
-Hello World
+RizzMen merupakan web untuk Risk Management
