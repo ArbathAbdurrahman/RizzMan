@@ -3,3 +3,14 @@
 @tailwind utilities;
 
 /* Tambahkan CSS kustom di bawah sini */
+.fufu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fufu img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
