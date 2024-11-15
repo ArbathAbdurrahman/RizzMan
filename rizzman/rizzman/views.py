@@ -5,3 +5,9 @@ def index(request):
         'title' : 'RizzMan'
     }
     return render(request,'index.html',context)
+
+def login(request):
+    context = {
+        'title' : 'RizzMan'
+    }
+    return render(request,'login.html',context)
