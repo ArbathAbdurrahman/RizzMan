@@ -604,20 +604,8 @@ video {
   display: flex;
 }
 
-.h-0\.5 {
-  height: 0.125rem;
-}
-
 .h-3 {
   height: 0.75rem;
-}
-
-.w-10 {
-  width: 2.5rem;
-}
-
-.w-1 {
-  width: 0.25rem;
 }
 
 .justify-center {
@@ -675,4 +663,9 @@ video {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
 }
