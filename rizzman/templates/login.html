@@ -5,35 +5,30 @@
     <title>Login Page</title>
 {% endblock title %}
 
-{% block content %}
+{% block content %} 
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
-    <header>
-        <div class="logo">
-            <img src="{% static 'img\bank.png' %}" alt="logo" class="h-3">
-            <h1>RizzMan</h1>
-        </div>
-        <div class="flex">
-            <div class="container">
-                <div class="loginBox flex justify-center align-middle bg-slate-800">
-                    <div class="wlcm">
-                        <h2>Welcome To RizzMan</h2>
-                        <div class="login">
-                            <h4">Log In</h4>
-                            <form action="" method="post">
-                                <div class="textBox">
-                                    <input type="email" name="email" placeholder="email" required>
-                                </div>
-                                <div class="textBox">
-                                    <input type="password" name="password" placeholder="password" required>
-                                </div>
-                            </form>
-                        </div>
+    <header class="w-full h-16 px-10 bg-white shadow justify-start items-center gap-2.5 inline-flex">
+        <img src="{% static 'img\bank.png' %}" alt="logo" class="w-9">
+        <h1 class="text-[#030303] text-2xl font-bold font-['Poppins']">RizzMan</h1>
+    </header>
+    <main class="flex justify-center flex-grow">
+        <div class="container m-5 py-10 px-36 flex items-center justify-center">
+            <div class="loginBox">
+                <div class="wlcm">
+                    <h2>Welcome To RizzMan</h2>
+                    <div class="login">
+                        <h4">Log In</h4>
+                        <form action="" method="post">
+                            <div class="textBox">
+                                <input type="email" name="email" placeholder="email" required>
+                            </div>
+                            <div class="textBox">
+                                <input type="password" name="password" placeholder="password" required>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div>
-            <h1 class="text-green-500" >Kalau text ini berwarna hijau berarti tailwind berfungsi</h1>
-        </div>
-    </header>
+    </main>
 {% endblock content %}

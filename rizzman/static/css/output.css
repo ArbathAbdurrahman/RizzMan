@@ -592,6 +592,10 @@ video {
   position: static;
 }
 
+.m-5 {
+  margin: 1.25rem;
+}
+
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -604,25 +608,73 @@ video {
   display: flex;
 }
 
-.h-3 {
-  height: 0.75rem;
+.inline-flex {
+  display: inline-flex;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.w-9 {
+  width: 2.25rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-center {
   justify-content: center;
 }
 
-.bg-slate-800 {
+.gap-2\.5 {
+  gap: 0.625rem;
+}
+
+.bg-white {
   --tw-bg-opacity: 1;
-  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.px-36 {
+  padding-left: 9rem;
+  padding-right: 9rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .text-center {
   text-align: center;
 }
 
-.align-middle {
-  vertical-align: middle;
+.font-\[\'Poppins\'\] {
+  font-family: 'Poppins';
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-4xl {
@@ -634,9 +686,20 @@ video {
   font-weight: 700;
 }
 
+.text-\[\#030303\] {
+  --tw-text-opacity: 1;
+  color: rgb(3 3 3 / var(--tw-text-opacity));
+}
+
 .text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 /* Tambahkan CSS kustom di bawah sini */
@@ -660,12 +723,20 @@ video {
 }
 
 .loginBox {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
+  height: 460px;
+  width: 860px;
+  flex-direction: column;
   align-items: center;
-}
-
-.logo img {
-  width: 100px;
-  height: auto;
+  justify-content: center;
+  gap: 0.625rem;
+  border-radius: 20px;
+  background-color: rgb(238 238 238 / 0.95);
+  padding-left: 155px;
+  padding-right: 155px;
+  padding-top: 2.5rem;
+  padding-bottom: 41px;
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }

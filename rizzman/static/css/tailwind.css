@@ -21,13 +21,7 @@
     align-items: center;
 }
 
-.loginBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.logo img {
-    width: 100px;
-    height: auto;
+.loginBox {
+    @apply w-[860px] h-[460px] px-[155px] pt-10 pb-[41px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex;
 }
