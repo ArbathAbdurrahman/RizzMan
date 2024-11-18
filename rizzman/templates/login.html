@@ -3,28 +3,32 @@
 
 {% block title %}
     <title>Login Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
 {% endblock title %}
 
 {% block content %} 
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
-    <header class="w-full h-16 px-10 bg-white shadow justify-start items-center gap-2.5 inline-flex">
+    <header class="w-full h-[68px] px-10 bg-white shadow justify-start items-center gap-2.5 inline-flex">
         <img src="{% static 'img\bank.png' %}" alt="logo" class="w-9">
         <h1 class="text-[#030303] text-2xl font-bold font-['Poppins']">RizzMan</h1>
     </header>
     <main class="flex justify-center flex-grow">
         <div class="container m-5 py-10 px-36 flex items-center justify-center">
-            <div class="loginBox">
-                <div class="wlcm">
-                    <h2>Welcome To RizzMan</h2>
-                    <div class="login">
-                        <h4">Log In</h4>
-                        <form action="" method="post">
-                            <div class="textBox">
-                                <input type="email" name="email" placeholder="email" required>
+            <div class="loginBox w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex">
+                <div class="wlcm w-[551px] h-[244px] flex-col justify-center items-center gap-4 inline-flex">
+                    <h2 class="text-center text-[#030303] text-[32px] font-bold font-['Poppins']">Welcome To RizzMan</h2>
+                    <div class="login w-[551px] h-[180px] flex-col justify-center items-start gap-2.5 inline-flex">
+                        <h4 class="h-[30px] text-[#030303] text-[22px] font-normal font-['Poppins']">Log In</h4>
+                        <form action="" method="post" class="self-stretch flex-col justify-center items-start gap-2.5 inline-flex">
+                            <div class="textBox self-stretch">
+                                <input type="email" name="email" placeholder="email" class="text-[#8a8a8a]/95 text-lg font-normal font-['Poppins'] w-[551px] h-[39px]" required>
                             </div>
-                            <div class="textBox">
-                                <input type="password" name="password" placeholder="password" required>
+                            <div class="textBox self-stretch">
+                                <input type="password" name="password" placeholder="password" class="text-[#8a8a8a]/95 text-lg font-normal font-['Poppins'] w-[551px] h-[39px]" required>
                             </div>
+                            <button type="submit" class="btn w-[551px] h-[39px] bg-[#5baa5b] text-center text-white text-lg font-normal font-['Poppins']">Login</button>
                         </form>
                     </div>
                 </div>
