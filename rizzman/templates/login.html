@@ -12,25 +12,28 @@
             <img src="{% static 'img\bank.png' %}" alt="logo" class="h-3">
             <h1>RizzMan</h1>
         </div>
-    </header>
-    <body class="flex">
-        <div class="container">
-            <div class="loginBox flex justify-center align-middle bg-slate-800">
-                <div class="wlcm">
-                    <h2>Welcome To RizzMan</h2>
-                    <div class="login">
-                        <h4">Log In</h4>
-                        <form action="" method="post">
-                            <div class="textBox">
-                                <input type="email" name="email" placeholder="email" required>
-                            </div>
-                            <div class="textBox">
-                                <input type="password" name="password" placeholder="password" required>
-                            </div>
-                        </form>
+        <div class="flex">
+            <div class="container">
+                <div class="loginBox flex justify-center align-middle bg-slate-800">
+                    <div class="wlcm">
+                        <h2>Welcome To RizzMan</h2>
+                        <div class="login">
+                            <h4">Log In</h4>
+                            <form action="" method="post">
+                                <div class="textBox">
+                                    <input type="email" name="email" placeholder="email" required>
+                                </div>
+                                <div class="textBox">
+                                    <input type="password" name="password" placeholder="password" required>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+        <div>
+            <h1 class="text-green-500" >Kalau text ini berwarna hijau berarti tailwind berfungsi</h1>
+        </div>
+    </header>
 {% endblock content %}
