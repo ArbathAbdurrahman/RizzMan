@@ -7,10 +7,25 @@
 
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
-    <header>
-        <div class="logo">
-            <img src="{% static 'img\bank.png' %}" alt="logo" width="100px" height="auto">
-            <h1>RizzMan</h1>
+    
+    <div class="flex flex-col items-center justify-center min-h-screen bg-background">
+    <div class="bg-card p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-foreground">Welcome to RizzMan</h1>
+        <form class="mt-6">
+        <div class="mb-4">
+            <label class="block text-sm text-muted-foreground" for="email">Email</label>
+            <input class="w-full p-2 border border-border rounded" type="email" id="email" placeholder="Enter your email" required />
         </div>
-    </header>
+        <div class="mb-4">
+            <label class="block text-sm text-muted-foreground" for="password">Password</label>
+            <input class="w-full p-2 border border-border rounded" type="password" id="password" placeholder="Enter your password" required />
+        </div>
+        <button class="w-full bg-primary text-primary-foreground p-2 rounded hover:bg-primary/80" type="submit">Log In</button>
+        </form>
+    </div>
+    <div class="mt-4 text-sm text-muted-foreground">
+        <a href="#" class="hover:underline">Privacy Policy</a> |
+        <a href="#" class="hover:underline">Terms of Service</a>
+    </div>
+    </div>
 {% endblock content %}
