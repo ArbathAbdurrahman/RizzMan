@@ -12,7 +12,8 @@
     
     {% endblock title %}
 </head>
-<body style="display: flex; flex-direction: column; min-height: 100vh;">
+<body class="body">
+    {% include 'nav.html' %}
     {% block content %}
     
     {% endblock content %}

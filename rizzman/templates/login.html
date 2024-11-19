@@ -3,35 +3,31 @@
 
 {% block title %}
     <title>Login Page</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    </style>
 {% endblock title %}
 
 {% block content %} 
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
-    <header class="w-full h-[68px] px-10 bg-white shadow justify-start items-center gap-2.5 inline-flex">
-        <img src="{% static 'img\bank.png' %}" alt="logo" class="w-9">
-        <h1 class="text-[#030303] text-2xl font-bold font-['Poppins']">RizzMan</h1>
-    </header>
-    <main class="flex justify-center flex-grow">
-        <div class="container m-5 py-10 px-36 flex items-center justify-center">
-            <div class="loginBox w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex">
-                <div class="wlcm w-[551px] h-[244px] flex-col justify-center items-center gap-4 inline-flex">
-                    <h2 class="text-center text-[#030303] text-[32px] font-bold font-['Poppins']">Welcome To RizzMan</h2>
-                    <div class="login w-[551px] h-[180px] flex-col justify-center items-start gap-2.5 inline-flex">
-                        <form action="" method="post" class="self-stretch flex-col justify-center items-start gap-2.5 inline-flex">
-                            <h4 class="h-[30px] text-[#030303] text-[22px] font-normal font-['Poppins']">Log In</h4>
-                            <input type="email" name="email" placeholder="email" class="text-black text-lg font-normal font-['Poppins'] w-[551px] h-[39px]" required>
-                            <input type="password" name="password" placeholder="password" class="text-black text-lg font-normal font-['Poppins'] w-[551px] h-[39px]" required>
-                            <button type="submit" class="btn w-[551px] h-[39px] bg-[#5baa5b] text-center text-white text-lg font-normal font-['Poppins']">Login</button>
+     
+    <main class="main">
+        <div class="container">
+            <div class="loginBox">
+                <div class="wlcm">
+                    <h2 class="text-center">Welcome To RizzMan</h2>
+                    <div class="login">
+                        <form action="" method="post" class="form">
+                            <h4 class="header4">Log In</h4>
+                            <input type="email" name="email" placeholder="email" class="kotak" required>
+                            <div class="flex flex-row justify-between w-full h-[39px] gap-0">
+                                <input type="password" name="password" placeholder="password" class="flex-grow kotak-pass" required>
+                                <div class="w-[50px] flex justify-center items-center m-0 border-[1px] border-l-0 border-[#8B8B8B] bg-white">
+                                    <a href=""><img src="{% static '\img\eye.png' %}" alt="see" class="w-[40px]"></a>
+                                </div>
+                            </div>
+                            <button type="submit" class="button text-center text-white text-lg font-normal font-['Poppins']">Login</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    <div class="cek container">
-        <h1>CEK</h1>
-    </div>
 {% endblock content %}

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 /* Tambahkan CSS kustom di bawah sini */
 .fufu {
     display: flex;
@@ -22,10 +24,63 @@
 }
 
 
-.loginBox {
-    @apply w-[860px] h-[460px] px-[155px] pt-10 pb-[41px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex;
+.body {
+    @apply flex flex-col h-screen;
 }
 
-.cek {
-    background-color: red;
+.head {
+    @apply w-full h-[68px] px-10 bg-white shadow justify-start items-center gap-2.5 inline-flex;
+}
+
+.header1 {
+    @apply text-[#030303] text-2xl font-bold font-['Poppins'];
+}
+
+.main {
+    @apply flex justify-center flex-grow;
+}
+
+.container {
+    @apply m-5 py-10 px-36 flex items-center justify-center;
+}
+
+.loginBox {
+    @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex;
+}
+
+.wlcm {
+    @apply w-[551px] h-[244px] flex-col justify-center items-center gap-4 inline-flex;
+}
+
+.text-center {
+    @apply text-[#030303] text-[32px] font-bold font-['Poppins'];
+}
+
+.login {
+    @apply w-[551px] h-[180px] flex-col justify-center items-start gap-2.5 inline-flex;
+}
+
+.show-pswd {
+    @apply flex 
+}
+
+.form {
+    @apply self-stretch flex-col justify-center items-start gap-2.5 inline-flex;
+}
+
+.header4 {
+    @apply h-[30px] text-[#030303] text-[22px] font-normal font-['Poppins'];
+}
+
+.kotak {
+    @apply text-black text-lg font-normal font-['Poppins'] w-[551px] h-[39px];
+@apply flex-grow;
+}
+
+.kotak-pass {
+@apply text-black text-lg font-normal font-['Poppins'] w-auto h-[39px];
+}
+
+.button {
+    @apply w-[551px] h-[39px] bg-[#5baa5b];
 }
