@@ -3,12 +3,12 @@
 
 {% block title %}
     <title>Login Page</title>
+    <script src="https://kit.fontawesome.com/385cd213ed.js" crossorigin="anonymous"></script>
 {% endblock title %}
 
-{% block content %} 
+{% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
-     
-    <main class="main">
+    <main>
         <div class="container">
             <div class="loginBox">
                 <div class="wlcm">
@@ -16,11 +16,13 @@
                     <div class="login">
                         <form action="" method="post" class="form">
                             <h4 class="header4">Log In</h4>
-                            <input type="email" name="email" placeholder="email" class="kotak" required>
+                            <input type="email" name="email" placeholder="email" class="kotak outline-none" required>
                             <div class="flex flex-row justify-between w-full h-[39px] gap-0">
-                                <input type="password" name="password" placeholder="password" class="flex-grow kotak-pass" required>
+                                <input type="password" name="password" id="password" placeholder="password" class="kotak outline-none" required>
                                 <div class="w-[50px] flex justify-center items-center m-0 border-[1px] border-l-0 border-[#8B8B8B] bg-white">
-                                    <a href=""><img src="{% static '\img\eye.png' %}" alt="see" class="w-[40px]"></a>
+                                    <div class="flex justify-center cursor-pointer" onclick="showPass()" role="button">
+                                        <i class="fa-regular fa-eye w-[30px] h-auto"></i>
+                                    </div>
                                 </div>
                             </div>
                             <button type="submit" class="button text-center text-white text-lg font-normal font-['Poppins']">Login</button>
