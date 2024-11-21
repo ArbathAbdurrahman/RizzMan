@@ -48,9 +48,6 @@
         @apply text-[#030303] text-2xl font-bold;
     }
     
-    .container {
-        @apply m-5 py-10 px-36 flex items-center justify-center;
-    }
     
     .loginBox {
         @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex;
@@ -87,8 +84,14 @@
     .button {
         @apply w-[551px] h-[39px] bg-[#5baa5b];
     }
+
+    
 }
 
 @layer utilities {
-
+    .blur-bg {
+        filter: blur(5px); /* Atur intensitas blur */
+        transition: filter 0.3s ease; /* Tambahkan animasi agar lebih halus */
+    }
 }
+

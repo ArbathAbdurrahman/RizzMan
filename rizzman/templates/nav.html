@@ -1,5 +1,43 @@
 {% load static %}
 <header>
-    <img src="{% static 'img\bank.png' %}" alt="logo" class="w-9">
-    <h1 class="header1">RizzMan</h1>
+    <div class="flex justify-between w-full flex-row">
+        <div class="logo flex flex-row">
+            <img src="{% static 'img/bank.png' %}" alt="logo" class="w-9">
+            <h1 class="header1">RizzMan</h1>
+        </div>
+        <div class="navBar justify-items-center content-center">
+            <ul class="flex flex-row gap-[10px]">
+                <li><a href="#">Home</a></li>
+                <li><button onclick="togglePopup()">Login</button></li>
+            </ul>
+        </div>
+    </div>
+    <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40" onclick="togglePopup()"></div>
 </header>
+
+<div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40" onclick="togglePopup()"></div>
+<div class="container hidden fixed inset-0 justify-center items-center z-50" id="loginPop">
+    <div class="loginBox">
+        <button class="absolute top-4 right-4" onclick="togglePopup()">
+            <i class="fa-solid fa-square-xmark fa-2x"></i>
+        </button>
+        <div class="wlcm">
+            <h2 class="text-center">Welcome To RizzMan</h2>
+            <div class="login">
+                <form action="" method="post" class="form">
+                    <h4 class="header4">Log In</h4>
+                    <input type="email" name="email" placeholder="email" class="kotak outline-none" required>
+                    <div class="flex flex-row justify-between w-full h-[39px] gap-0">
+                        <input type="password" name="password" id="password" placeholder="password" class="kotak outline-none" required>
+                        <div class="w-[50px] flex justify-center items-center m-0 border-[1px] border-l-0 border-[#8B8B8B] bg-white">
+                            <div class="flex justify-center cursor-pointer" onclick="showPass()" role="button">
+                                <i class="fa-regular fa-eye w-[30px] h-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="button text-center text-white text-lg font-normal font-['Poppins']">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
