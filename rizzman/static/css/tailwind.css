@@ -45,13 +45,18 @@
 
 @layer components {
     .header1 {
-        @apply text-[#030303] text-2xl font-bold;
+        @apply text-[#030303] text-2xl font-bold text-center;
     }
     
     
     .loginBox {
-        @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex;
+        @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex relative;
     }
+
+    .signUpBox {
+        @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex relative;
+    }
+
     
     .wlcm {
         @apply w-[551px] h-[244px] flex-col justify-center items-center gap-4 inline-flex;
@@ -72,9 +77,13 @@
     .form {
         @apply self-stretch flex-col justify-center items-start gap-2.5 inline-flex;
     }
+
+    .ket {
+        @apply flex justify-items-center flex-col;
+    }
     
     .header4 {
-        @apply h-[30px] text-[#030303] text-[22px] font-normal font-['Poppins'];
+        @apply text-[#030303] text-[15px] font-normal font-['Poppins'];
     }
     
     .kotak {
@@ -90,8 +99,23 @@
 
 @layer utilities {
     .blur-bg {
-        filter: blur(5px); /* Atur intensitas blur */
-        transition: filter 0.3s ease; /* Tambahkan animasi agar lebih halus */
+        @apply filter blur-sm transition ease-in-out duration-300;
+    }
+
+    .popup-enter {
+        @apply opacity-0 scale-95;
+    }
+
+    .popup-enter-active {
+        @apply opacity-100 scale-100 transition-transform ease duration-100;
+    }
+
+    .popup-exit {
+        @apply opacity-100 scale-100;
+    }
+
+    .popup-exit-active {
+        @apply opacity-0 scale-95 transition-transform ease duration-300;
     }
 }
 

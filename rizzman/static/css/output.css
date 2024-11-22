@@ -583,15 +583,6 @@ main {
   justify-content: center;
 }
 
-#overlay {
-  position: fixed;
-  inset: 0px;
-  z-index: 50;
-  display: none;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-  --tw-bg-opacity: 0.5;
-}
-
 .container {
   width: 100%;
 }
@@ -627,6 +618,8 @@ main {
 }
 
 .header1 {
+  font-size: 32px;
+  text-align: center;
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
@@ -634,19 +627,8 @@ main {
   color: rgb(3 3 3 / var(--tw-text-opacity));
 }
 
-.container {
-  margin: 1.25rem;
-  align-items: center;
-  justify-content: center;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-  padding-left: 9rem;
-  padding-right: 9rem;
-}
-
 .loginBox {
-  position: fixed;
-  z-index: 50;
+  position: relative;
   display: inline-flex;
   height: 353px;
   width: 700px;
@@ -697,10 +679,15 @@ main {
   align-self: stretch;
 }
 
+.ket {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
 .header4 {
-  height: 30px;
   font-family: 'Poppins';
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 400;
   --tw-text-opacity: 1;
   color: rgb(3 3 3 / var(--tw-text-opacity));
@@ -732,24 +719,32 @@ main {
   position: fixed;
 }
 
+.absolute {
+  position: absolute;
+}
+
 .inset-0 {
   inset: 0px;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
+.top-4 {
+  top: 1rem;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .z-50 {
   z-index: 50;
 }
 
-.m-0 {
-  margin: 0px;
-}
-
 .mb-6 {
   margin-bottom: 1.5rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
 }
 
 .block {
@@ -760,36 +755,28 @@ main {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .hidden {
   display: none;
-}
-
-.h-\[39px\] {
-  height: 39px;
-}
-
-.h-auto {
-  height: auto;
 }
 
 .w-9 {
   width: 2.25rem;
 }
 
-.w-\[30px\] {
-  width: 30px;
-}
-
-.w-\[50px\] {
-  width: 50px;
-}
-
 .w-full {
   width: 100%;
 }
 
-.cursor-pointer {
-  cursor: pointer;
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
 }
 
 .flex-row {
@@ -816,52 +803,21 @@ main {
   justify-items: center;
 }
 
-.gap-0 {
-  gap: 0px;
+.gap-3 {
+  gap: 0.75rem;
 }
 
 .gap-\[10px\] {
   gap: 10px;
 }
 
-.rounded {
-  border-radius: 0.25rem;
+.border-r-4 {
+  border-right-width: 4px;
 }
 
-.border-\[1px\] {
-  border-width: 1px;
-}
-
-.border-l-0 {
-  border-left-width: 0px;
-}
-
-.border-\[\#8B8B8B\] {
+.border-black {
   --tw-border-opacity: 1;
-  border-color: rgb(139 139 139 / var(--tw-border-opacity));
-}
-
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-opacity-50 {
-  --tw-bg-opacity: 0.5;
-}
-
-.p-2 {
-  padding: 0.5rem;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .text-center {
@@ -905,9 +861,9 @@ main {
   outline-offset: 2px;
 }
 
-.loginBox.show {
-  display: flex;
-  opacity: 1;
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 /* Tambahkan CSS kustom di bawah sini */
@@ -935,3 +891,4 @@ main {
   padding: 0;
   box-sizing: border-box;
 }
+
