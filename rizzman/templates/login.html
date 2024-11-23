@@ -8,13 +8,13 @@
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  --> 
 <div id="pageWrapper" class="h-full">
-    <main class="main h-full flex-row px-[10px] py-0 bg-[#90ee90] divide-x-4 divide-black">
-        <div class="basis-3/4 p-[10px] w-full justify-items-center">
-            <div class="profil card">
-                <div class="photoProfil mb-5">
-                    <img src="{% static 'img/download.jpg' %}" alt="profil" class="rounded-full w-[280px] border-4 border-black">
+    <main class="main h-full flex-row px-[10px] py-0 bg-[#BAFCA2] divide-x-4 divide-black">
+        <div class="basis-3/4 p-[10px] w-full flex justify-center align-middle">
+            <div class="profil cardRec p-8 flex flex-col gap-4">
+                <div class="photoProfil">
+                    <img src="{% static 'img/download.jpg' %}" alt="profil" class="rounded-full w-[270px] border-4 border-black">
                 </div>
-                <div>
+                <div class="flex flex-col justify-items-center">
                     <table class="user">
                         <tr>
                             <th>Nama</th>
@@ -41,17 +41,22 @@
                             <td>:</td>
                             <td>Dosen</td>
                         </tr>
+                        <tr>
+                            <th>Total Pengisian</th>
+                            <td>:</td>
+                            <td>10</td>
+                        </tr>
                     </table>    
                 </div>    
             </div>
         </div>
         <div class="basis-1/4 p-[10px]">
-            <div class="menu m-4 card">
-                <h1 class="mb-4 font-bold">Menu</h1>
-            <ul>
-                <li><a href="">Isi Formulir</a></li>
-                <li><a href="">lihat tabel</a></li>
-            </ul>
+            <div class="menu m-4 cardCir flex flex-col gap-5 p-[20px]">
+                <h1 class="font-bold text-2x1 text-center">Menu</h1>
+                <ul class="flex flex-col gap-5">
+                    <li><div class="buttonCir mb-[20px] flex justify-center align-middle"><a class="text-center text-[20px]" href="">Isi Formulir</a></div></li>
+                    <li><div class="buttonCir flex justify-center align-middle"><a class="text-center text-[20px]" href="">Lihat Tabel</a></div></li>
+                </ul>
             </div>
         </div>
     </main>

@@ -569,7 +569,7 @@ header {
   justify-content: flex-start;
   gap: 0.625rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(253 253 150 / var(--tw-bg-opacity));
   padding-left: 2.5rem;
   padding-right: 2.5rem;
 }
@@ -617,14 +617,16 @@ main {
 
 .header1 {
   font-size: 32px;
-  height: 30px;
-  text-align: center;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
   color: rgb(3 3 3 / var(--tw-text-opacity));
-  font-family: 'public sans';
+  height: auto;
+  text-align: center;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  font-family: 'Lexend Mega';
 }
 
 .loginBox {
@@ -637,9 +639,10 @@ main {
   justify-content: center;
   gap: 0.625rem;
   border-radius: 20px;
-  background-color: rgb(238 238 238 / 0.95);
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 238 238 / var(--tw-bg-opacity));
+  --tw-shadow: 8px 8px 0px rgba(0,0,0,1);
+  --tw-shadow-colored: 8px 8px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -693,7 +696,7 @@ main {
   color: rgb(3 3 3 / var(--tw-text-opacity));
 }
 
-.kotak {
+.BoxPlchdr {
   height: 39px;
   width: 551px;
   flex-grow: 1;
@@ -702,20 +705,34 @@ main {
   font-weight: 400;
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-  font-family: 'public sans';
+  font-family: 'Public Sans';
 }
 
-.button {
-  height: 39px;
-  width: 551px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(91 170 91 / var(--tw-bg-opacity));
-}
-
-.buttonNav {
+.buttonRec {
   height: 3rem;
-  width: 89px;
+  width: auto;
   cursor: pointer;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 214 179 / var(--tw-bg-opacity));
+  padding: 0.625rem;
+}
+
+.buttonRec:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 160 122 / var(--tw-bg-opacity));
+  --tw-shadow: 2px 2px 0px rgba(0,0,0,1);
+  --tw-shadow-colored: 2px 2px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.buttonCir {
+  height: 3rem;
+  width: auto;
+  cursor: pointer;
+  border-radius: 9999px;
   border-width: 2px;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
@@ -724,7 +741,7 @@ main {
   padding: 0.625rem;
 }
 
-.buttonNav:hover {
+.buttonCir:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(121 247 255 / var(--tw-bg-opacity));
   --tw-shadow: 2px 2px 0px rgba(0,0,0,1);
@@ -732,13 +749,9 @@ main {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.buttonNav:active {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 225 239 / var(--tw-bg-opacity));
-}
-
-.card {
-  height: auto;
+.cardRec {
+  height: -moz-fit-content;
+  height: fit-content;
   width: auto;
   place-content: center;
   border-width: 4px;
@@ -746,7 +759,22 @@ main {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-  padding: 2.5rem;
+  --tw-shadow: 8px 8px 0px rgba(0,0,0,1);
+  --tw-shadow-colored: 8px 8px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.cardCir {
+  height: -moz-fit-content;
+  height: fit-content;
+  width: auto;
+  place-content: center;
+  border-radius: 0.75rem;
+  border-width: 4px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-shadow: 8px 8px 0px rgba(0,0,0,1);
   --tw-shadow-colored: 8px 8px 0px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
@@ -793,16 +821,12 @@ main {
   margin: 1rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
 .mb-6 {
   margin-bottom: 1.5rem;
 }
 
-.mb-5 {
-  margin-bottom: 1.25rem;
+.mb-\[20px\] {
+  margin-bottom: 20px;
 }
 
 .block {
@@ -821,6 +845,10 @@ main {
   display: none;
 }
 
+.h-\[39px\] {
+  height: 39px;
+}
+
 .h-full {
   height: 100%;
 }
@@ -833,8 +861,12 @@ main {
   width: 2.25rem;
 }
 
-.w-\[280px\] {
-  width: 280px;
+.w-\[270px\] {
+  width: 270px;
+}
+
+.w-\[551px\] {
+  width: 551px;
 }
 
 .w-full {
@@ -851,6 +883,10 @@ main {
 
 .flex-row {
   flex-direction: row;
+}
+
+.flex-col {
+  flex-direction: column;
 }
 
 .content-center {
@@ -877,12 +913,16 @@ main {
   gap: 0.75rem;
 }
 
-.gap-\[10px\] {
-  gap: 10px;
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-5 {
   gap: 1.25rem;
+}
+
+.gap-\[10px\] {
+  gap: 10px;
 }
 
 .divide-x-4 > :not([hidden]) ~ :not([hidden]) {
@@ -913,13 +953,26 @@ main {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
-.bg-\[\#90ee90\] {
+.bg-\[\#87cceb\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(144 238 144 / var(--tw-bg-opacity));
+  background-color: rgb(135 204 235 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#BAFCA2\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(186 252 162 / var(--tw-bg-opacity));
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .p-\[10px\] {
   padding: 10px;
+}
+
+.p-\[20px\] {
+  padding: 20px;
 }
 
 .px-\[10px\] {
@@ -936,6 +989,10 @@ main {
   text-align: center;
 }
 
+.align-middle {
+  vertical-align: middle;
+}
+
 .font-\[\'Poppins\'\] {
   font-family: 'Poppins';
 }
@@ -943,6 +1000,10 @@ main {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.text-\[20px\] {
+  font-size: 20px;
 }
 
 .text-lg {
@@ -958,25 +1019,14 @@ main {
   font-weight: 400;
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.shadow-\[8px_8px_0px_rgba\(0\2c 0\2c 0\2c 1\)\] {
-  --tw-shadow: 8px 8px 0px rgba(0,0,0,1);
-  --tw-shadow-colored: 8px 8px 0px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.outline-none {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
 }
 
 .blur {

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend+Mega:wght@700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Tambahkan CSS kustom di bawah sini */
 .fufu {
@@ -37,7 +37,7 @@
     }
 
     header {
-        @apply w-full h-[68px] px-10 bg-white justify-start items-center gap-2.5 inline-flex;
+        @apply w-full h-[68px] px-10 bg-[#FDFD96] justify-start items-center gap-2.5 inline-flex;
     }
 
     main {
@@ -47,17 +47,17 @@
 
 @layer components {
     .header1 {
-        @apply text-[#030303] text-2xl font-bold text-center h-[30px];
-        font-family: 'public sans';
+        @apply text-black tracking-wide text-4xl font-semibold text-center h-auto;
+        font-family: 'Lexend Mega';
+    }
+
+    .descript {
+        @apply text-[#030303] font-normal text-[15px] text-justify;
     }
     
     
     .loginBox {
-        @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex relative;
-    }
-
-    .signUpBox {
-        @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex relative;
+        @apply w-[700px] h-[353px] bg-[#eeeeee] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
     }
 
     
@@ -89,21 +89,25 @@
         @apply text-[#030303] text-[15px] font-normal font-['Poppins'];
     }
     
-    .kotak {
+    .BoxPlchdr {
         @apply text-black text-lg font-normal w-[551px] h-[39px] flex-grow;
-        font-family: 'public sans';
-    }
-    
-    .button {
-        @apply w-[551px] h-[39px] bg-[#5baa5b];
+        font-family: 'Public Sans';
     }
 
-    .buttonNav {
-        @apply h-12 w-[89px] border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF] cursor-pointer;
+    .buttonRec {
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#F8D6B3] hover:bg-[#FFA07A] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer;
     }
 
-    .card {
-        @apply border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center p-10 w-auto h-auto;
+    .buttonCir {
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-full;
+    }
+
+    .cardRec {
+        @apply border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
+    }
+
+    .cardCir {
+        @apply border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
     }
 
     .user th {
