@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Tambahkan CSS kustom di bawah sini */
 .fufu {
@@ -27,25 +27,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Public Sans', sans-serif;
 }
 
 @layer base {
     body {
-        @apply flex flex-col h-screen font-['Poppins'];
+        @apply flex flex-col h-screen;
+        font-family: 'Public Sans';
     }
 
     header {
-        @apply w-full h-[68px] px-10 bg-white border-b-black justify-start items-center gap-2.5 inline-flex;
+        @apply w-full h-[68px] px-10 bg-white justify-start items-center gap-2.5 inline-flex;
     }
 
     main {
-        @apply flex justify-center flex-grow;
+        @apply flex justify-center flex-grow p-[10px];
     }
 }
 
 @layer components {
     .header1 {
         @apply text-[#030303] text-2xl font-bold text-center h-[30px];
+        font-family: 'public sans';
     }
     
     
@@ -88,6 +91,7 @@
     
     .kotak {
         @apply text-black text-lg font-normal w-[551px] h-[39px] flex-grow;
+        font-family: 'public sans';
     }
     
     .button {
@@ -97,6 +101,16 @@
     .buttonNav {
         @apply h-12 w-[89px] border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] active:bg-[#00E1EF] cursor-pointer;
     }
+
+    .card {
+        @apply border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center p-10 w-auto h-auto;
+    }
+
+    .user th {
+        @apply text-start p-1;
+    }
+
+
     
 }
 
