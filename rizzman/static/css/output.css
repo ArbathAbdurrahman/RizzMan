@@ -568,13 +568,12 @@ header {
   align-items: center;
   justify-content: flex-start;
   gap: 0.625rem;
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(0 0 0 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 main {
@@ -619,6 +618,7 @@ main {
 
 .header1 {
   font-size: 32px;
+  height: 30px;
   text-align: center;
   font-size: 1.5rem;
   line-height: 2rem;
@@ -709,6 +709,31 @@ main {
   width: 551px;
   --tw-bg-opacity: 1;
   background-color: rgb(91 170 91 / var(--tw-bg-opacity));
+}
+
+.buttonNav {
+  height: 3rem;
+  width: 89px;
+  cursor: pointer;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(166 250 255 / var(--tw-bg-opacity));
+  padding: 0.625rem;
+}
+
+.buttonNav:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(121 247 255 / var(--tw-bg-opacity));
+  --tw-shadow: 2px 2px 0px rgba(0,0,0,1);
+  --tw-shadow-colored: 2px 2px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.buttonNav:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 225 239 / var(--tw-bg-opacity));
 }
 
 .static {
