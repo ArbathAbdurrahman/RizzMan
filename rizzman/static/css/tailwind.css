@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend+Mega:wght@700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa:wght@300..700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lexend+Mega:wght@600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Tambahkan CSS kustom di bawah sini */
 .fufu {
@@ -27,13 +27,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Public Sans', sans-serif;
+    font-family: 'IBM Plex Mono','Public Sans', sans-serif;
 }
 
 @layer base {
     body {
         @apply flex flex-col h-screen;
-        font-family: 'Public Sans';
     }
 
     header {
@@ -47,8 +46,8 @@
 
 @layer components {
     .header1 {
-        @apply text-black tracking-wide text-4xl font-semibold text-center h-auto;
-        font-family: 'Lexend Mega';
+        @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
+        font-family: 'Comfortaa';
     }
 
     .descript {
@@ -91,7 +90,6 @@
     
     .BoxPlchdr {
         @apply text-black text-lg font-normal w-[551px] h-[39px] flex-grow;
-        font-family: 'Public Sans';
     }
 
     .buttonRec {

@@ -558,7 +558,6 @@ body {
   display: flex;
   height: 100vh;
   flex-direction: column;
-  font-family: 'Public Sans';
 }
 
 header {
@@ -622,11 +621,11 @@ main {
   text-align: center;
   font-size: 2.25rem;
   line-height: 2.5rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.025em;
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-  font-family: 'Lexend Mega';
+  font-family: 'Comfortaa';
 }
 
 .loginBox {
@@ -705,7 +704,6 @@ main {
   font-weight: 400;
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-  font-family: 'Public Sans';
 }
 
 .buttonRec {
@@ -1119,6 +1117,10 @@ main {
   font-family: 'Poppins';
 }
 
+.font-\[\'Comfortaa\'\] {
+  font-family: 'Comfortaa';
+}
+
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -1234,7 +1236,7 @@ input:focus, textarea:focus {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Public Sans', sans-serif;
+  font-family: 'IBM Plex Mono','Public Sans', sans-serif;
 }
 
 .hover\:bg-\[\#d7f2ed\]:hover {
