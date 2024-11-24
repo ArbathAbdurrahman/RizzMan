@@ -1,16 +1,16 @@
 {% load static %}
 <script src="https://kit.fontawesome.com/385cd213ed.js" crossorigin="anonymous"></script>
-<header class="border-b-4 border-black">
+<header class="border-b-4 border-black h-16 flex flex-shrink-0">
     <div class="flex justify-between w-full flex-row">
         <div class="logo flex flex-row justify-items-center content-center gap-3">
             <img src="{% static 'img/bank.png' %}" alt="logo" class="w-9">
             <h1 class="header1">RizzMan</h1>
         </div>
         <div class="navBar justify-items-center content-center">
-            <ul class="flex flex-row gap-[10px]">
-                <li><a class="buttonRec" href="#ke_home.html">Home</a></li>
-                <li><a class="buttonRec" href="#ke_daftar.html">Daftar</a></li>
-                <li><a class="buttonRec"  onclick="loginPopup()">Login</a></li>
+            <ul class="flex flex-row gap-[10px] h-auto">
+                <li><a class="buttonRec" href=''>Home</a></li>
+                <li><a class="buttonRec" id="signupBtn" href="/signup">Daftar</a></li>
+                <li><a class="buttonRec" onclick="loginPopup()">Login</a></li>
             </ul>
         </div>
     </div>
