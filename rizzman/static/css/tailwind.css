@@ -37,7 +37,7 @@
     }
 
     header {
-        @apply w-full h-[68px] px-10 bg-[#FDFD96] justify-start items-center gap-2.5 inline-flex;
+        @apply w-full h-[68px] px-10 bg-[#e5f4f1] justify-start items-center gap-2.5 inline-flex;
     }
 
     main {
@@ -57,7 +57,7 @@
     
     
     .loginBox {
-        @apply w-[700px] h-[353px] bg-[#eeeeee] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
+        @apply w-[700px] h-[353px] bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
     }
 
     
@@ -95,19 +95,19 @@
     }
 
     .buttonRec {
-        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#F8D6B3] hover:bg-[#FFA07A] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer;
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#ffe2e4] hover:bg-[#fbcdd0] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer;
     }
 
     .buttonCir {
-        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#A6FAFF] hover:bg-[#79F7FF] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-full;
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-full;
     }
 
     .cardRec {
-        @apply border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
+        @apply border-4 border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
     }
 
     .cardCir {
-        @apply border-4 border-black bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
+        @apply border-4 border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
     }
 
     .user th {
@@ -154,5 +154,12 @@
         -moz-appearance: textfield;
         appearance: textfield;
     }
+
+    input:focus, textarea:focus {
+        outline: none !important;
+        box-shadow: none !important; /* Untuk elemen yang menggunakan shadow */
+        border-color: initial !important; /* Untuk elemen yang menggunakan border */
+      }
+      
 }
 

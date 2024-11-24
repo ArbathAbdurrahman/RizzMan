@@ -3,9 +3,15 @@
 
 {% block title %}
     <title>Sign Up</title>
+    <style>
+        #signupBtn {
+            display: none;
+        }
+    </style>
 {% endblock title %}
 
 {% block content %}
+<main class="bg-[#e7e9fe]">
     <div id="pageWrapper">
         <div class="signupBox flex flex-col justify-items-center h-auto w-auto m-3 gap-3">
             <h2 class="text-center">Sign Up</h2>
@@ -34,7 +40,7 @@
                     </button>
                         
                     <!-- Dropdown menu -->
-                    <div id="dropdownRadioBgHover" class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+                    <div id="dropdownRadioBgHover" class="z-10 hidden w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioBgHoverButton">
                             <li>
                                 <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
@@ -76,11 +82,12 @@
                         <input type="date" name="tanggalLahir" class="BoxPlchdr" required>
                     </div>
 
-                    <button type="submit" class="w-[551px] h-[39px] bg-[#87cceb] text-center text-black text-lg font-normal font-['Poppins']">Sign Up</button>
+                    <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal font-['Poppins']">Sign Up</button>
                 </form>
             </div>
         </div>
     </div>
+</main>
 
     <script>
         document.getElementById('dropdownRadioBgHoverButton').addEventListener('click', function() {
