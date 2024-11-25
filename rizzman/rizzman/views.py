@@ -6,11 +6,11 @@ def index(request):
     }
     return render(request,'index.html',context)
 
-def login(request):
+def profile(request):
     context = {
         'title' : 'RizzMan'
     }
-    return render(request,'login.html',context)
+    return render(request,'profile.html',context)
 
 def signup(request):
     context = {

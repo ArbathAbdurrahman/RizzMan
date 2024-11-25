@@ -81,7 +81,7 @@
     }
 
     .ket {
-        @apply flex justify-items-center flex-col;
+        @apply flex justify-items-center flex-col w-full;
     }
     
     .header4 {
@@ -89,7 +89,7 @@
     }
     
     .BoxPlchdr {
-        @apply text-black text-lg font-normal w-[551px] h-[39px] flex-grow;
+        @apply text-black text-lg font-normal w-full;
     }
 
     .buttonRec {
@@ -97,7 +97,7 @@
     }
 
     .buttonCir {
-        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-full;
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
     }
 
     .cardRec {
@@ -153,10 +153,15 @@
         appearance: textfield;
     }
 
-    input:focus, textarea:focus {
+    input:focus, textarea:focus, select:focus {
         outline: none !important;
         box-shadow: none !important; /* Untuk elemen yang menggunakan shadow */
         border-color: initial !important; /* Untuk elemen yang menggunakan border */
+      }
+
+      select option:hover {
+        background-color: #d7f2ed; /* Warna latar belakang saat hover */
+        color: black; /* Warna teks saat hover */
       }
       
 }

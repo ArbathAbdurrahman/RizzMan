@@ -3,14 +3,13 @@
 <header class="border-b-4 border-black h-16 flex flex-shrink-0">
     <div class="flex justify-between w-full flex-row">
         <div class="logo flex flex-row justify-items-center content-center gap-3">
-            <h1 class="header1">RizzMan</h1>
+            <h1><a class="header1" href="{% url 'home' %}">RizzMan</a></h1>
         </div>
         <div class="navBar justify-items-center content-center">
             <ul class="flex flex-row gap-[10px] h-auto">
-                <li><a class="buttonRec" href='http://127.0.0.1:8000/'>Home</a></li>
-                <li><a class="buttonRec" href='{% url "forms" %}'>Forms</a></li>
-                <li><a class="buttonRec" id="signupBtn" href="/signup">Daftar</a></li>
+                <li><a class="buttonRec" id="signupBtn" href="{% url 'signup' %}">Daftar</a></li>
                 <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
+                <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
             </ul>
         </div>
     </div>
@@ -34,8 +33,10 @@
                         <h4 class="header4">Password</h4>
                         <input type="password" name="password" placeholder="password" class="BoxPlchdr" required>
                     </div>
-                <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button>
+                <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
+                <!-- jika submit maka akan menuju ke profile.html -->
                 </form>
+                <p>Belum daftar? <a href="{% url 'signup' %}" class="text-blue-500">daftar di sini</a></p>
             </div>
         </div>
     </div>
