@@ -11,3 +11,9 @@ def login(request):
         'title' : 'RizzMan'
     }
     return render(request,'login.html',context)
+
+def signup(request):
+    context = {
+        'title' : 'RizzMan'
+    }
+    return render(request,'signup.html',context)

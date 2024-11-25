@@ -1,26 +1,32 @@
 // Tambahkan javascript disini 
-let isColorChanged = false;
+function loginPopup() {
+    const popup = document.getElementById('loginPop');
+    const overlay = document.getElementById('overlay');
+    const pageWrapper = document.getElementById('pageWrapper');
 
-document.getElementById('ubah-warna-bg').addEventListener('click', () => {
-    const loginContainer = document.getElementById('login-container');
-    if (loginContainer) {
-        if (!isColorChanged) {
-            loginContainer.classList.remove('bg-gray-100');
-            loginContainer.classList.add('bg-green-500');
-            isColorChanged = true;
-        } else {
-            loginContainer.classList.remove('bg-green-500');
-            loginContainer.classList.add('bg-gray-100');
-            isColorChanged = false;
-        }
-    }
-});
+    if (popup.classList.contains('hidden')) {
+        // Saat popup dibuka
+        popup.classList.remove('hidden');
+        popup.classList.add('popup-enter'); // Tambahkan animasi masuk
+        overlay.classList.remove('hidden');
+        pageWrapper.classList.add('blur-bg');
 
-function showPass() {
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-        x.type = "text";
+        // Hapus kelas animasi setelah animasi selesai
+        setTimeout(() => {
+            popup.classList.remove('popup-enter');
+            popup.classList.add('flex'); // Tetapkan gaya flex setelah masuk
+        }, 100); // Durasi animasi sesuai dengan CSS (0.3s)
     } else {
-        x.type = "password";
+        // Saat popup ditutup
+        popup.classList.remove('flex');
+        popup.classList.add('popup-exit-active'); // Tambahkan animasi keluar
+        overlay.classList.add('hidden');
+        pageWrapper.classList.remove('blur-bg');
+
+        // Sembunyikan popup setelah animasi selesai
+        setTimeout(() => {
+            popup.classList.add('hidden');
+            popup.classList.remove('popup-exit-active');
+        }, 300); // Durasi animasi sesuai dengan CSS (0.3s)
     }
 }

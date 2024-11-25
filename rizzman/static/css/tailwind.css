@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comfortaa:wght@300..700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lexend+Mega:wght@600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Tambahkan CSS kustom di bawah sini */
 .fufu {
@@ -27,34 +27,38 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'IBM Plex Mono','Public Sans', sans-serif;
 }
 
 @layer base {
     body {
-        @apply flex flex-col h-screen font-['Poppins'];
+        @apply flex flex-col h-screen;
     }
 
     header {
-        @apply w-full h-[68px] px-10 bg-white shadow justify-start items-center gap-2.5 inline-flex;
+        @apply w-full h-[68px] px-10 bg-[#e5f4f1] justify-start items-center gap-2.5 inline-flex;
     }
 
     main {
-        @apply flex justify-center flex-grow;
+        @apply flex justify-center flex-grow p-[10px];
     }
 }
 
 @layer components {
     .header1 {
-        @apply text-[#030303] text-2xl font-bold;
+        @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
+        font-family: 'Comfortaa';
+    }
+
+    .descript {
+        @apply text-[#030303] font-normal text-[15px] text-justify;
     }
     
-    .container {
-        @apply m-5 py-10 px-36 flex items-center justify-center;
-    }
     
     .loginBox {
-        @apply w-[700px] h-[353px] bg-[#eeeeee]/95 rounded-[20px] shadow flex-col justify-center items-center gap-2.5 inline-flex;
+        @apply w-[700px] h-[353px] bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
     }
+
     
     .wlcm {
         @apply w-[551px] h-[244px] flex-col justify-center items-center gap-4 inline-flex;
@@ -75,20 +79,85 @@
     .form {
         @apply self-stretch flex-col justify-center items-start gap-2.5 inline-flex;
     }
+
+    .ket {
+        @apply flex justify-items-center flex-col;
+    }
     
     .header4 {
-        @apply h-[30px] text-[#030303] text-[22px] font-normal font-['Poppins'];
+        @apply text-[#030303] text-[15px] font-normal font-['Poppins'];
     }
     
-    .kotak {
+    .BoxPlchdr {
         @apply text-black text-lg font-normal w-[551px] h-[39px] flex-grow;
     }
-    
-    .button {
-        @apply w-[551px] h-[39px] bg-[#5baa5b];
+
+    .buttonRec {
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#ffe2e4] hover:bg-[#fbcdd0] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer;
     }
+
+    .buttonCir {
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-full;
+    }
+
+    .cardRec {
+        @apply border-4 border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
+    }
+
+    .cardCir {
+        @apply border-4 border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
+    }
+
+    .user th {
+        @apply text-start p-1;
+    }
+
+    
 }
 
 @layer utilities {
+    .blur-bg {
+        filter: blur(4px);
+        transition: filter 0.3s ease-in-out;
+    }
 
+    .popup-enter {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    .popup-enter-active {
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.1s ease, transform 0.1s ease;
+    }
+
+    .popup-exit {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .popup-exit-active {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+
+    input:focus, textarea:focus {
+        outline: none !important;
+        box-shadow: none !important; /* Untuk elemen yang menggunakan shadow */
+        border-color: initial !important; /* Untuk elemen yang menggunakan border */
+      }
+      
 }
+
