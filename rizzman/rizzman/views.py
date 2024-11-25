@@ -17,3 +17,9 @@ def signup(request):
         'title' : 'RizzMan'
     }
     return render(request,'signup.html',context)
+
+def forms(request):
+    context = {
+        'title' : 'RizzMan'
+    }
+    return render(request,'forms.html',context)
