@@ -23,3 +23,8 @@ def forms(request):
         'title' : 'RizzMan'
     }
     return render(request,'forms.html',context)
+def tabel(request):
+    context = {
+        'title' : 'RizzMan'
+    }
+    return render(request,'tabel.html',context)

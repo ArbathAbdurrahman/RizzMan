@@ -13,5 +13,6 @@ urlpatterns = [
     path('profile/',views.profile,name='profile'),
     path('signup/',views.signup,name='signup'),
     path('forms/',views.forms,name='forms'),
+    path('tabel/',views.tabel,name='tabel'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #load gambar
