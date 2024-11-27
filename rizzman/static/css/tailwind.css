@@ -32,7 +32,7 @@
 
 @layer base {
     body {
-        @apply flex flex-col h-screen;
+        @apply flex flex-col h-screen justify-between;
     }
 
     header {
@@ -40,7 +40,7 @@
     }
 
     main {
-        @apply flex justify-center flex-grow p-[10px];
+        @apply flex justify-center flex-grow p-[10px] mb-auto;
     }
 }
 
@@ -101,16 +101,15 @@
     }
 
     .cardRec {
-        @apply border-4 border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
+        @apply border-[3.4px] border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
     }
 
     .cardCir {
-        @apply border-4 border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
+        @apply border-[3.4px] border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
     }
 
-    .user th {
-        @apply text-start p-1;
-    }
+
+
 
     
 }
@@ -157,12 +156,25 @@
         outline: none !important;
         box-shadow: none !important; /* Untuk elemen yang menggunakan shadow */
         border-color: initial !important; /* Untuk elemen yang menggunakan border */
-      }
+    }
 
-      select option:hover {
-        background-color: #d7f2ed; /* Warna latar belakang saat hover */
-        color: black; /* Warna teks saat hover */
+    select option:hover {
+    background-color: #d7f2ed; /* Warna latar belakang saat hover */
+    color: black; /* Warna teks saat hover */
+    }
+
+    #overlayBox {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
       }
-      
 }
 
