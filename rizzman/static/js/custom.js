@@ -30,16 +30,3 @@ function loginPopup() {
         }, 300); // Durasi animasi sesuai dengan CSS (0.3s)
     }
 }
-
-const openBtn = document.querySelector('#open-btn');
-const overlay = document.getElementById('overlay');
-
-openBtn.addEventListener('click', () => {
-    HSOverlay.open('#hs-unstyled-modal');
-    overlay.classList.remove('hidden');
-});
-
-overlay.addEventListener('click', () => {
-    HSOverlay.close('#hs-unstyled-modal');
-    overlay.classList.add('hidden');
-});

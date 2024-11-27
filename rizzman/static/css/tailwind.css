@@ -50,6 +50,11 @@
         font-family: 'Comfortaa';
     }
 
+    .header3 {
+        @apply text-black text-[26px] font-medium h-auto;
+        font-family: 'Comfortaa';
+    }
+
     .descript {
         @apply text-[#030303] font-normal text-[15px] text-justify;
     }
@@ -57,6 +62,10 @@
     
     .loginBox {
         @apply w-[700px] h-[353px] bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
+    }
+
+    .editBox {
+        @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-4/5 px-14 py-5;
     }
 
     
@@ -162,19 +171,5 @@
     background-color: #d7f2ed; /* Warna latar belakang saat hover */
     color: black; /* Warna teks saat hover */
     }
-
-    #overlayBox {
-        position: fixed; /* Sit on top of the page content */
-        display: none; /* Hidden by default */
-        width: 100%; /* Full width (cover the whole page) */
-        height: 100%; /* Full height (cover the whole page) */
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-        cursor: pointer; /* Add a pointer on hover */
-      }
 }
 
