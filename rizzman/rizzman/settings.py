@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rizzman'
 ]
 
 MIDDLEWARE = [
@@ -65,9 +66,9 @@ WSGI_APPLICATION = 'rizzman.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_rizzman',  # Nama database
+        'NAME': 'template1',  # Nama database
         'USER': 'postgres',      # Nama user PostgreSQL
-        'PASSWORD': 'admin123',  # Password user PostgreSQL
+        'PASSWORD': 'testing',  # Password user PostgreSQL
         'HOST': 'localhost',     # Host database (umumnya 'localhost' untuk lokal)
         'PORT': '5432',          # Port PostgreSQL (default: 5432)
     }

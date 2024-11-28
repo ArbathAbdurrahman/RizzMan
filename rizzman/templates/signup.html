@@ -1,0 +1,14 @@
+
+<head>
+<title> Buat akun </title>
+</head>
+
+<body>
+<form method="POST" action="/signup/">
+{% csrf_token %}
+
+<input type="email" name="email">
+<br>
+<input type="password" name="password">
+<input type="submit">
+</body>
