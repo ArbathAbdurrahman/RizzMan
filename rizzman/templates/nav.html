@@ -1,5 +1,43 @@
 {% load static %}
-<header class="head">
-    <img src="{% static 'img\bank.png' %}" alt="logo" class="w-9">
-    <h1 class="header1">RizzMan</h1>
+<script src="https://kit.fontawesome.com/385cd213ed.js" crossorigin="anonymous"></script>
+<header class="border-b-4 border-black h-16 flex flex-shrink-0">
+    <div class="flex justify-between w-full flex-row">
+        <div class="logo flex flex-row justify-items-center content-center gap-3">
+            <h1><a class="header1" href="{% url 'home' %}">RizzMan</a></h1>
+        </div>
+        <div class="navBar justify-items-center content-center">
+            <ul class="flex flex-row gap-[10px] h-auto">
+                <li><a class="buttonRec" id="signupBtn" href="{% url 'signup' %}">Daftar</a></li>
+                <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
+                <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
+            </ul>
+        </div>
+    </div>
 </header>
+
+<div id="overlay" class="hidden fixed inset-0 z-40" onclick="loginPopup()"></div>
+<div class="container hidden fixed inset-0 justify-center items-center z-50" id="loginPop">
+    <div class="loginBox">
+        <button class="absolute top-4 right-4" onclick="loginPopup()">
+            <i class="fa-solid fa-square-xmark fa-2x"></i>
+        </button>
+        <div class="wlcm">
+            <h2 class="text-center font-['Comfortaa']">Log In</h2>
+            <div class="login">
+                <form action="" method="post" class="form">
+                    <div class="ket">
+                        <h4 class="header4">Email</h4>
+                        <input type="email" name="email" placeholder="email" class="BoxPlchdr" required>
+                    </div>
+                    <div class="ket">
+                        <h4 class="header4">Password</h4>
+                        <input type="password" name="password" placeholder="password" class="BoxPlchdr" required>
+                    </div>
+                <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
+                <!-- jika submit maka akan menuju ke profile.html -->
+                </form>
+                <p>Belum daftar? <a href="{% url 'signup' %}" class="text-blue-500">daftar di sini</a></p>
+            </div>
+        </div>
+    </div>
+</div>

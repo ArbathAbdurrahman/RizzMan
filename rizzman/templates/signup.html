@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Sign Up</title>
+    <style>
+        #signupBtn {
+            display: none;
+        }
+        #profileBtn {
+            display: none;
+        }
+    </style>
+{% endblock title %}
+
+{% block content %}
+<main class="bg-[#e7e9fe]">
+    <div id="pageWrapper">
+        <div class="signupBox flex flex-col justify-items-center h-auto w-auto m-3 gap-3">
+            <h2 class="text-center font-['Comfortaa']">Sign Up</h2>
+            <div class="signup flex place-content-center">
+                <form action="" method="post" class="form">
+                    <div class="ket">
+                        <h4 class="header4">Email</h4>
+                        <input type="email" name="email" placeholder="email" class="BoxPlchdr" required>
+                    </div>
+                    <div class="ket">
+                        <h4 class="header4">Password</h4>
+                        <input type="password" name="password" placeholder="password" class="BoxPlchdr" required>
+                    </div>
+                    <div class="ket">
+                        <h4 class="header4">Confirm Password</h4>
+                        <input type="password" name="password" placeholder="password" class="BoxPlchdr" required>
+                    </div>
+                    <div class="ket">
+                        <label class="header4">Nama</label>
+                        <input type="text" name="nama" placeholder="nama" class="BoxPlchdr" required>
+                    </div>
+                    <div class="ket">
+                        <label class="header4">Jabatan</label>
+                        <select id="jabatan" class="buttonCir w-full">
+                          <option value="rektor">Rektor</option>
+                          <option value="fakultas">Fakultas</option>
+                          <option value="prodi">Prodi</option>
+                          <option value="dosen">Dosen</option>
+                        </select>    
+                    </div>
+                    <div class="ket">
+                        <h4 class="header4">Nomor Induk</h4>
+                        <input type="number" name="NomorInduk" placeholder="Nomor Induk" class="BoxPlchdr remove-arrow" required>
+                    </div>
+                    <div class="ket">
+                        <h4 class="header4">Alamat</h4>
+                        <input type="text" name="alamat" placeholder="alamat" class="BoxPlchdr" required>
+                    </div>
+                    <div class="ket">
+                        <h4 class="header4">Tanggal Lahir</h4>
+                        <input type="date" name="tanggalLahir" class="BoxPlchdr" required>
+                    </div>
+
+                    <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <script>
+        document.getElementById('dropdownRadioBgHoverButton').addEventListener('click', function() {
+            var dropdown = document.getElementById('dropdownRadioBgHover');
+            dropdown.classList.toggle('hidden');
+        });
+    </script>
+{% endblock content %}
