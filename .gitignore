@@ -1,6 +1,6 @@
 /venv/
 /node_modules/
-# rizzman/static/css/output.css
+rizzman/static/css/output.css
 
 # Python files
 *.pyc
