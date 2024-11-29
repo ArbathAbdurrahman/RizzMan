@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 
 
 class Department(models.Model):
@@ -72,3 +75,17 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+    
+# Signal untuk membuat profil pengguna saat user baru dibuat
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """Signal untuk membuat profil pengguna ketika user baru dibuat."""
+    if created:
+        UserProfile.objects.create(user=instance)
+        print(f"User profile for {instance.username} has been created.")
+
+# Signal untuk menyimpan profil pengguna saat user diperbarui
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    """Signal untuk menyimpan profil pengguna ketika user diperbarui."""
+    instance.profile.save()
