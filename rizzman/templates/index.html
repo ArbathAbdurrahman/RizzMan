@@ -3,12 +3,22 @@
 
 {% block title %}
     <title>RizzMan</title>
+    <style>
+        #profileBtn {
+            display: none;
+        }
+    </style>
 {% endblock title %}
 
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
-    <h1 class="text-4xl font-bold mb-6 text-center text-red-600">AYO AYO GANYANG FUFUFAFA</h1>
-    <div class="fufu">
-        <img src="static\img\download.jpg" alt="fufu">
-    </div>
+    <!-- ini untuk blur ketika popup login muncul -->
+     <main>
+        <div id="pageWrapper"> 
+            <div class="fufu">
+                <img src="{% static 'img\herta.jpg' %}" alt="fufu">
+            </div>
+         </div>
+    
+     </main>
 {% endblock content %}

@@ -10,8 +10,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='home'),
-    path('testing/',views.home,name='testing'),
+    path('profile/',views.profile,name='profile'),
+    path('signup/',views.signup,name='signup'),
+    path('forms/',views.forms,name='forms'),
+    path('tabel/',views.tabel,name='tabel'),
     path('login/',views.login,name='login'),
-    path('signup/',views.create_user,name='signup'),
-    path('logout/',views.logout,name='logout')
+    path('logout',views.logout,name='logout'),
+    path('chart/',views.chart,name='chart')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #load gambar
+
+hander404 = "views.handler404"

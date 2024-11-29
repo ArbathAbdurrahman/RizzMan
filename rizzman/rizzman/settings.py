@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'rizzman.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'template1',  # Nama database
+        'NAME': 'rizz1',  # Nama database
         'USER': 'postgres',      # Nama user PostgreSQL
         'PASSWORD': 'testing',  # Password user PostgreSQL
         'HOST': 'localhost',     # Host database (umumnya 'localhost' untuk lokal)

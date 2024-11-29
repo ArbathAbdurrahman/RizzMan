@@ -32,6 +32,7 @@ class Risk(models.Model):
     created = models.DateField(auto_now_add=True)
     modified = models.DateField(auto_now=True)
     total_modifikasi = models.IntegerField(default=0)
+    kode_resiko = models.CharField(max_length=255)
 
     def __str__(self):
         return f"Risk {self.kode_resiko} - {self.tujuan}"
@@ -40,12 +41,13 @@ class UserProfile(models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     user = models.TextField()
     password = models.TextField()
+    namalengkap= models.CharField(max_length=300,null=True,blank=True,default='Unknown')
     nomor_induk = models.CharField(max_length=50,default=None,null=True)
     jabatan = models.CharField(max_length=100,default=None)
-    gelar = models.CharField(max_length=100, blank=True, null=True)
+    gelar = models.CharField(max_length=100, blank=True,null=True,default="Unknown")
     alamat = models.TextField(default=None)
     tanggal_lahir = models.DateField(default=None)
-    foto = models.ImageField(upload_to='user_photos/', blank=True, null=True,default=None)
+    foto = models.ImageField(upload_to='user_photos/', blank=True, null=True,default="user_photos/herta.jpg")
     total_pengisian = models.IntegerField(default=0)
 
     def __str__(self):

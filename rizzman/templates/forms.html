@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>RizzMan</title>
+    <style>
+        #signupBtn {
+            display: none;
+        }
+        #loginBtn {
+            display: none;
+        }
+    </style>
+{% endblock title %}
+
+{% block content %}
+    <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
+    <div class="max-w-4xl mx-auto p-4 bg-white shadow rounded-lg">
+        <h2 class="text-xl font-semibold mb-4">Form Risiko</h2>
+        <form action="#" method="post" class="space-y-4">
+            {% csrf_token %}
+            <!-- Tujuan -->
+            <div>
+                <label for="tujuan" class="block text-sm font-medium text-gray-700">Tujuan</label>
+                <input type="text" id="tujuan" name="tujuan" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            
+            <!-- Proses Bisnis -->
+            <div>
+                <label for="proses_bisnis" class="block text-sm font-medium text-gray-700">Proses Bisnis</label>
+                <select id="proses_bisnis" name="proses_bisnis" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Pilih Proses Bisnis</option>
+                    <!-- Tambahkan opsi di sini -->
+                </select>
+            </div>
+            
+            <!-- Kelompok Resiko -->
+            <div>
+                <label for="kelompok_resiko" class="block text-sm font-medium text-gray-700">Kelompok Resiko</label>
+                <select id="kelompok_resiko" name="kelompok_resiko" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Pilih Kelompok Resiko</option>
+                    <!-- Tambahkan opsi di sini -->
+                </select>
+            </div>
+            
+            <!-- Kode Resiko -->
+            <div>
+                <label for="kode_resiko" class="block text-sm font-medium text-gray-700">Kode Resiko</label>
+                <select id="kode_resiko" name="kode_resiko" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Pilih Kode Resiko</option>
+                    <!-- Tambahkan opsi di sini -->
+                </select>
+            </div>
+            
+            <!-- Penyebab Resiko -->
+            <div>
+                <label for="penyebab_resiko" class="block text-sm font-medium text-gray-700">Penyebab Resiko</label>
+                <textarea id="penyebab_resiko" name="penyebab_resiko" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+            
+            <!-- Sumber Resiko -->
+            <div>
+                <label for="sumber_resiko" class="block text-sm font-medium text-gray-700">Sumber Resiko</label>
+                <select id="sumber_resiko" name="sumber_resiko" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Internal</option>
+                    <option>External</option>
+                    <option>Internal & External</option>
+                </select>
+            </div>
+            
+            <!-- Akibat -->
+            <div>
+                <label for="akibat" class="block text-sm font-medium text-gray-700">Akibat</label>
+                <textarea id="akibat" name="akibat" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+            
+            <!-- Akibat Finansial -->
+            <div>
+                <label for="akibat_finansial" class="block text-sm font-medium text-gray-700">Akibat Finansial</label>
+                <input type="text" id="akibat_finansial" name="akibat_finansial" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            
+            <!-- Pemilik Resiko -->
+            <div>
+                <label for="pemilik_resiko" class="block text-sm font-medium text-gray-700">Pemilik Resiko</label>
+                <select id="pemilik_resiko" name="pemilik_resiko" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Pilih Pemilik Resiko</option>
+                    <!-- Tambahkan 10 opsi di sini -->
+                </select>
+            </div>
+            
+            <!-- Departemen -->
+            <div>
+                <label for="departemen" class="block text-sm font-medium text-gray-700">Departemen</label>
+                <select id="departemen" name="departemen" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Pilih Departemen</option>
+                    <!-- Tambahkan 10 opsi di sini -->
+                </select>
+            </div>
+    
+            <!-- Inherent Likelihood -->
+            <div>
+                <label for="inherent_likelihood" class="block text-sm font-medium text-gray-700">Inherent Likelihood</label>
+                <input type="text" id="inherent_likelihood" name="inherent_likelihood" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+    
+            <!-- Inherent Impact -->
+            <div>
+                <label for="inherent_impact" class="block text-sm font-medium text-gray-700">Inherent Impact</label>
+                <input type="text" id="inherent_impact" name="inherent_impact" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <!-- Control -->
+            <div>
+                <label for="control" class="block text-sm font-medium text-gray-700">Control</label>
+                <select id="control" name="control" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Ada</option>
+                    <option>Tidak</option>
+                </select>
+            </div>
+    
+            <!-- Memadai -->
+            <div>
+                <label for="memadai" class="block text-sm font-medium text-gray-700">Memadai</label>
+                <select id="memadai" name="memadai" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Ya</option>
+                    <option>Tidak</option>
+                </select>
+            </div>
+    
+            <!-- Status -->
+            <div>
+                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                <select id="status" name="status" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Dijalankan</option>
+                    <option>Belum</option>
+                </select>
+            </div>
+    
+            <!-- Residual Likelihood -->
+            <div>
+                <label for="residual_likelihood" class="block text-sm font-medium text-gray-700">Residual Likelihood</label>
+                <input type="text" id="residual_likelihood" name="residual_likelihood" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+    
+            <!-- Residual Impact -->
+            <div>
+                <label for="residual_impact" class="block text-sm font-medium text-gray-700">Residual Impact</label>
+                <input type="text" id="residual_impact" name="residual_impact" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+    
+            <!-- Perlakuan -->
+            <div>
+                <label for="perlakuan" class="block text-sm font-medium text-gray-700">Perlakuan</label>
+                <select id="perlakuan" name="perlakuan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <option>Accept</option>
+                    <option>Reduce</option>
+                </select>
+            </div>
+    
+            <!-- Tindakan Mitigasi -->
+            <div>
+                <label for="tindakan_mitigasi" class="block text-sm font-medium text-gray-700">Tindakan Mitigasi</label>
+                <textarea id="tindakan_mitigasi" name="tindakan_mitigasi" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+    
+            <!-- Mitigasi Likelihood -->
+            <div>
+                <label for="mitigasi_likelihood" class="block text-sm font-medium text-gray-700">Mitigasi Likelihood</label>
+                <input type="text" id="mitigasi_likelihood" name="mitigasi_likelihood" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+    
+            <!-- Mitigasi Impact -->
+            <div>
+                <label for="mitigasi_impact" class="block text-sm font-medium text-gray-700">Mitigasi Impact</label>
+                <input type="text" id="mitigasi_impact" name="mitigasi_impact" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+    
+            <div class="flex justify-end">
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Submit</button>
+            </div>
+        </form>
+    </div>    
+{% endblock content %}

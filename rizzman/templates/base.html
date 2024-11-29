@@ -8,15 +8,23 @@
     <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+    <script src="https://kit.fontawesome.com/385cd213ed.js" crossorigin="anonymous"></script>
     {% block title %}
     
     {% endblock title %}
+    <script src="{% static 'js/custom.js' %}" defer></script>
 </head>
-<body class="body">
+<body>
     {% include 'nav.html' %}
     {% block content %}
     
     {% endblock content %}
-    <script src="{% static 'js/custom.js' %}" defer></script>
+    
+
+<footer class="h-[50px] flex flex-grow-0 flex-shrink-0 justify-center items-center border-t-4 bg-[#f8f7ff] border-black">
+      <p class="text-sm">© 2024 <a href="" class="hover:underline">RizzMan™</a>. All Rights Reserved.
+      </p>
+</footer>
+
 </body>
 </html>
