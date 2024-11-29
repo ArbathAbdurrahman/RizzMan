@@ -66,11 +66,14 @@ WSGI_APPLICATION = 'rizzman.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'template1',  # Nama database
+        'NAME': 'db_rizzman',  # Nama database
         'USER': 'postgres',      # Nama user PostgreSQL
-        'PASSWORD': 'testing',  # Password user PostgreSQL
+        'PASSWORD': 'admin123',  # Password user PostgreSQL
         'HOST': 'localhost',     # Host database (umumnya 'localhost' untuk lokal)
         'PORT': '5432',          # Port PostgreSQL (default: 5432)
+        'OPTIONS': {
+            'client_encoding': 'utf8',  # Pastikan encoding UTF-8
+        },
     }
 }
 
