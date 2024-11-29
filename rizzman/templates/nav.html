@@ -24,6 +24,7 @@
             <h2 class="text-center font-['Comfortaa']">Log In</h2>
             <div class="login">
                 <form action="" method="post" class="form">
+                    {% csrf_token %}
                     <div class="ket">
                         <h4 class="header4">Email</h4>
                         <input type="email" name="email" placeholder="email" class="BoxPlchdr" required>

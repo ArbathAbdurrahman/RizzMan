@@ -778,6 +778,27 @@ main {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.buttonCirRd {
+  height: 3rem;
+  width: auto;
+  cursor: pointer;
+  border-radius: 0.375rem;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 226 228 / var(--tw-bg-opacity));
+  padding: 0.625rem;
+}
+
+.buttonCirRd:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(251 205 208 / var(--tw-bg-opacity));
+  --tw-shadow: 2px 2px 0px rgba(0,0,0,1);
+  --tw-shadow-colored: 2px 2px 0px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .cardRec {
   height: -moz-fit-content;
   height: fit-content;
@@ -878,10 +899,6 @@ main {
   margin-bottom: 1rem;
 }
 
-.mb-\[20px\] {
-  margin-bottom: 20px;
-}
-
 .mt-1 {
   margin-top: 0.25rem;
 }
@@ -896,6 +913,10 @@ main {
 
 .table {
   display: table;
+}
+
+.grid {
+  display: grid;
 }
 
 .hidden {
@@ -976,16 +997,16 @@ main {
   width: 100%;
 }
 
-.max-w-4xl {
-  max-width: 56rem;
-}
-
-.max-w-\[200px\] {
-  max-width: 200px;
+.w-\[100\%\] {
+  width: 100%;
 }
 
 .max-w-\[400px\] {
   max-width: 400px;
+}
+
+.flex-none {
+  flex: none;
 }
 
 .flex-shrink-0 {
@@ -1028,6 +1049,18 @@ main {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-rows-4 {
+  grid-template-rows: repeat(4, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -1104,6 +1137,14 @@ main {
 
 .gap-\[10px\] {
   gap: 10px;
+}
+
+.gap-\[20px\] {
+  gap: 20px;
+}
+
+.gap-6 {
+  gap: 1.5rem;
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
@@ -1200,11 +1241,6 @@ main {
 .bg-\[\#e7e9fe\] {
   --tw-bg-opacity: 1;
   background-color: rgb(231 233 254 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#f0f0f0\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(240 240 240 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#f8f7ff\] {
@@ -1342,12 +1378,20 @@ main {
   font-size: 14px;
 }
 
+.text-\[15px\] {
+  font-size: 15px;
+}
+
 .text-\[18px\] {
   font-size: 18px;
 }
 
 .text-\[20px\] {
   font-size: 20px;
+}
+
+.text-\[25px\] {
+  font-size: 25px;
 }
 
 .text-\[41px\] {
@@ -1374,22 +1418,6 @@ main {
   line-height: 1rem;
 }
 
-.text-\[10px\] {
-  font-size: 10px;
-}
-
-.text-\[12px\] {
-  font-size: 12px;
-}
-
-.text-\[15px\] {
-  font-size: 15px;
-}
-
-.text-\[25px\] {
-  font-size: 25px;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -1413,11 +1441,6 @@ main {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 
 .text-gray-700 {
@@ -1450,6 +1473,10 @@ main {
 .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.contain-content {
+  contain: content;
 }
 
 .blur-bg {

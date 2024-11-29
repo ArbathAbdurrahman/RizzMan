@@ -109,6 +109,11 @@
         @apply h-12 w-auto border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
     }
 
+    .buttonCirRd {
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#ffe2e4] hover:bg-[#fbcdd0] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
+
+    }
+
     .cardRec {
         @apply border-[3.4px] border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
     }
