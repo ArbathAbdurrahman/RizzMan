@@ -2,74 +2,232 @@
 {% load static %}
 
 {% block title %}
-    <title>Login Page</title>
+    <title>Profile Rizky</title>
     <style>
-        #signupBtn {
-            display: none;
-        }
         #loginBtn {
             display: none;
         }
         #profileBtn {
             display: none;
         }
+        th, td {
+            font-size: 18px;
+        }
+        th {
+            text-align: left;
+            font-weight: normal;
+            padding-right: 10px;
+        }
     </style>
 {% endblock title %}
 
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  --> 
-<div id="pageWrapper" class="h-full">
-    <main class="main h-full flex-row p-0 divide-x-4 divide-black">
-        <div class="basis-3/4 p-[10px] w-full flex justify-center align-middle bg-[#e2eafc]">
-            <div class="profil cardRec p-8 flex flex-col gap-4">
-                <div class="photoProfil flex justify-center">
-                    <img src="{% static 'img/download.jpg' %}" alt="profil" class="rounded-full w-[270px] border-4 border-black">
+    <main id="pageWrapper" class="main h-full flex-row p-0 divide-x-4 divide-black">
+        <div class="h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-[#e2eafc]">
+            <div class="profil cardRec p-8 flex flex-row gap-10">
+                <div class="photoProfil flex items-center flex-col gap-4 justify-center">
+                    <img src="{% static 'img/herta.jpg' %}" alt="profil" class="rounded-full w-[270px] border-4 border-black">
+                    <div class="buttonCir w-2/3 p-0 items-center justify-center flex"><a onclick="popupEdit()" class="font-normal text-[20px] w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
                 </div>
-                <div class="flex flex-col justify-items-center">
-                    <table class="user">
-                        <tr>
-                            <th>Nama</th>
-                            <td class="w-3">:</td>
-                            <td>Rizky</td>
-                        </tr>
-                        <tr>
-                            <th>Nomor Induk</th>
-                            <td>:</td>
-                            <td>888838383</td>
-                        </tr>
-                        <tr>
-                            <th>Alamat</th>
-                            <td>:</td>
-                            <td>Bandung</td>
-                        </tr>
-                        <tr>
-                            <th>Tanggal Lahir</th>
-                            <td>:</td>
-                            <td>17 Agustus 1945</td>
-                        </tr>
-                        <tr>
-                            <th>Gelar</th>
-                            <td>:</td>
-                            <td>Dosen</td>
-                        </tr>
-                        <tr>
-                            <th>Total Pengisian</th>
-                            <td>:</td>
-                            <td>10</td>
-                        </tr>
-                    </table>    
-                </div>    
+                <div class="flex flex-col gap-5">
+                    <div class="flex flex-col justify-center items-center cardCir bg-pink-50 p-4">
+                        <table class="user">
+                            <tr>
+                                <th>Nama</th>
+                                <td class="w-3">:</td>
+                                <td>Rizky</td>
+                            </tr>
+                            <tr>
+                                <th>NIP</th>
+                                <td>:</td>
+                                <td>888838383</td>
+                            </tr>
+                            <tr>
+                                <th>Alamat</th>
+                                <td>:</td>
+                                <td>Bandung</td>
+                            </tr>
+                            <tr>
+                                <th>Tanggal Lahir</th>
+                                <td>:</td>
+                                <td>17 Agustus 1945</td>
+                            </tr>
+                            <tr>
+                                <th>Jabatan</th>
+                                <td>:</td>
+                                <td>Dosen</td>
+                            </tr>
+                            <tr>
+                                <th>Total Pengisian</th>
+                                <td>:</td>
+                                <td>10</td>
+                            </tr>
+                        </table>    
+                    </div>    
+                    <div class="deskripsi cardCir max-w-[400px]">
+                        <div class="p-2">
+                            <h1 class="header3 text-[25px]">Deskripsi</h1>
+                            <p class="text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, modi? Vero quibusdam reiciendis deleniti aut impedit asperiores reprehenderit, quisquam earum fugit, voluptatum officiis eius est nam dolores non aspernatur quidem?</p>    
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="basis-1/4 p-[10px] bg-[#fbf8cc]">
             <div class="menu m-4 cardCir flex flex-col gap-5 p-[20px]">
                 <h1 class="font-bold text-2x1 text-center font-['Comfortaa']">Menu</h1>
-                <ul class="flex flex-col gap-5">
-                    <li><div class="buttonCir mb-[20px] flex justify-center align-middle h-auto"><a class="text-center text-[20px]" href='{% url "forms" %}'>Isi Formulir</a></div></li>
-                    <li><div class="buttonCir flex justify-center align-middle h-auto"><a class="text-center text-[20px]" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+                <ul class="flex flex-col gap-10">
+                    <li><div class="buttonCir flex justify-center align-middle h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+                    <li><div class="buttonCir flex justify-center align-middle h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
                 </ul>
             </div>
         </div>
     </main>
-</div>
+
+    <div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
+    <div class="container hidden fixed inset-0 justify-center items-center z-50" id="editPop">
+        <div class="editBox">
+            <div class="flex flex-row gap-[10px] absolute bottom-3 right-3 ]">
+                <button class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
+                <button class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
+            </div>
+            <div class="basis-5/12 h-full flex flex-row items-start gap-10">
+                <div class="editPhoto flex flex-col items-center gap-2">
+                    <div class="photoProfile relative">
+                        <img src="{% static 'img/herta.jpg' %}" alt="profil" class="rounded-full w-[180px] border-4 border-black">
+                        <button class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[140px] text-[14px]">
+                            <i class="fa-solid fa-pen"></i>
+                            <p>Edit</p>
+                        </button>
+                    </div>
+                    <h4 class="header4 text-[20px]">Photo Profile</h4>
+                </div>
+                <div class="pt-5 flex gap-3 flex-col">
+                    <div class="flex h-fit flex-row gap-3 w-[400px]">
+                        <input type="text" name="nama" class="BoxPlchdr cursor-not-allowed" value="Mulyono" readonly disabled>
+                        <a onclick="ubahNama()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
+                    </div>
+                    <div class="flex items-start flex-col gap-1">
+                        <h1 class="header3">23106054143</h1>
+                        <h1 class="header3">Dosen</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="basis-7/12 w-full border-t-[2px] gap-5 border-gray-600 flex flex-row">
+                <div class="pt-5 pl-10 gap-7 flex flex-col">
+                    <div class="w-fit">
+                        <h4 class="header4 text-[18px]">NIP/NIM</h4>
+                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                            <input type="number" name="NIP" class="BoxPlchdr cursor-not-allowed remove-arrow" value="23106043045" readonly disabled>
+                            <a onclick="ubahNIP()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
+                        </div>
+                        <p class="text-[13px]">*pastikan mengisi NIP/NIM dengan benar dan tepat</p>
+                    </div>
+                    <div class="w-fit">
+                        <h4 class="header4 text-[18px]">Alamat</h4>
+                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                            <input type="text" name="alamat" class="BoxPlchdr cursor-not-allowed" value="Osaka" readonly disabled>
+                            <a onclick="ubahAlamat()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
+                        </div>
+                        <p class="text-[13px] w-fit">
+                            *isi alamat sesuai dengan yang dimasukkan <br>
+                            di Sistem Akademik UIN Sunan Kalijaga
+                        </p>
+                    </div>
+                </div>
+                <div class="pt-5 pl-10 gap-7 flex flex-col">
+                    <div class="w-fit">
+                        <h4 class="header4 text-[18px]">Tanggal Lahir</h4>
+                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                            <input type="date" name="tanggalLahir" class="BoxPlchdr cursor-not-allowed remove-arrow" readonly disabled>
+                            <a onclick="ubahTanggalLahir()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
+                        </div>
+                        <p class="text-[13px]">*pastikan mengisi tanggal lahir dengan benar dan tepat</p>
+                    </div>
+                    <div class="w-fit">
+                        <h4 class="header4 text-[18px]">Deskripsi</h4>
+                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                            <textarea name="deskripsi" class="BoxPlchdr cursor-not-allowed remove-arrow h-[100px]" placeholder="Deskripsi" readonly disabled>What a sigma</textarea>
+                            <a onclick="ubahDeskripsi()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function ubahNama() {
+            const input = document.querySelector('input[name="nama"]');
+            input.removeAttribute('readonly');
+            input.removeAttribute('disabled');
+            input.classList.remove('cursor-not-allowed');
+        }
+
+        function ubahNIP() {
+            const input = document.querySelector('input[name="NIP"]');
+            input.removeAttribute('readonly');
+            input.removeAttribute('disabled');
+            input.classList.remove('cursor-not-allowed');
+        }
+
+        function ubahAlamat() {
+            const input = document.querySelector('input[name="alamat"]');
+            input.removeAttribute('readonly');
+            input.removeAttribute('disabled');
+            input.classList.remove('cursor-not-allowed');
+        }
+
+        function ubahTanggalLahir() {
+            const input = document.querySelector('input[name="tanggalLahir"]');
+            input.removeAttribute('readonly');
+            input.removeAttribute('disabled');
+            input.classList.remove('cursor-not-allowed');
+        }
+
+        function ubahDeskripsi() {
+            const input = document.querySelector('textarea[name="deskripsi"]');
+            input.removeAttribute('readonly');
+            input.removeAttribute('disabled');
+            input.classList.remove('cursor-not-allowed');
+        }
+
+        function popupEdit() {
+            const overlay = document.getElementById('overlay');
+            const editPop = document.getElementById('editPop');
+            const pageWrapper = document.getElementById('pageWrapper');
+            
+            if (editPop.classList.contains('hidden')) {
+                // Saat popup dibuka
+                editPop.classList.remove('hidden');
+                editPop.classList.add('popup-enter'); // Tambahkan animasi masuk
+                overlay.classList.remove('hidden');
+                pageWrapper.classList.add('blur-bg');
+
+                // Hapus kelas animasi setelah animasi selesai
+                setTimeout(() => {
+                    editPop.classList.remove('popup-enter');
+                    editPop.classList.add('flex'); // Tetapkan gaya flex setelah masuk
+                }, 100); // Durasi animasi sesuai dengan CSS (0.3s)
+            } else {
+                // Saat popup ditutup
+                editPop.classList.remove('flex');
+                editPop.classList.add('popup-exit-active'); // Tambahkan animasi keluar
+                overlay.classList.add('hidden');
+                pageWrapper.classList.remove('blur-bg');
+
+                // Sembunyikan popup setelah animasi selesai
+                setTimeout(() => {
+                    editPop.classList.add('hidden');
+                    editPop.classList.remove('popup-exit-active');
+                }, 300); // Durasi animasi sesuai dengan CSS (0.3s)
+            }
+
+        }
+
+    </script>
+    
+    
 {% endblock content %}

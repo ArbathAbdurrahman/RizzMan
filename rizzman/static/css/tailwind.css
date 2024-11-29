@@ -32,7 +32,7 @@
 
 @layer base {
     body {
-        @apply flex flex-col h-screen;
+        @apply flex flex-col h-screen justify-between;
     }
 
     header {
@@ -40,13 +40,18 @@
     }
 
     main {
-        @apply flex justify-center flex-grow p-[10px];
+        @apply flex justify-center flex-grow p-[10px] mb-auto;
     }
 }
 
 @layer components {
     .header1 {
         @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
+        font-family: 'Comfortaa';
+    }
+
+    .header3 {
+        @apply text-black text-[26px] font-medium h-auto;
         font-family: 'Comfortaa';
     }
 
@@ -57,6 +62,10 @@
     
     .loginBox {
         @apply w-[700px] h-[353px] bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
+    }
+
+    .editBox {
+        @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-4/5 px-14 py-5;
     }
 
     
@@ -100,17 +109,21 @@
         @apply h-12 w-auto border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
     }
 
+    .buttonCirRd {
+        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#ffe2e4] hover:bg-[#fbcdd0] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
+
+    }
+
     .cardRec {
-        @apply border-4 border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
+        @apply border-[3.4px] border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
     }
 
     .cardCir {
-        @apply border-4 border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
+        @apply border-[3.4px] border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
     }
 
-    .user th {
-        @apply text-start p-1;
-    }
+
+
 
     
 }
@@ -157,12 +170,11 @@
         outline: none !important;
         box-shadow: none !important; /* Untuk elemen yang menggunakan shadow */
         border-color: initial !important; /* Untuk elemen yang menggunakan border */
-      }
+    }
 
-      select option:hover {
-        background-color: #d7f2ed; /* Warna latar belakang saat hover */
-        color: black; /* Warna teks saat hover */
-      }
-      
+    select option:hover {
+    background-color: #d7f2ed; /* Warna latar belakang saat hover */
+    color: black; /* Warna teks saat hover */
+    }
 }
 

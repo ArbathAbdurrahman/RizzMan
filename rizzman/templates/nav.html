@@ -7,7 +7,6 @@
         </div>
         <div class="navBar justify-items-center content-center">
             <ul class="flex flex-row gap-[10px] h-auto">
-                <li><a class="buttonRec" id="signupBtn" href="{% url 'signup' %}">Daftar</a></li>
                 <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
                 <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
             </ul>
@@ -25,6 +24,7 @@
             <h2 class="text-center font-['Comfortaa']">Log In</h2>
             <div class="login">
                 <form action="" method="post" class="form">
+                    {% csrf_token %}
                     <div class="ket">
                         <h4 class="header4">Email</h4>
                         <input type="email" name="email" placeholder="email" class="BoxPlchdr" required>
@@ -36,7 +36,6 @@
                 <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
                 <!-- jika submit maka akan menuju ke profile.html -->
                 </form>
-                <p>Belum daftar? <a href="{% url 'signup' %}" class="text-blue-500">daftar di sini</a></p>
             </div>
         </div>
     </div>
