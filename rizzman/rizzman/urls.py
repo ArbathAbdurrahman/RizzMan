@@ -15,4 +15,7 @@ urlpatterns = [
     path('forms/',views.forms,name='forms'),
     path('tabel/',views.tabel,name='tabel'),
 
+    path('testing/',views.home,name='testing'),
+    path('login/',views.login,name='login'),
+    path('logout/',views.logout,name='logout')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #load gambar

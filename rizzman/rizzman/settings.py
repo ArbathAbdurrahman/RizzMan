@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rizzman'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,9 @@ DATABASES = {
         'PASSWORD': 'admin123',  # Password user PostgreSQL
         'HOST': 'localhost',     # Host database (umumnya 'localhost' untuk lokal)
         'PORT': '5432',          # Port PostgreSQL (default: 5432)
+        'OPTIONS': {
+            'client_encoding': 'utf8',  # Pastikan encoding UTF-8
+        },
     }
 }
 
