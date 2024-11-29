@@ -4,5 +4,5 @@ rizzman/static/css/output.css
 
 # # Python files
 # *.pyc
-# __pycache__/
+# rizzman/rizzman/__pycache__/
 # /staticfiles/
