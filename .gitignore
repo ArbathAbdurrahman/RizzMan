@@ -1,8 +1,9 @@
 /venv/
-/node_modules/
+rizzman/venv/
+rizzman/node_modules/
 rizzman/static/css/output.css
 
 # Python files
 *.pyc
-__pycache__/
-/staticfiles/
+rizzman/rizzman/__pycache__/
+rizzman/staticfiles/
