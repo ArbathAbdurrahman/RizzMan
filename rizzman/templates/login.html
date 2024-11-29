@@ -14,7 +14,9 @@
                 <div class="wlcm">
                     <h2 class="text-center">Welcome To RizzMan</h2>
                     <div class="login">
-                        <form action="" method="post" class="form">
+                        <form action="/login/" method="post" class="form">
+                            {% csrf_token %}
+
                             <h4 class="header4">Log In</h4>
                             <input type="email" name="email" placeholder="email" class="kotak" required>
                             <div class="flex flex-row justify-between w-full h-[39px] gap-0">
