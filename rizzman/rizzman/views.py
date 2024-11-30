@@ -6,8 +6,26 @@ from django.contrib import messages
 from .forms import CustomAuthenticationForm
 
 def index(request):
+    if request.method == "POST":
+        form = CustomAuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "You have successfully logged in!")
+                return redirect('/profile')  # Ganti '/profile' dengan URL tujuan setelah login
+            else:
+                messages.error(request, "Invalid username or password")
+        else:
+            messages.error(request, "Please correct the error below.")
+    else:
+        form = CustomAuthenticationForm()
+
     context = {
-        'title' : 'RizzMan'
+        'title' : 'RizzMan',
+        'form' : form,
     }
     return render(request,'index.html',context)
 
@@ -50,4 +68,4 @@ def tabel(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/login/')
+    return redirect('/')

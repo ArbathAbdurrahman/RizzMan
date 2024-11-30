@@ -25,8 +25,8 @@ class Risk(models.Model):
     ('both', 'Internal dan External'),
     ]
     MEMADAI_CHOICES = [
-        (True, 'Memadai')
-        (False, 'Tidak Memadai')
+        (True, 'Memadai'),
+        (False, 'Tidak Memadai'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="risks")

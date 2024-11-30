@@ -24,6 +24,10 @@
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  --> 
     <main id="pageWrapper" class="main h-full flex-row p-0 divide-x-4 divide-black">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
         <div class="h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-[#e2eafc]">
             <div class="profil cardRec p-8 flex flex-row gap-10">
                 <div class="photoProfil flex items-center flex-col gap-4 justify-center">
@@ -85,8 +89,8 @@
         </div>
     </main>
 
-    <div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
-    <div class="container hidden fixed inset-0 justify-center items-center z-50" id="editPop">
+    <!-- <div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div> -->
+    <!-- <div class="container hidden fixed inset-0 justify-center items-center z-50" id="editPop">
         <div class="editBox">
             <div class="flex flex-row gap-[10px] absolute bottom-3 right-3 ]">
                 <button class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
@@ -155,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <script>
