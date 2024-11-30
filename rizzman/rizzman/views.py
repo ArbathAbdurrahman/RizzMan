@@ -93,6 +93,11 @@ def forms(request):
     if request.method != "POST":
         return render(request,'forms.html',context)
 
+    if 'user' not in request.session:
+        response = render(request,'403.html',context)
+        response.status_code=403
+        return response
+
     user = request.session['user']
     tujuan = request.POST.get('tujuan')
     proses_bisnis = request.POST.get('proses_bisnis')
@@ -136,7 +141,7 @@ def forms(request):
         residual_score=(int(residual_likelihood) * int(residual_impact)),mitigasi_score=(int(mitigasi_likelihood) * int(mitigasi_impact))
     )
     _Risk.save()
-    return HttpResponse("<h1> Berhasil </h1>")
+    return HttpResponse(alert("Berhasil dimasukkan!")+redirect("/tabel/"))
 
 def signup(request):
     context = {'title' : 'RizzMan'}
@@ -157,7 +162,7 @@ def signup(request):
         password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
         _UserProfile= UserProfile(user=email,password=password_hash,namalengkap=nama,jabatan=jabatan,gelar=gelar,nomor_induk=nomor_induk,alamat=alamat,tanggal_lahir=tanggal_lahir)
         _UserProfile.save()
-        return HttpResponse("<h1> Berhasil </h1>")
+        return HttpResponse(alert("Berhasil! silahkan login kembali!")+redirect("/login/"))
 
     else:
         return render(request,'signup.html',context)
@@ -189,4 +194,11 @@ def home(request):
     return render(request,'home.html',context)
 
 def handler404(request,exception):
-    return HttpResponse("<h1> ERROR {} </h1>".format(exception))
+    response = render(request,"404.html")
+    response.status_code=404
+    return response
+
+def handler403(request,exception):
+    response = render(request,"403.html")
+    response.status_code=403
+    return response

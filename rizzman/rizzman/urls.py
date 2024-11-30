@@ -20,4 +20,5 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #load gambar
 
-hander404 = "views.handler404"
+handler404 = "rizzman.views.handler404"
+handler403 = "rizzman.views.handler403"
