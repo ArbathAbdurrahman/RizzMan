@@ -14,29 +14,3 @@
     </div>
 </header>
 
-<div id="overlay" class="hidden fixed inset-0 z-40" onclick="loginPopup()"></div>
-<div class="container hidden fixed inset-0 justify-center items-center z-50" id="loginPop">
-    <div class="loginBox">
-        <button class="absolute top-4 right-4" onclick="loginPopup()">
-            <i class="fa-solid fa-square-xmark fa-2x"></i>
-        </button>
-        <div class="wlcm">
-            <h2 class="text-center font-['Comfortaa']">Log In</h2>
-            <div class="login">
-                <form action="" method="post" class="form">
-                    {% csrf_token %}
-                    <div class="ket">
-                        <h4 class="header4">Email</h4>
-                        <input type="email" name="email" placeholder="email" class="BoxPlchdr" required>
-                    </div>
-                    <div class="ket">
-                        <h4 class="header4">Password</h4>
-                        <input type="password" name="password" placeholder="password" class="BoxPlchdr" required>
-                    </div>
-                <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
-                <!-- jika submit maka akan menuju ke profile.html -->
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

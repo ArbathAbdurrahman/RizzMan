@@ -14,20 +14,38 @@
                 <div class="wlcm">
                     <h2 class="text-center">Welcome To RizzMan</h2>
                     <div class="login">
-                        <form action="/login/" method="post" class="form">
-                            {% csrf_token %}
-
-                            <h4 class="header4">Log In</h4>
-                            <input type="email" name="email" placeholder="email" class="kotak" required>
-                            <div class="flex flex-row justify-between w-full h-[39px] gap-0">
-                                <input type="password" name="password" placeholder="password" class="flex-grow kotak-pass" required>
-                                <div class="w-[50px] flex justify-center items-center m-0 border-[1px] border-l-0 border-[#8B8B8B] bg-white">
-                                    <a href=""><img src="{% static '\img\eye.png' %}" alt="see" class="w-[40px]"></a>
-                                </div>
+                        {% if messages %}
+                            <div class="mb-4 space-y-2">
+                                {% for message in messages %}
+                                    <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
                             </div>
+                        {% endif %}
+                        
+                        <form method="post" class="form">
+                            {% csrf_token %}
+                            <h4 class="header4">Log In</h4>
+                            
+                            {{ form.non_field_errors }}
+                    
+                            <!-- Username Field -->
+                             <h1>kont</h1>
+                            <div class="mb-4">
+                                {{ form.username.errors }}
+                                {{ form.username }}
+                            </div>
+                    
+                            <!-- Password Field -->
+                            <div class="mb-4">
+                                {{ form.password.errors }}
+                                {{ form.password }}
+                            </div>
+                    
                             <button type="submit" class="button text-center text-white text-lg font-normal font-['Poppins']">Login</button>
                         </form>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>

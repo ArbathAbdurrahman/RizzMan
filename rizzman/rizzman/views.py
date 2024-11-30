@@ -1,14 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from .models import UserProfile
-import hashlib
-
-def alert(kalimat):
-    return "<script> alert('{}'); </script>".format(kalimat)
-
-def redirect(url):
-    return "<script> location.href='{}' </script>".format(url)
+from django.contrib import messages
+from .forms import CustomAuthenticationForm
 
 def index(request):
     context = {
@@ -16,23 +11,31 @@ def index(request):
     }
     return render(request,'index.html',context)
 
-def login(request):
-    context = {
-        'title' : 'RizzMan'
-    }
-    return render(request,'login.html',context)
+def login_view(request):
+    if request.method == "POST":
+        form = CustomAuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "You have successfully logged in!")
+                return redirect('/profile')  # Ganti '/profile' dengan URL tujuan setelah login
+            else:
+                messages.error(request, "Invalid username or password")
+        else:
+            messages.error(request, "Please correct the error below.")
+    else:
+        form = CustomAuthenticationForm()
+    
+    return render(request, 'login.html', {'form': form})
 
 def profile(request):
     context = {
         'title' : 'RizzMan'
     }
     return render(request,'profile.html',context)
-
-def signup(request):
-    context = {
-        'title' : 'RizzMan'
-    }
-    return render(request,'signup.html',context)
 
 def forms(request):
     context = {
@@ -45,57 +48,6 @@ def tabel(request):
     }
     return render(request,'tabel.html',context)
 
-
-def create_user(request):
-    context = {}
-    if request.method != "POST":
-        return render(request,"signup.html")
-    username = request.POST.get('email');
-    password = request.POST.get('password')
-
-    user = UserProfile.objects.filter(user=username).values()
-    if len(user) > 0:
-        return HttpResponse("Email sudah ada!")
-    password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
-    user_added = UserProfile(user=username,password=password_hash,nomor_induk="",jabatan="",gelar="",alamat="",tanggal_lahir="2000-01-01",foto="",total_pengisian=0)
-    user_added.save()
-    return HttpResponse("User telah dibuat!")
-
-def insert_data(request):
-    if request.method != "POST":
-        return render(request,"")
-
-def logout(request):
-    if 'user' in request.session:
-        del request.session['user']
-        del request.session['logged']
-        return HttpResponse(alert("Berhasil Log Out!")+redirect("/login/"))
-    else:
-        return HttpResponse(alert("Kamu belum masuk!")+redirect("/login/"))
-
-def login(request):
-    context={}
-    if 'user' in request.session:
-        return HttpResponse(alert("Anda sudah login") + redirect("/beranda/"));
-    if request.method != "POST":
-        return render(request,'login.html',context);
-
-    username = request.POST.get('email')
-    password = request.POST.get('password')
-    user = UserProfile.objects.filter(user=username).values()
-    if len(user) == 1:
-        password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
-        if (password_hash != user[0]['password']):
-            return HttpResponse(alert("Password anda salah"));
-        else:
-            request.session['user']=username
-            request.session['logged']=True
-            return HttpResponse(alert("Password anda salah")+redirect("/login/"))
-    else:
-        return HttpResponse(alert("Password anda salah")+redirect("/login/"))
-
-def home(request):
-    if 'username'  not in request.session:
-        return HttpResponse("Gak bisa!!")
-    else:
-        return HttpResponse("Bisa!!")
+def logout_view(request):
+    logout(request)
+    return redirect('/login/')
