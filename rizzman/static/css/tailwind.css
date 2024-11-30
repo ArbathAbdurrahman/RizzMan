@@ -279,6 +279,10 @@
     .editFrmBtn {
         @apply flex-row gap-1;
     }
+
+    #logout {
+        display: none;
+    }
     
     
 }

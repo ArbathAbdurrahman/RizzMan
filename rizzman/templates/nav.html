@@ -9,7 +9,9 @@
             <ul class="flex flex-row gap-[10px] h-auto">
                 <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
                 <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
-                <li><button class="text-[25px]" id="burger" onclick="burgerPop()"><i class="fa-solid fa-bars"></i></button></li>  
+                <li><a class="buttonRec" id="logout" href="{% url 'home' %}">Logout</a></li>
+                <li><button class="text-[25px]" id="burger" onclick="burgerPop()"><i class="fa-solid fa-bars"></i></button></li>
+
             </ul>
         </div>
     </div>
@@ -44,8 +46,9 @@
 
 <div id="burgerNav">
     <ul class="flex flex-col">
-        <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#ffe2e4] hover:bg-[#fbcdd0] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
-        <li><div class="buttonCir border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#ffe2e4] hover:bg-[#fbcdd0] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+        <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+        <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+        <li><div class="buttonCir border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f6a8ad] hover:bg-[#eca3a8] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Logout</a></div></li>
     </ul>
 </div>
 
