@@ -3,12 +3,13 @@
 <header class="border-b-4 border-black h-16 flex flex-shrink-0">
     <div class="flex justify-between w-full flex-row">
         <div class="logo flex flex-row justify-items-center content-center gap-3">
-            <h1><a class="header1" href="{% url 'home' %}">RizzMan</a></h1>
+            <h1><a class="header1 judul" href="{% url 'home' %}">RizzMan</a></h1>
         </div>
         <div class="navBar justify-items-center content-center">
             <ul class="flex flex-row gap-[10px] h-auto">
                 <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
                 <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
+                <li><button class="text-[25px]" id="burger" onclick="burgerPop()"><i class="fa-solid fa-bars"></i></button></li>  
             </ul>
         </div>
     </div>
@@ -18,7 +19,7 @@
 <div class="container hidden fixed inset-0 justify-center items-center z-50" id="loginPop">
     <div class="loginBox">
         <button class="absolute top-4 right-4" onclick="loginPopup()">
-            <i class="fa-solid fa-square-xmark fa-2x"></i>
+            <i class="fa-solid fa-square-xmark text-[25px]"></i>
         </button>
         <div class="wlcm">
             <h2 class="text-center font-['Comfortaa']">Log In</h2>
@@ -33,10 +34,30 @@
                         <h4 class="header4">Password</h4>
                         <input type="password" name="password" placeholder="password" class="BoxPlchdr" required>
                     </div>
-                <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
+                <button type="submit" class="w-full h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
                 <!-- jika submit maka akan menuju ke profile.html -->
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<div id="burgerNav">
+    <ul class="flex flex-col">
+        <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#ffe2e4] hover:bg-[#fbcdd0] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+        <li><div class="buttonCir border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#ffe2e4] hover:bg-[#fbcdd0] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+    </ul>
+</div>
+
+<script>
+    function burgerPop () {
+    var x = document.getElementById("burgerNav");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+
+</script>

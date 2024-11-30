@@ -70,7 +70,7 @@
 
     
     .wlcm {
-        @apply w-[551px] h-[244px] flex-col justify-center items-center gap-4 inline-flex;
+        @apply w-full h-auto px-10 flex-col justify-center items-center gap-4 inline-flex;
     }
     
     .text-center {
@@ -78,7 +78,7 @@
     }
     
     .login {
-        @apply w-[551px] h-[180px] flex-col justify-center items-start gap-2.5 inline-flex;
+        @apply w-full h-[180px] gap-2.5 flex;
     }
     
     .show-pswd {
@@ -86,7 +86,7 @@
     }
     
     .form {
-        @apply self-stretch flex-col justify-center items-start gap-2.5 inline-flex;
+        @apply w-full flex-col justify-center items-start gap-2.5 flex;
     }
 
     .ket {
@@ -106,11 +106,11 @@
     }
 
     .buttonCir {
-        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
+        @apply h-12 w-auto flex items-center border-black border-2 p-2.5 bg-[#e5f4f1] hover:bg-[#d7f2ed] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
     }
 
     .buttonCirRd {
-        @apply h-12 w-auto border-black border-2 p-2.5 bg-[#ffe2e4] hover:bg-[#fbcdd0] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
+        @apply h-12 w-auto flex items-center border-black border-2 p-2.5 bg-[#ffe2e4] hover:bg-[#fbcdd0] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer rounded-md;
 
     }
 
@@ -122,9 +122,49 @@
         @apply border-[3.4px] border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
     }
 
+    .profil {
+        @apply p-5 flex flex-row gap-10 m-5;
+    }
 
+    .imgPrf{
+        @apply rounded-full w-[270px] border-4 border-black;
+    }
 
+    .photoProfil {
+        @apply flex items-center flex-col gap-4 justify-center;
+    }
 
+    .bag1 {
+        @apply h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-[#e2eafc];
+    }
+
+    .user {
+        @apply flex justify-start;
+    }
+
+    .formRisk{
+        @apply space-y-4 w-auto grid grid-cols-4 gap-[20px];
+    }
+
+    .editPrfl1 {
+        @apply h-full flex flex-row items-start gap-10;
+    }
+
+    .editPrfl2 {
+        @apply pt-5 pl-10 gap-7 flex flex-col;
+    }
+
+    .mainEditPrfl {
+        @apply basis-7/12 w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
+    }
+
+    .editPhoto {
+        @apply rounded-full w-[180px] border-4 border-black;
+    }
+
+    .editFrmBtn {
+        @apply flex flex-row gap-[10px] items-start;
+    }
     
 }
 
@@ -176,5 +216,110 @@
     background-color: #d7f2ed; /* Warna latar belakang saat hover */
     color: black; /* Warna teks saat hover */
     }
+
+    
 }
 
+
+
+@media screen and (min-width: 1032px) {
+    #burger {
+        @apply hidden;
+    }
+
+    
+}
+
+
+@media screen and (max-width: 1032px) {
+
+    .bag2 {
+        @apply basis-0 hidden;
+    }
+
+    .mainPrf{
+        @apply bg-[#e2eafc]
+    }
+    header {
+        @apply px-5;
+    }
+
+    .profil {
+        @apply flex-col gap-1 w-full;
+    }
+
+    .photoProfil {
+        @apply gap-2 flex-row;
+    }
+
+    .imgPrf {
+        @apply w-[180px];
+    }
+
+    .formRisk {
+        @apply grid-cols-2 gap-3;
+    }
+
+    .mainEditPrfl {
+        @apply flex-col gap-1 items-start;
+    }
+
+    .editPrfl1 {
+        @apply pl-0 gap-1 flex-col justify-center items-center;
+    }
+
+    .editPrfl2 {
+        @apply pl-0 gap-1;
+    }
+
+    .editBox {
+        @apply items-center;
+    }
+
+    .editFrmBtn {
+        @apply flex-row gap-1;
+    }
+    
+    
+}
+
+#burgerNav {
+    display: none;
+}
+
+@media screen and (max-width: 640px) {
+    .loginBox {
+        @apply w-[438px];
+    }
+
+    /* .editBox {
+        @apply w-[438px] h-[auto] px-5 py-5;
+    } */
+
+    header {
+        @apply px-3;
+    }
+
+    .judul {
+        @apply text-3xl
+    }
+
+    .profil {
+        @apply p-4 m-2;
+    }
+
+    .imgPrf {
+        @apply min-w-[140px];
+    }
+
+    .bag1 {
+        @apply flex-none;
+    }
+
+    .formRisk {
+        @apply grid-cols-1 gap-1;
+    }    
+
+    
+
+}

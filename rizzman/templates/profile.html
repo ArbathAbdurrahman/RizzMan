@@ -23,15 +23,15 @@
 
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  --> 
-    <main id="pageWrapper" class="main h-full flex-row p-0 divide-x-4 divide-black">
-        <div class="h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-[#e2eafc]">
-            <div class="profil cardRec p-8 flex flex-row gap-10">
-                <div class="photoProfil flex items-center flex-col gap-4 justify-center">
-                    <img src="{% static 'img/herta.jpg' %}" alt="profil" class="rounded-full w-[270px] border-4 border-black">
-                    <div class="buttonCir w-2/3 p-0 items-center justify-center flex"><a onclick="popupEdit()" class="font-normal text-[20px] w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
+    <main id="pageWrapper" class="mainPrf p-0 divide-x-4 divide-black">
+        <div class="bag1">
+            <div class="profil cardRec h-auto">
+                <div class="photoProfil">
+                    <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                    <div class="buttonCir w-fit h-fit p-1 items-center justify-center flex"><a onclick="popupEdit()" class="btnTxt font-normal text-[20px] w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
                 </div>
-                <div class="flex flex-col gap-5">
-                    <div class="flex flex-col justify-center items-center cardCir bg-pink-50 p-4">
+                <div class="flex flex-col gap-5 basis-2/4">
+                    <div class="flex flex-col cardCir bg-pink-50 p-4">
                         <table class="user">
                             <tr>
                                 <th>Nama</th>
@@ -65,7 +65,7 @@
                             </tr>
                         </table>    
                     </div>    
-                    <div class="deskripsi cardCir max-w-[400px]">
+                    <div class="deskripsi cardCir w-full">
                         <div class="p-2">
                             <h1 class="header3 text-[25px]">Deskripsi</h1>
                             <p class="text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, modi? Vero quibusdam reiciendis deleniti aut impedit asperiores reprehenderit, quisquam earum fugit, voluptatum officiis eius est nam dolores non aspernatur quidem?</p>    
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="basis-1/4 p-[10px] bg-[#fbf8cc]">
+        <div class="bag2 basis-1/4 p-[10px] bg-[#fbf8cc]">
             <div class="menu m-4 cardCir flex flex-col gap-5 p-[20px]">
                 <h1 class="font-bold text-2x1 text-center font-['Comfortaa']">Menu</h1>
                 <ul class="flex flex-col gap-10">
@@ -87,38 +87,34 @@
 
     <div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
     <div class="container hidden fixed inset-0 justify-center items-center z-50" id="editPop">
-        <div class="editBox">
-            <div class="flex flex-row gap-[10px] absolute bottom-3 right-3 ]">
-                <button class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
-                <button class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
-            </div>
-            <div class="basis-5/12 h-full flex flex-row items-start gap-10">
-                <div class="editPhoto flex flex-col items-center gap-2">
-                    <div class="photoProfile relative">
-                        <img src="{% static 'img/herta.jpg' %}" alt="profil" class="rounded-full w-[180px] border-4 border-black">
-                        <button class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[140px] text-[14px]">
+        <div class="editBox overflow-auto">
+            <div class="editPrfl1">
+                <div class="flex flex-col items-center gap-2">
+                    <div class="photoProfile">
+                        <img src="{% static 'img/herta.jpg' %}" alt="profil" class="editPhoto">
+                        <button onclick="coba()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
                             <i class="fa-solid fa-pen"></i>
                             <p>Edit</p>
                         </button>
                     </div>
-                    <h4 class="header4 text-[20px]">Photo Profile</h4>
+                    <h4 class="header4 text-[18px]">Photo Profile</h4>
                 </div>
                 <div class="pt-5 flex gap-3 flex-col">
-                    <div class="flex h-fit flex-row gap-3 w-[400px]">
+                    <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                         <input type="text" name="nama" class="BoxPlchdr cursor-not-allowed" value="Mulyono" readonly disabled>
                         <a onclick="ubahNama()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                     </div>
-                    <div class="flex items-start flex-col gap-1">
-                        <h1 class="header3">23106054143</h1>
-                        <h1 class="header3">Dosen</h1>
+                    <div class="flex items-start flex-col gap-1 w-full">
+                        <h1 class="header3 w-full">23106054143</h1>
+                        <h1 class="header3 w-full">Dosen</h1>
                     </div>
                 </div>
             </div>
-            <div class="basis-7/12 w-full border-t-[2px] gap-5 border-gray-600 flex flex-row">
-                <div class="pt-5 pl-10 gap-7 flex flex-col">
+            <div class="mainEditPrfl">
+                <div class="editPrfl2">
                     <div class="w-fit">
                         <h4 class="header4 text-[18px]">NIP/NIM</h4>
-                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                        <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                             <input type="number" name="NIP" class="BoxPlchdr cursor-not-allowed remove-arrow" value="23106043045" readonly disabled>
                             <a onclick="ubahNIP()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
@@ -126,7 +122,7 @@
                     </div>
                     <div class="w-fit">
                         <h4 class="header4 text-[18px]">Alamat</h4>
-                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                        <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                             <input type="text" name="alamat" class="BoxPlchdr cursor-not-allowed" value="Osaka" readonly disabled>
                             <a onclick="ubahAlamat()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
@@ -136,10 +132,10 @@
                         </p>
                     </div>
                 </div>
-                <div class="pt-5 pl-10 gap-7 flex flex-col">
+                <div class="editPrfl2">
                     <div class="w-fit">
                         <h4 class="header4 text-[18px]">Tanggal Lahir</h4>
-                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                        <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                             <input type="date" name="tanggalLahir" class="BoxPlchdr cursor-not-allowed remove-arrow" readonly disabled>
                             <a onclick="ubahTanggalLahir()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
@@ -147,13 +143,18 @@
                     </div>
                     <div class="w-fit">
                         <h4 class="header4 text-[18px]">Deskripsi</h4>
-                        <div class="flex h-fit flex-row gap-3 w-[400px]">
+                        <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                             <textarea name="deskripsi" class="BoxPlchdr cursor-not-allowed remove-arrow h-[100px]" placeholder="Deskripsi" readonly disabled>What a sigma</textarea>
                             <a onclick="ubahDeskripsi()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="editFrmBtn">
+                <button class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
+                <button class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
+            </div>
+
         </div>
     </div>
 
@@ -225,6 +226,10 @@
                 }, 300); // Durasi animasi sesuai dengan CSS (0.3s)
             }
 
+        }
+
+        function coba() {
+            alert('Edit Photo Profile');
         }
 
     </script>
