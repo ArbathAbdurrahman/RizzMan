@@ -13,44 +13,8 @@
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
     <!-- ini untuk blur ketika popup login muncul -->
-    <div id="overlay" class="hidden fixed inset-0 z-40" onclick="loginPopup()"></div>
-    <div class="container hidden fixed inset-0 justify-center items-center z-50" id="loginPop">
-        <div class="loginBox">
-            <button class="absolute top-4 right-4" onclick="loginPopup()">
-                <i class="fa-solid fa-square-xmark fa-2x"></i>
-            </button>
-            <div class="wlcm">
-                <h2 class="text-center font-['Comfortaa']">Log In</h2>
-                <div class="login">
-                    {% if messages %}
-                            <div class="mb-4 space-y-2">
-                                {% for message in messages %}
-                                    <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
-                                        {{ message }}
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    <form action="" method="post" class="form">
-                        {% csrf_token %}
-                        {{ form.non_field_errors }}
-                        <div class="ket">
-                            <h4 class="header4">Email</h4>
-                            {{ form.username.errors }}
-                            {{ form.username }}
-                        </div>
-                        <div class="ket">
-                            <h4 class="header4">Password</h4>
-                            {{ form.password.errors }}
-                            {{ form.password }}
-                        </div>
-                    <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
-                    <!-- jika submit maka akan menuju ke profile.html -->
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
      <main>
         <div id="pageWrapper"> 
             <div class="fufu">
