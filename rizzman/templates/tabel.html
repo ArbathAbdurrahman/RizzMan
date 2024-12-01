@@ -7,12 +7,26 @@
         #loginBtn {
             display: none;
         }
+
+        #burger {
+            display: none;
+        }
+        #logout {
+            display: none;
+        }
     </style>
 {% endblock title %}
 
 {% block content %}
 <main class="w-full h-full flex-col justify-start">
     <h1 class="header1 p-3">Tabel Resiko</h1>
+    <div class="mb-4 space-y-2">
+        {% for message in messages %}
+        <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
     <div class="cardRec m-[10px]">
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right border-separate border-spacing-0">
@@ -30,51 +44,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for risk in tabel %}
                     <tr class="bg-white border-b">
                         <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap text-xs text-center border border-gray-500">
                             1
                         </th>
                         <td class="px-2 py-4 w-3/4 border border-gray-500">
-                            Kontol
+                            {{risk.tujuan}}
                         </td>
                         <td class="px-2 py-4 w-1/4 border border-gray-500">
                             <div id="actionBtn" class="flex flex-row place-content-center gap-2">
-                                <div class="buttonCirRd h-auto"><a href="#">Hapus</a></div>
-                                <div class="buttonCir h-auto"><a href="#">Edit</a></div>
+                                <div class="buttonCirRd h-auto"><a href="{% url 'delete_risk' risk.id %}">Hapus</a></div>
+                                <div class="buttonCir h-auto"><a href="{% url 'edit_risk' risk.id %}">Edit</a></div>
                                 <div class="buttonCir h-auto"><a href="#">Lihat Grafik</a></div>    
                             </div>
                         </td>
                     </tr>
-                    <tr class="bg-white border-b">
-                        <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap text-xs text-center border border-gray-500">
-                            2
-                        </th>
-                        <td class="px-2 py-4 w-3/4 border border-gray-500">
-                            Hytam
-                        </td>
-                        <td class="px-2 py-4 w-1/4 border border-gray-500">
-                            <div id="actionBtn" class="flex flex-row place-content-center gap-2">
-                                <div class="buttonCirRd h-auto"><a href="#">Hapus</a></div>
-                                <div class="buttonCir h-auto"><a href="#">Edit</a></div>
-                                <div class="buttonCir h-auto"><a href="#">Lihat Grafik</a></div>    
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="bg-white">
-                        <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap text-xs text-center border border-gray-500">
-                            3
-                        </th>
-                        <td class="px-2 py-4 w-3/4 border border-gray-500">
-                            Pak Kris
-                        </td>
-                        <td class="px-2 py-4 w-1/4 border border-gray-500">
-                            <div id="actionBtn" class="flex flex-row place-content-center gap-2">
-                                <div class="buttonCirRd h-auto"><a href="#">Hapus</a></div>
-                                <div class="buttonCir h-auto"><a href="#">Edit</a></div>
-                                <div class="buttonCir h-auto"><a href="#">Lihat Grafik</a></div>    
-                            </div>
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>    

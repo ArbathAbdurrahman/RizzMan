@@ -3,50 +3,109 @@
 <header class="border-b-4 border-black h-16 flex flex-shrink-0">
     <div class="flex justify-between w-full flex-row">
         <div class="logo flex flex-row justify-items-center content-center gap-3">
-            <h1><a class="header1" href="{% url 'home' %}">RizzMan</a></h1>
+            <h1><a class="header1 judul" href="{% url 'home' %}">RizzMan</a></h1>
         </div>
         <div class="navBar justify-items-center content-center">
             <ul class="flex flex-row gap-[10px] h-auto">
+                {% if request.user.is_authenticated %}
+                <li><a class="buttonRec" href="{% url 'tabel' %}">Forms</a></li>
+                <li><a class="buttonRec" href="{% url 'profile' %}">profil</a></li>
+                {% if request.resolver_match.view_name == 'tabel' %}
+                <li><a class="buttonRec" href="{% url 'forms' %}">Isi Forms</a></li>
+                {% else %}
+                <li><a class="buttonRec" id="logout" href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+                {% else %}
                 <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
-                <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
+                {% endif %}
+                <li><button class="text-[25px]" id="burger" onclick="burgerPop()"><i class="fa-solid fa-bars"></i></button></li>
+
             </ul>
-        </div>
-        <div class="container hidden fixed inset-0 justify-center items-center z-50" id="loginPop">
-            <div class="loginBox">
-                <button class="absolute top-4 right-4" onclick="loginPopup()">
-                    <i class="fa-solid fa-square-xmark fa-2x"></i>
-                </button>
-                <div class="wlcm">
-                    <h2 class="text-center font-['Comfortaa']">Log In</h2>
-                    <div class="login">
-                        {% if messages %}
-                                <div class="mb-4 space-y-2">
-                                    {% for message in messages %}
-                                        <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
-                                            {{ message }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
-                        <form action="" method="post" class="form">
-                            {% csrf_token %}
-                            {{ form.non_field_errors }}
-                            <div class="ket">
-                                <h4 class="header4">Email</h4>
-                                {{ form.username.errors }}
-                                {{ form.username }}
-                            </div>
-                            <div class="ket">
-                                <h4 class="header4">Password</h4>
-                                {{ form.password.errors }}
-                                {{ form.password }}
-                            </div>
-                        <button type="submit" class="w-[551px] h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">Login</button> 
-                        <!-- jika submit maka akan menuju ke profile.html -->
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </header>
+<!-- Overlay -->
+<div id="overlay" class="hidden fixed inset-0 z-40" onclick="loginPopup()"></div>
+
+<!-- Pop-up Login -->
+<div id="loginPop" class="hidden fixed inset-0 justify-center items-center z-50">
+    <div class="loginBox">
+        <button class="absolute top-4 right-4" onclick="loginPopup()">
+            <i class="fa-solid fa-square-xmark text-[25px]"></i>
+        </button>
+        <div class="wlcm">
+            <h2 class="text-center font-['Comfortaa']">Log In</h2>
+            <div class="login">
+                <form action="" method="post" class="form">
+                    {% csrf_token %}
+                    <span class="text text-red-500">
+                        {{ form.non_field_errors }}
+                    </span>
+                    <div class="ket">
+                        <h4 class="header4">Username</h4>
+                        {{ form.username }}
+                    </div>
+                    <div class="ket">
+                        <h4 class="header4">Password</h4>
+                        {{ form.password }}
+                    </div>
+                    <button type="submit" class="w-full h-[39px] bg-[#e5f3f1] hover:bg-[#d7f2ed] p-0 buttonRec text-center text-black text-lg font-normal">
+                        Login
+                    </button> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="burgerNav">
+        <ul class="flex flex-col">
+            <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+            <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+            <li><div class="buttonCir border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f6a8ad] hover:bg-[#eca3a8] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Logout</a></div></li>
+        </ul>
+    </div>
+
+<script>
+    function burgerPop () {
+    var x = document.getElementById("burgerNav");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
+
+// function loginPopup() {
+//             const popup = document.getElementById('loginPop');
+//             const overlay = document.getElementById('overlay');
+//             const pageWrapper = document.getElementById('pageWrapper');
+
+//             if (popup.classList.contains('hidden')) {
+//                 // Saat popup dibuka
+//                 popup.classList.remove('hidden');
+//                 popup.classList.add('popup-enter'); // Tambahkan animasi masuk
+//                 overlay.classList.remove('hidden');
+//                 pageWrapper.classList.add('blur-bg');
+
+//                 // Hapus kelas animasi setelah animasi selesai
+//                 setTimeout(() => {
+//                     popup.classList.remove('popup-enter');
+//                     popup.classList.add('flex'); // Tetapkan gaya flex setelah masuk
+//                 }, 300); // Durasi animasi sesuai dengan CSS
+//             } else {
+//                 // Saat popup ditutup
+//                 popup.classList.remove('flex');
+//                 popup.classList.add('popup-exit-active'); // Tambahkan animasi keluar
+//                 overlay.classList.add('hidden');
+//                 pageWrapper.classList.remove('blur-bg');
+
+//                 // Sembunyikan popup setelah animasi selesai
+//                 setTimeout(() => {
+//                     popup.classList.add('hidden');
+//                     popup.classList.remove('popup-exit-active');
+//                 }, 300); // Durasi animasi sesuai dengan CSS
+//             }
+//         }
+
+
+</script>

@@ -7,6 +7,10 @@
         #profileBtn {
             display: none;
         }
+
+        #burger {
+            display: none;
+        }
     </style>
 {% endblock title %}
 
@@ -15,7 +19,16 @@
     <!-- ini untuk blur ketika popup login muncul -->
 
 
+    {% if messages %}
+    <div class="mb-4 space-y-2">
+        {% for message in messages %}
+        <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
      <main>
+        {% endif %}
         <div id="pageWrapper"> 
             <div class="fufu">
                 <img src="{% static 'img\herta.jpg' %}" alt="fufu">

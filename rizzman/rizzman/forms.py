@@ -1,20 +1,163 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from .models import UserProfile, Risk, Department, Bisnis, Kelompok
 
 class CustomAuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={
-            'class': 'kotak',
-            'placeholder': 'Username or Email',
+            'placeholder': 'Username',
             'required': True,
         }),
-        label="Username or Email"
+        label="Username"
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'kotak-pass',
             'placeholder': 'Password',
             'required': True,
         }),
         label="Password"
     )
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['foto','nama', 'alamat', 'tanggal_lahir',]
+        widgets = {
+            'nama': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly','disabled': 'disabled',}),
+            'alamat': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly','disabled': 'disabled',}),
+            'tanggal_lahir': forms.DateInput(attrs={
+                'class': 'BoxPlchdr cursor-not-allowed remove-arrow',
+                'readonly': 'readonly',
+                'disabled': 'disabled',
+                'type': 'date',  # Pastikan type adalah 'date' untuk mendukung input kalender
+            }),
+        }
+
+# Risk Forms
+class RiskForm(forms.ModelForm):
+    class Meta:
+        model = Risk
+        fields = [
+            'tujuan', 
+            'proses_bisnis', 
+            'kelompok_resiko', 
+            'kode_resiko', 
+            'penyebab_resiko', 
+            'sumber_resiko', 
+            'akibat', 
+            'akibat_finansial', 
+            'departemen',
+            'pemilik_resiko',
+            'inherent_likelihood', 
+            'inherent_impact', 
+            'control', 
+            'memadai', 
+            'residual_likelihood', 
+            'residual_impact', 
+            'perlakuan', 
+            'tindakan_mitigasi', 
+            'mitigasi_likelihood', 
+            'mitigasi_impact'
+        ]
+
+        widgets = {
+            'tujuan': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'penyebab_resiko': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'akibat': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'tindakan_mitigasi': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'sumber_resiko': forms.Select(attrs={'class': 'form-control'}),
+            'control': forms.Select(choices=[(True, 'Ada'), (False, 'Tidak')]),
+            'memadai': forms.Select(choices=[(True, 'Ya'), (False, 'Tidak')]),
+            'status': forms.Select(choices=[(True, 'Dijalankan'), (False, 'Belum')]),
+            'perlakuan': forms.Select(choices=[(True, 'Accept'), (False, 'Reduce')])
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Semua harus diisi
+        for field_name in self.fields:
+            self.fields[field_name].required = True
+            
+        # Setup katogori dinamis
+        self.fields['departemen'].queryset = Department.objects.all()
+        self.fields['proses_bisnis'].queryset = Bisnis.objects.all()
+        self.fields['kelompok_resiko'].queryset = Kelompok.objects.all()
+        
+        # Handling eror
+        for field in self.fields:
+            self.fields[field].error_messages = {
+                'required': f'{field.replace("_", " ").title()} harus diisi.',
+                'invalid': f'Masukkan {field.replace("_", " ")} yang valid.'
+            }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        
+        # Validasi numerik
+        numeric_fields = [
+            'inherent_likelihood', 'inherent_impact', 
+            'residual_likelihood', 'residual_impact', 
+            'mitigasi_likelihood', 'mitigasi_impact',
+            'akibat_finansial'
+        ]
+        
+        for field in numeric_fields:
+            value = cleaned_data.get(field)
+            if value is None:
+                self.add_error(field, f'{field.replace("_", " ").title()} harus diisi.')
+            elif not isinstance(value, (int, float)):
+                self.add_error(field, f'{field.replace("_", " ").title()} harus berupa angka.')
+            
+        # Validasi maksimal
+        if cleaned_data.get('inherent_likelihood', 0) > 5:
+            self.add_error('inherent_likelihood', 'Likelihood maksimal 5')
+        
+        if cleaned_data.get('inherent_impact', 0) > 5:
+            self.add_error('inherent_impact', 'Impact maksimal 5')
+
+        if cleaned_data.get('residual_likelihood', 0) > 5:
+            self.add_error('residual_likelihood', 'Likelihood maksimal 5')
+        if cleaned_data.get('residual_impact', 0) > 5:
+            self.add_error('residual_impact', 'Impact maksimal 5')
+
+        if cleaned_data.get('mitigasi_likelihood', 0) > 5:
+            self.add_error('mitigasi_likelihood', 'Likelihood maksimal 5')
+        if cleaned_data.get('mitigasi_impact', 0) > 5:
+            self.add_error('mitigasi_impact', 'Impact maksimal 5')
+        
+        return cleaned_data
+
+    def clean_kode_resiko(self):
+        kode_resiko = self.cleaned_data.get('kode_resiko')
+        
+        if not kode_resiko:
+            raise forms.ValidationError("Kode Resiko harus diisi.")
+        
+        # Kode resiko unik
+        if Risk.objects.filter(kode_resiko=kode_resiko).exists():
+            raise forms.ValidationError("Kode Resiko sudah ada. Gunakan kode yang unik.")
+        
+        return kode_resiko
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        
+        # Hitung score
+        instance.inherent_score = (
+            instance.inherent_likelihood * 
+            instance.inherent_impact
+        )
+        instance.residual_score = (
+            instance.residual_likelihood * 
+            instance.residual_impact
+        )
+        instance.mitigasi_score = (
+            instance.mitigasi_likelihood * 
+            instance.mitigasi_impact
+        )
+        
+        if commit:
+            instance.save()
+        return instance

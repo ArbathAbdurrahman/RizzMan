@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
-
+import os
 
 class Department(models.Model):
     """Model untuk departemen."""
@@ -11,7 +11,20 @@ class Department(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Bisnis(models.Model):
+    """Model untuk Bisnis."""
+    name = models.CharField(max_length=255, unique=True)
 
+    def __str__(self):
+        return self.name
+
+class Kelompok(models.Model):
+    """Model untuk kelompok resiko."""
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
 
 class Risk(models.Model):
     """Model untuk risiko."""
@@ -28,14 +41,22 @@ class Risk(models.Model):
         (True, 'Memadai'),
         (False, 'Tidak Memadai'),
     ]
+    STATUS_CONTROL = [
+        (True, 'Ada'),
+        (False, 'Tidak'),
+    ]
+    STATUS_PERLAKUAN = [
+        (True, 'Accept'),
+        (True, 'Reduce'),
+    ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="risks")
     tujuan = models.TextField()
-    proses_bisnis = models.CharField(max_length=255, blank=True, null=True)
-    kelompok_resiko = models.CharField(max_length=255, blank=True, null=True)
+    proses_bisnis = models.ForeignKey(Bisnis, on_delete=models.SET_NULL, null=True, related_name="risks")
+    kelompok_resiko = models.ForeignKey(Kelompok, on_delete=models.SET_NULL, null=True, related_name="risks")
     kode_resiko = models.CharField(max_length=255, unique=True)  # Tidak boleh null
     penyebab_resiko = models.TextField()
-    sumber_resiko = models.CharField(max_length=10,choices=SUMBER_RESIKO_CHOICES,default='both'),
+    sumber_resiko = models.CharField(max_length=100,choices=SUMBER_RESIKO_CHOICES)
     akibat = models.TextField()
     akibat_finansial = models.PositiveIntegerField()  # Tidak boleh negatif
     pemilik_resiko = models.CharField(max_length=255)
@@ -43,13 +64,13 @@ class Risk(models.Model):
     inherent_likelihood = models.PositiveIntegerField(default=0)
     inherent_impact = models.PositiveIntegerField(default=0)
     inherent_score = models.PositiveIntegerField(default=0)
-    control = models.BooleanField()
+    control = models.BooleanField(choices=STATUS_CONTROL)
     memadai = models.BooleanField(choices=MEMADAI_CHOICES)
     status = models.BooleanField(choices=STATUS_CHOICES, default=True)
     residual_likelihood = models.PositiveIntegerField(default=0)
     residual_impact = models.PositiveIntegerField(default=0)
     residual_score = models.PositiveIntegerField(default=0)
-    perlakuan = models.BooleanField()
+    perlakuan = models.BooleanField(choices=STATUS_PERLAKUAN)
     tindakan_mitigasi = models.TextField()
     mitigasi_likelihood = models.PositiveIntegerField(default=0)
     mitigasi_impact = models.PositiveIntegerField(default=0)
@@ -66,24 +87,55 @@ class Risk(models.Model):
         if self.inherent_score < 0 or self.residual_score < 0 or self.mitigasi_score < 0:
             raise ValidationError("Score values cannot be negative.")
 
-        if self.residual_score > self.inherent_score:
-            raise ValidationError("Residual score cannot be higher than inherent score.")
+class Role(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    priority = models.IntegerField()
 
+    def __str__(self):
+        return self.name
 
 class UserProfile(models.Model):
     """Profil tambahan untuk pengguna."""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    nomor_induk = models.CharField(max_length=50, blank=True, null=True)
-    jabatan = models.CharField(max_length=100, blank=True, null=True)
-    gelar = models.CharField(max_length=100, blank=True, null=True)
+    nama = models.CharField(max_length=50, blank=True, null=True)
+    jabatan = models.ForeignKey(Role,max_length=100, blank=True, null=True, on_delete=models.SET_NULL,default=None)
     alamat = models.TextField(blank=True, null=True)
     tanggal_lahir = models.DateField(blank=True, null=True)
-    foto = models.ImageField(upload_to='user_photos/', blank=True, null=True)
+    foto = models.ImageField(upload_to='user_photos/', blank=True, null=True, default='herta.jpg')
     total_pengisian = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
 
+# Signals untuk mendeteksi penghapusan foto profil
+@receiver(post_delete, sender=UserProfile)
+def delete_profile_photo_on_delete(sender, instance, **kwargs):
+    """Hapus file foto profil saat UserProfile dihapus."""
+    if instance.foto and instance.foto.name != 'herta.jpg':  # Pastikan default foto tidak dihapus
+        if os.path.isfile(instance.foto.path):
+            try:
+                os.remove(instance.foto.path)
+            except Exception as e:
+                print(f"Error saat menghapus foto: {e}")
+
+@receiver(pre_save, sender=UserProfile)
+def delete_old_profile_photo_on_update(sender, instance, **kwargs):
+    """Hapus file foto lama saat diperbarui dengan foto baru."""
+    if not instance.pk:  # Jika instance baru, abaikan
+        return
+
+    try:
+        old_instance = UserProfile.objects.get(pk=instance.pk)
+    except UserProfile.DoesNotExist:
+        return
+
+    # Jika foto diubah, hapus foto lama
+    if old_instance.foto != instance.foto and old_instance.foto.name != 'herta.jpg':
+        if old_instance.foto and os.path.isfile(old_instance.foto.path):
+            try:
+                os.remove(old_instance.foto.path)
+            except Exception as e:
+                print(f"Error saat menghapus foto lama: {e}")
 
 # Signal untuk membuat profil pengguna saat user baru dibuat
 @receiver(post_save, sender=User)
