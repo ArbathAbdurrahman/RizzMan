@@ -120,7 +120,7 @@
     }
 
     .cardRec {
-        @apply border-[3.4px] border-black bg-[#e9f5db] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
+        @apply border-[3.4px] border-black bg-[#ecf3e4] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
     }
 
     .cardCir {
@@ -140,7 +140,7 @@
     }
 
     .bag1 {
-        @apply h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-[#e2eafc];
+        @apply h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-white;
     }
 
     .user {
@@ -273,10 +273,6 @@
     }
     .bag2 {
         @apply basis-0 hidden;
-    }
-
-    .mainPrf{
-        @apply bg-[#e2eafc]
     }
     header {
         @apply px-5;
