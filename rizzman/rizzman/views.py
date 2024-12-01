@@ -87,23 +87,29 @@ def login(request):
         context['error'] = 1
         context['error_message'] = "Password atau username anda salah, mohon cek kembali!"
         return render(request,"login.html",context=context)
+
+def get_rgb(t):
+    return "{},{},{}".format((255*t)/1000,0,255-(255*t/1000))
  
 def chart(request):
     queryset = Risk.objects.all().values()
     datapoints = [{'x':1,'y':-1000,'r':10}]
     labels = []
+    colors = []
     for i in range(len(queryset)):
         datapoint = {}
         datapoint['x'] = i+1
         datapoint['y'] = queryset[i]['inherent_score']
         datapoint['label'] = queryset[i]['kode_resiko']
-        datapoint['r'] = 40
+        datapoint['r'] = 50
         datapoint['backgroundColor'] = 'rgb(0,0,0)'
         datapoints.append(datapoint)
         labels.append(queryset[i]['kode_resiko'])
+        color = "rgb({})".format(get_rgb(datapoint['y']))
+        colors.append(color)
 
     datapoints_json = json.dumps(datapoints,cls=DjangoJSONEncoder)
-    return render(request,'chart.html',{'datapoints':datapoints_json,'labels':labels})
+    return render(request,'chart.html',{'datapoints':datapoints_json,'labels':labels,'colors':colors})
 
 
 

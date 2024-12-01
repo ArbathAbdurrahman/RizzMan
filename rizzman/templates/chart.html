@@ -24,7 +24,7 @@
                 datasets: [{
                     label: 'Bubble Dataset',
                     data: {{ datapoints | safe }},
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    backgroundColor: {{ colors|safe }},
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
                     hoverRadius:0
@@ -50,7 +50,8 @@
                     x: {
                         min: 1,
                         max: 50,
-                        type:'linear'
+                        type:'linear',
+                        padding:1000
                     },
                     y: {
                         type:'linear',
