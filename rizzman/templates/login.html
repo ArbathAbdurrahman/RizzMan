@@ -12,6 +12,9 @@
         <div class="container" id="login-container">
             <div class="loginBox">
                 <div class="wlcm">
+                    {% if error == 1 %}
+                    <h1 style="color:red"> {{ error_message }}</h1>
+                    {% endif %}
                     <h2 class="text-center">Welcome To RizzMan</h2>
                     <div class="login">
                         <form action="/login/" method="post" class="form">

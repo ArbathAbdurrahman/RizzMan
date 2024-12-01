@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate
 from .models import UserProfile, Risk
 import pytz
@@ -22,7 +22,15 @@ def index(request):
         return HttpResponse(alert("Kamu belum login!")+redirect("/login/"))
 
 
-    return render(request,'index.html',context)
+    return HttpResponseRedirect("/profile/")
+
+def edit(request):
+    if request.method != "PUT":
+        response = render(request,'403.html')
+        response.status_code=403
+        return response
+
+    usernaem 
 
 def create_user(request):
     context = {'title':'RizzMan'}
@@ -53,7 +61,7 @@ def logout(request):
         return HttpResponse(alert("Kamu belum masuk!")+redirect("/login/"))
 
 def login(request):
-    context={'title':'RizzMan'};
+    context={'title':'RizzMan','error':0};
     if 'user' in request.session:
         return HttpResponse(alert("Anda sudah login") + redirect("/"));
     if request.method != "POST":
@@ -65,14 +73,17 @@ def login(request):
     if len(user) == 1:
         password_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
         if (password_hash != user[0]['password']):
-            return HttpResponse(alert("Password anda salah"));
+            context['error'] = 1
+            context['error_message'] = "Password atau username anda salah, mohon cek kembali!"
+            return render(request,"login.html",context=context)
         else:
             request.session['user']=username
             request.session['logged']=True
             return HttpResponse(alert("Password anda benar")+redirect("/"))
     else:
-        return HttpResponse(alert("Password anda salah")+redirect("/login/"))
-
+        context['error'] = 1
+        context['error_message'] = "Password atau username anda salah, mohon cek kembali!"
+        return render(request,"login.html",context=context)
  
 def chart(request):
     datapoints = [
@@ -90,13 +101,15 @@ def chart(request):
 
 def forms(request):
     context = {'title':'RizzMan'}
-    if request.method != "POST":
-        return render(request,'forms.html',context)
 
     if 'user' not in request.session:
         response = render(request,'403.html',context)
         response.status_code=403
         return response
+
+
+    if request.method != "POST":
+        return render(request,'forms.html',context)
 
     user = request.session['user']
     tujuan = request.POST.get('tujuan')
