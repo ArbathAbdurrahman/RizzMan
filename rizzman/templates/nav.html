@@ -10,7 +10,7 @@
                 <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
                 <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
                 <li><a class="buttonRec" id="logout" href="{% url 'home' %}">Logout</a></li>
-                <li><button class="text-[25px]" id="burger" onclick="burgerPop()"><i class="fa-solid fa-bars"></i></button></li>
+                <li><button class="text-[25px] rounded-md px-2 transition-colors duration-300 ease-in-out" id="burger" onclick="burgerPop()"><i class="fa-solid fa-bars"></i></button></li>
 
             </ul>
         </div>
@@ -24,7 +24,7 @@
             <i class="fa-solid fa-square-xmark text-[25px]"></i>
         </button>
         <div class="wlcm">
-            <h2 class="text-center font-['Comfortaa']">Log In</h2>
+            <h2 class="textCenter">Log In</h2>
             <div class="login">
                 <form action="" method="post" class="form">
                     {% csrf_token %}
@@ -46,14 +46,15 @@
 
 <div id="burgerNav" class="z-10">
     <ul class="flex flex-col">
-        <li><div id="formBur" class="buttonCir hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
-        <li><div id="tableBur" class="buttonCir hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
-        <li><div id="loginBur" class="buttonCir hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" onclick="loginPopup()">Login</a></div></li>
-        <li><div id="logoutBur" class="buttonCir hover:shadow-none border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f9ced0] hover:bg-[#ffc1c5] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'home' %}">Logout</a></div></li>
+        <li><div id="formBur" class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+        <li><div id="tableBur" class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+        <li><div id="loginBur" class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" onclick="loginPopup()">Login</a></div></li>
+        <li><div id="logoutBur" class="font-bold font-['Raleway'] border-black hover:shadow-none border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f9ced0] hover:bg-[#ffc1c5] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'home' %}">Logout</a></div></li>
     </ul>
 </div>
 
 <script>
+    
     function burgerPop() {
         var x = document.getElementById("burgerNav");
         if (x.style.display === "block") {
@@ -68,4 +69,11 @@
             }, 400);
         }
     }
+    let isToggled = false;
+    const x = document.getElementById("burger");
+    x.addEventListener("click", function() {
+        x.style.backgroundColor = isToggled ? "white" : "rgb(31 41 55)";
+        x.style.color = isToggled ? "black" : "white";
+        isToggled = !isToggled;
+    });
 </script>
