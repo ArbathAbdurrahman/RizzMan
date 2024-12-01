@@ -5,6 +5,9 @@ from .models import UserProfile, Risk
 import pytz
 from datetime import datetime
 import hashlib
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 timezone = pytz.timezone("Asia/Jakarta")
 
@@ -86,17 +89,22 @@ def login(request):
         return render(request,"login.html",context=context)
  
 def chart(request):
-    datapoints = [
-        { "label": "Mercury", "y": 57900000, "z": 2440 },
-        { "label": "Venus", "y": 108200000, "z": 6052 },
-        { "label": "Earth", "y": 149600000, "z": 6371 },
-        { "label": "Mars", "y": 227900000, "z": 3390 },
-        { "label": "Jupiter", "y": 778600000, "z": 69911 },
-        { "label": "Saturn", "y": 1433500000, "z": 58232 },
-        { "label": "Uranus", "y": 2872500000, "z": 25362 },
-        { "label": "Neptune", "y": 4495100000, "z": 24622 }
-    ]
-    return render(request, 'chart.html', { "datapoints" : datapoints })                        
+    queryset = Risk.objects.all().values()
+    datapoints = [{'x':1,'y':-1000,'r':10}]
+    labels = []
+    for i in range(len(queryset)):
+        datapoint = {}
+        datapoint['x'] = i+1
+        datapoint['y'] = queryset[i]['inherent_score']
+        datapoint['label'] = queryset[i]['kode_resiko']
+        datapoint['r'] = 40
+        datapoint['backgroundColor'] = 'rgb(0,0,0)'
+        datapoints.append(datapoint)
+        labels.append(queryset[i]['kode_resiko'])
+
+    datapoints_json = json.dumps(datapoints,cls=DjangoJSONEncoder)
+    return render(request,'chart.html',{'datapoints':datapoints_json,'labels':labels})
+
 
 
 def forms(request):
