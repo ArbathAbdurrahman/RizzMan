@@ -1,11 +1,11 @@
 {% load static %}
 <script src="https://kit.fontawesome.com/385cd213ed.js" crossorigin="anonymous"></script>
-<header class="border-b-4 border-black h-16 flex flex-shrink-0">
+<header class="border-b-4 border-black h-16 flex flex-shrink-0 z-50">
     <div class="flex justify-between w-full flex-row">
         <div class="logo flex flex-row justify-items-center content-center gap-3">
-            <h1><a class="header1 judul" href="{% url 'home' %}">RizzMan</a></h1>
+            <a href="{% url 'home' %}"><img src="{% static 'img/RizzMan.png' %}" alt="logo" class="h-[54px]"></a>
         </div>
-        <div class="navBar justify-items-center content-center">
+        <div class="navBar flex items-center">
             <ul class="flex flex-row gap-[10px] h-auto">
                 <li><a class="buttonRec" id="loginBtn" onclick="loginPopup()">Login</a></li>
                 <li><a class="buttonRec" id="profileBtn" href="{% url 'profile' %}">Back</a></li>
@@ -18,7 +18,7 @@
 </header>
 
 <div id="overlay" class="hidden fixed inset-0 z-40" onclick="loginPopup()"></div>
-<div class="container hidden fixed inset-0 justify-center items-center z-50" id="loginPop">
+<div class="container hidden fixed inset-0 justify-center items-center z-50 transition-all duration-200" id="loginPop">
     <div class="loginBox">
         <button class="absolute top-4 right-4" onclick="loginPopup()">
             <i class="fa-solid fa-square-xmark text-[25px]"></i>
@@ -44,23 +44,28 @@
     </div>
 </div>
 
-<div id="burgerNav">
+<div id="burgerNav" class="z-10">
     <ul class="flex flex-col">
-        <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
-        <li><div class="buttonCir border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
-        <li><div class="buttonCir border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f6a8ad] hover:bg-[#eca3a8] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Logout</a></div></li>
+        <li><div id="formBur" class="buttonCir hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+        <li><div id="tableBur" class="buttonCir hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+        <li><div id="loginBur" class="buttonCir hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" onclick="loginPopup()">Login</a></div></li>
+        <li><div id="logoutBur" class="buttonCir hover:shadow-none border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f9ced0] hover:bg-[#ffc1c5] h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'home' %}">Logout</a></div></li>
     </ul>
 </div>
 
 <script>
-    function burgerPop () {
-    var x = document.getElementById("burgerNav");
-    if (x.style.display === "block") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "block";
+    function burgerPop() {
+        var x = document.getElementById("burgerNav");
+        if (x.style.display === "block") {
+            x.style.top = "-150px";
+            setTimeout(function() {
+                x.style.display = "none";
+            }, 400);
+        } else {
+            x.style.display = "block";
+            setTimeout(function() {
+                x.style.top = "65px";
+            }, 400);
+        }
     }
-}
-
-
 </script>

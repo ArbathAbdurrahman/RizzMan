@@ -35,7 +35,7 @@
     }
 
     header {
-        @apply w-full h-[68px] px-10 bg-[#e5f4f1] justify-start items-center gap-2.5 inline-flex;
+        @apply w-full h-[68px] px-10 bg-white justify-start items-center gap-2.5 inline-flex;
     }
 
     main {
@@ -67,6 +67,11 @@
         @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-4/5 px-14 py-5;
     }
 
+    .notifBox {
+        @apply w-fit h-fit bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
+    }
+
+
     
     .wlcm {
         @apply w-full h-auto px-10 flex-col justify-center items-center gap-4 inline-flex;
@@ -93,7 +98,8 @@
     }
     
     .header4 {
-        @apply text-[#030303] text-[15px] font-normal font-['Poppins'];
+        @apply text-[#030303] text-[15px] font-normal;
+        font-family: "Nunito Sans", sans-serif;
     }
     
     .BoxPlchdr {
@@ -164,7 +170,22 @@
     .editFrmBtn {
         @apply flex flex-row gap-[10px] items-start;
     }
+
+    .tabelRsk tr:hover {
+        @apply bg-gray-100 transition-colors duration-500 ease-in-out;
+    }
     
+    #burgerNav {
+        display: none;
+        position: absolute;
+        top: -150px;
+        width: 100%;
+        transition: top 0.4s;
+    }
+
+    #pageWrapper {
+        transition: all 0.4s;
+    }
 }
 
 @layer utilities {
