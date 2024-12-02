@@ -29,8 +29,8 @@ class Kelompok(models.Model):
 class Risk(models.Model):
     """Model untuk risiko."""
     STATUS_CHOICES = [
-        (True, 'Active'),
-        (False, 'Inactive'),
+        (True, 'Executed'),
+        (False, 'Ongoing'),
     ]
     SUMBER_RESIKO_CHOICES = [
     ('internal', 'Internal'),
@@ -66,7 +66,7 @@ class Risk(models.Model):
     inherent_score = models.PositiveIntegerField(default=0)
     control = models.BooleanField(choices=STATUS_CONTROL)
     memadai = models.BooleanField(choices=MEMADAI_CHOICES)
-    status = models.BooleanField(choices=STATUS_CHOICES, default=True)
+    status = models.BooleanField(choices=STATUS_CHOICES)
     residual_likelihood = models.PositiveIntegerField(default=0)
     residual_impact = models.PositiveIntegerField(default=0)
     residual_score = models.PositiveIntegerField(default=0)
@@ -78,6 +78,7 @@ class Risk(models.Model):
     created = models.DateField(auto_now_add=True)
     modified = models.DateField(auto_now=True)
     total_modifikasi = models.PositiveIntegerField(default=0)
+    tingkat = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return f"Risk {self.kode_resiko} - {self.tujuan}"
@@ -106,6 +107,18 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+
+# Penambahan tingkat otomatis
+@receiver(pre_save, sender=Risk)
+def set_risk_level(sender, instance, **kwargs):
+    try:
+        if instance.user and hasattr(instance.user, 'profile') and instance.user.profile and instance.user.profile.jabatan:
+            instance.tingkat = instance.user.profile.jabatan.priority
+        else:
+            instance.tingkat = None
+    except Exception as e:
+        # Log error atau set tingkat ke default
+        instance.tingkat = None
 
 # Signals untuk mendeteksi penghapusan foto profil
 @receiver(post_delete, sender=UserProfile)

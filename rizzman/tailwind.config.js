@@ -4,11 +4,15 @@ module.exports = {
     './templates/*.html',
     './templates/**/*.html',
     './**/templates/**/*.html',
-    './**/*.py'
+    './**/*.py',
+    './static/js/*.js',
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
-}
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+  ],
+};
 

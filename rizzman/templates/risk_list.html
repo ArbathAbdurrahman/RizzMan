@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Daftar Risiko</h1>
+            <a href="{% url 'forms' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                Tambah Risiko Baru
+            </a>
+        </div>
+
+        <!-- Filters and Search -->
+        <form method="get" class="mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Search Input -->
+                <div>
+                    <input type="text" name="q" placeholder="Cari Risiko..." 
+                           value="{{ search_query }}"
+                           class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Department Filter -->
+                <div>
+                    <select name="departemen" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Departemen</option>
+                        {% for dept in departments %}
+                            <option value="{{ dept.name }}" 
+                                    {% if dept.name == selected_departemen %}selected{% endif %}>
+                                {{ dept.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <select name="tingkat" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Tingkat</option>
+                        {% for tingkat in tingkat_options %}
+                            <option value="{{ tingkat }}" 
+                                    {% if tingkat == selected_tingkat %}selected{% endif %}>
+                                {{ tingkat }}
+                            </option>
+                        {% endfor %}
+                    </select>                    
+                </div>
+
+                <!-- Risk Level Filter -->
+                <div>
+                    <select name="risk_level" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Level Risiko</option>
+                        <option value="high" {% if selected_risk_level == 'high' %}selected{% endif %}>Risiko Tinggi</option>
+                        <option value="medium" {% if selected_risk_level == 'medium' %}selected{% endif %}>Risiko Sedang</option>
+                        <option value="low" {% if selected_risk_level == 'low' %}selected{% endif %}>Risiko Rendah</option>
+                    </select>
+                </div>
+
+                <!-- Sort -->
+                <div>
+                    <select name="sort" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="-created" {% if selected_sort == '-created' %}selected{% endif %}>Terbaru</option>
+                        <option value="created" {% if selected_sort == 'created' %}selected{% endif %}>Terlama</option>
+                        <option value="-inherent_score" {% if selected_sort == '-inherent_score' %}selected{% endif %}>Risiko Tertinggi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 flex justify-between items-center">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                    Terapkan Filter
+                </button>
+                <div class="text-gray-600">
+                    Total Risiko: {{ total_risks }} 
+                    (Tinggi: {{ high_risk_count }}, Sedang: {{ medium_risk_count }}, Rendah: {{ low_risk_count }})
+                </div>
+            </div>
+        </form>
+
+        <!-- Risk Table -->
+        <div class="overflow-x-auto">
+            <table class="w-full bg-white">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">Kode Risiko</th>
+                        <th class="py-3 px-6 text-left">Tujuan</th>
+                        <th class="py-3 px-6 text-center">Departemen</th>
+                        <th class="py-3 px-6 text-center">Skor Risiko</th>
+                        <th class="py-3 px-6 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm font-light">
+                    {% for risk in risks %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                            <div class="flex items-center">
+                                <span class="font-medium">{{ risk.kode_resiko|truncatechars:5 }}</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            {{ risk.tujuan|truncatechars:50 }}
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            {{ risk.departemen.name }} {{ risk.tingkat }}
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <span class="
+                                {% if risk.inherent_score > 15 %}bg-red-200 text-red-800
+                                {% elif risk.inherent_score > 8 %}bg-yellow-200 text-yellow-800
+                                {% else %}bg-green-200 text-green-800
+                                {% endif %} 
+                                px-3 py-1 rounded-full text-xs">
+                                {{ risk.inherent_score }}
+                            </span>
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <div class="flex item-center justify-center">
+                                <a href="{% url 'risk_detail' risk.pk %}" class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{% url 'edit_risk' risk.pk %}" class="w-4 mr-2 transform hover:text-green-500 hover:scale-110">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{% url 'delete_risk' risk.pk %}" class="w-4 transform hover:text-red-500 hover:scale-110">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-gray-500">
+                            Tidak ada risiko yang ditemukan.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="flex justify-center mt-6">
+            <nav class="inline-flex rounded-md shadow">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET.urlencode }}" 
+                       class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        Sebelumnya
+                    </a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="px-4 py-2 border border-gray-300 bg-blue-500 text-white text-sm font-medium">
+                            {{ num }}
+                        </span>
+                    {% else %}
+                        <a href="?page={{ num }}&{{ request.GET.urlencode }}" 
+                           class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                            {{ num }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}&{{ request.GET.urlencode }}" 
+                       class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        Berikutnya
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Optional: Add dynamic filtering without page reload
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        form.addEventListener('change', function() {
+            // Optional: You could add AJAX filtering here
+        });
+    });
+</script>
+{% endblock %}

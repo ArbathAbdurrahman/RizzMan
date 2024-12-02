@@ -3,18 +3,6 @@
 
 {% block title %}
     <title>Tabel</title>
-    <style>
-        #loginBtn {
-            display: none;
-        }
-
-        #burger {
-            display: none;
-        }
-        #logout {
-            display: none;
-        }
-    </style>
 {% endblock title %}
 
 {% block content %}
@@ -43,7 +31,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="tabelRsk">
                     {% for risk in tabel %}
                     <tr class="bg-white border-b">
                         <th scope="row" class="px-2 py-4 font-medium text-gray-900 whitespace-nowrap text-xs text-center border border-gray-500">

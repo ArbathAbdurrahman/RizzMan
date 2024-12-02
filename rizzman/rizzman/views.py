@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import UserProfile, Risk
+from .models import UserProfile, Risk, Department
 from django.contrib import messages
 from .forms import CustomAuthenticationForm, UserProfileForm, RiskForm
+from django.http import Http404
+from django.db.models import Q
+from django.core.paginator import Paginator
 
 def index(request):
     if request.method == "POST":
@@ -24,6 +26,7 @@ def index(request):
     else:
         form = CustomAuthenticationForm()
 
+    print(request.user.profile.jabatan.priority)
     context = {
         'title' : 'RizzMan',
         'form' : form,
@@ -55,15 +58,6 @@ def profile(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
-
-@login_required
-def tabel(request):
-    tabel = Risk.objects.filter(user = request.user)
-    context = {
-        'title' : 'RizzMan',
-        'tabel' : tabel
-    }
-    return render(request,'tabel.html',context)
 
 @login_required
 def edit_risk(request, id):
@@ -139,9 +133,87 @@ def risk_detail(request, risk_id):
         risk = Risk.objects.get(id=risk_id)
     except Risk.DoesNotExist:
         messages.error(request, 'Risiko tidak ditemukan.')
-        return redirect('risk_list')
+        return redirect('tabel')
     
     return render(request, 'risk_detail.html', {
         'risk': risk,
         'title': f'Detail Risiko {risk.kode_resiko}'
     })
+
+def RiskListView(request):
+    # Start with risks for the current user
+    queryset = Risk.objects.filter(user=request.user)
+
+    # Search functionality
+    search_query = request.GET.get('q', '').strip()
+    if search_query:
+        queryset = queryset.filter(
+            Q(kode_resiko__icontains=search_query) |
+            Q(tujuan__icontains=search_query) |
+            Q(departemen__name__icontains=search_query)
+        )
+
+    # Filtering options
+    departemen = request.GET.get('departemen')
+    if departemen:
+        queryset = queryset.filter(departemen__name=departemen)
+    
+    # Filtering by Tingkat (Risk Level)
+    selected_tingkat = request.GET.get('tingkat')
+    if selected_tingkat:
+        queryset = queryset.filter(tingkat=selected_tingkat)
+
+    # Filter by risk level
+    risk_level = request.GET.get('risk_level')
+    if risk_level == 'high':
+        queryset = queryset.filter(inherent_score__gt=15)
+    elif risk_level == 'medium':
+        queryset = queryset.filter(inherent_score__range=(8, 15))
+    elif risk_level == 'low':
+        queryset = queryset.filter(inherent_score__lt=8)
+
+    # Sorting
+    sort_by = request.GET.get('sort', '-created')
+    queryset = queryset.order_by(sort_by)
+
+    # Pagination
+    paginator = Paginator(queryset, 10)  # Show 10 risks per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Context data
+    context = {
+        'risks': page_obj,
+        'departments': Department.objects.all(),
+        'tingkat_options': Risk.objects.values_list('tingkat', flat=True).distinct(),
+        'search_query': search_query,
+        'selected_departemen': departemen,
+        'selected_risk_level': risk_level,
+        'selected_sort': sort_by,
+        'total_risks': queryset.count(),
+        'high_risk_count': queryset.filter(inherent_score__gt=15).count(),
+        'medium_risk_count': queryset.filter(inherent_score__range=(8, 15)).count(),
+        'low_risk_count': queryset.filter(inherent_score__lt=8).count(),
+        'selected_tingkat': selected_tingkat,
+    }
+
+    return render(request, 'risk_list.html', context)
+
+
+    
+def risk_detail(request, pk):
+    try:
+        # Ensure the user can only view their own risks
+        risk = get_object_or_404(Risk, pk=pk, user=request.user)
+        
+        context = {
+            'risk': risk,
+            # Add any additional context data if needed
+            'title': f'Detail Risiko - {risk.kode_resiko}',
+        }
+        
+        return render(request, 'detail_resiko.html', context)
+    
+    except Risk.DoesNotExist:
+        # If the risk doesn't exist or doesn't belong to the user
+        raise Http404("Risk does not exist or you do not have permission to view it")

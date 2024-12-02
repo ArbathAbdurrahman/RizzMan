@@ -53,25 +53,83 @@ class RiskForm(forms.ModelForm):
             'inherent_impact', 
             'control', 
             'memadai', 
+            'status', 
             'residual_likelihood', 
             'residual_impact', 
             'perlakuan', 
             'tindakan_mitigasi', 
             'mitigasi_likelihood', 
-            'mitigasi_impact'
+            'mitigasi_impact',
         ]
 
         widgets = {
-            'tujuan': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'penyebab_resiko': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'akibat': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'tindakan_mitigasi': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'sumber_resiko': forms.Select(attrs={'class': 'form-control'}),
-            'control': forms.Select(choices=[(True, 'Ada'), (False, 'Tidak')]),
-            'memadai': forms.Select(choices=[(True, 'Ya'), (False, 'Tidak')]),
-            'status': forms.Select(choices=[(True, 'Dijalankan'), (False, 'Belum')]),
-            'perlakuan': forms.Select(choices=[(True, 'Accept'), (False, 'Reduce')])
-        }
+                'tujuan': forms.TextInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'proses_bisnis': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'kelompok_resiko': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'kode_resiko': forms.TextInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'penyebab_resiko': forms.Textarea(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'rows': 3
+                }),
+                'sumber_resiko': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'akibat': forms.Textarea(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'rows': 3
+                }),
+                'akibat_finansial': forms.NumberInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'pemilik_resiko': forms.TextInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'departemen': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'inherent_likelihood': forms.NumberInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'inherent_impact': forms.NumberInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'control': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'memadai': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'status': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'residual_likelihood': forms.NumberInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'residual_impact': forms.NumberInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'perlakuan': forms.Select(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'tindakan_mitigasi': forms.Textarea(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'rows': 3
+                }),
+                'mitigasi_likelihood': forms.NumberInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'mitigasi_impact': forms.NumberInput(attrs={
+                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                })
+            }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

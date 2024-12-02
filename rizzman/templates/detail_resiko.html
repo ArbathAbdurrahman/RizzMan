@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Details</title>{% endblock %}
+
+{% load humanize %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <div class="bg-green-600 text-white px-6 py-4">
+            <h2 class="text-2xl font-bold">Detail Risiko: {{ risk.kode_resiko }}</h2>
+        </div>
+
+        <div class="p-6">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 border-b pb-2">Informasi Risiko</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="font-medium text-gray-600">Kode Risiko:</span>
+                            <span>{{ risk.kode_resiko }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium text-gray-600">Departemen:</span>
+                            <span>{{ risk.departemen.name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium text-gray-600">Proses Bisnis:</span>
+                            <span>{{ risk.proses_bisnis.name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-medium text-gray-600">Pemilik Risiko:</span>
+                            <span>{{ risk.pemilik_resiko }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-semibold mb-4 border-b pb-2">Penilaian Risiko</h4>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="bg-blue-50 p-4 rounded">
+                            <h5 class="font-semibold text-center">Inherent Risk</h5>
+                            <div class="text-center">
+                                <p>Likelihood: {{ risk.inherent_likelihood }}</p>
+                                <p>Impact: {{ risk.inherent_impact }}</p>
+                                <p class="font-bold 
+                                    {% if risk.inherent_score > 15 %}text-red-600
+                                    {% elif risk.inherent_score >= 8 %}text-yellow-600
+                                    {% else %}text-green-600{% endif %}">
+                                    Score: {{ risk.inherent_score }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded">
+                            <h5 class="font-semibold text-center">Residual Risk</h5>
+                            <div class="text-center">
+                                <p>Likelihood: {{ risk.residual_likelihood }}</p>
+                                <p>Impact: {{ risk.residual_impact }}</p>
+                                <p class="font-bold 
+                                    {% if risk.residual_score > 15 %}text-red-600
+                                    {% elif risk.residual_score >= 8 %}text-yellow-600
+                                    {% else %}text-green-600{% endif %}">
+                                    Score: {{ risk.residual_score }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded">
+                            <h5 class="font-semibold text-center">Mitigasi Risk</h5>
+                            <div class="text-center">
+                                <p>Likelihood: {{ risk.mitigasi_likelihood }}</p>
+                                <p>Impact: {{ risk.mitigasi_impact }}</p>
+                                <p class="font-bold 
+                                    {% if risk.mitigasi_score > 15 %}text-red-600
+                                    {% elif risk.mitigasi_score >= 8 %}text-yellow-600
+                                    {% else %}text-green-600{% endif %}">
+                                    Score: {{ risk.mitigasi_score }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <h4 class="text-xl font-semibold mb-4 border-b pb-2">Detail Risiko</h4>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="mb-2"><strong>Sumber Risiko:</strong> {{ risk.get_sumber_resiko_display }}</p>
+                        <p class="mb-2"><strong>Penyebab Risiko:</strong> {{ risk.penyebab_resiko }}</p>
+                    </div>
+                    <div>
+                        <p class="mb-2"><strong>Akibat:</strong> {{ risk.akibat }}</p>
+                        <p class="mb-2"><strong>Akibat Finansial:</strong> Rp. {{ risk.akibat_finansial|intcomma }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <h4 class="text-xl font-semibold mb-4 border-b pb-2">Mitigasi</h4>
+                <div class="bg-gray-50 p-4 rounded">
+                    <p class="mb-2"><strong>Perlakuan:</strong> {{ risk.get_perlakuan_display }}</p>
+                    <p><strong>Tindakan Mitigasi:</strong> {{ risk.tindakan_mitigasi }}</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-between items-center">
+                <div>
+                    <p class="text-sm text-gray-600">
+                        <strong>Dibuat:</strong> {{ risk.created|date:"d M Y" }} | 
+                        <strong>Terakhir Diubah:</strong> {{ risk.modified|date:"d M Y" }}
+                    </p>
+                </div>
+                <div class="space-x-4">
+                    <a href="{% url 'tabel' %}" 
+                       class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">
+                        Kembali
+                    </a>
+                    <a href="{% url 'edit_risk' risk.id %}" 
+                       class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                        Edit Risiko
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
