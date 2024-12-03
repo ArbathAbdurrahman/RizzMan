@@ -11,6 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 timezone = pytz.timezone("Asia/Jakarta")
 
+
 def alert(kalimat):
     return "<script> alert('{}'); </script>".format(kalimat)
 
@@ -88,28 +89,27 @@ def login(request):
         context['error_message'] = "Password atau username anda salah, mohon cek kembali!"
         return render(request,"login.html",context=context)
 
-def get_rgb(t):
-    return "{},{},{}".format((255*t)/1000,0,255-(255*t/1000))
  
 def chart(request):
-    queryset = Risk.objects.all().values()
-    datapoints = [{'x':1,'y':-1000,'r':10}]
+    queryset = Risk.objects.filter(user=request.session['user']).values()
+    datapoints = []
     labels = []
-    colors = []
+    impact_colors = []
+    scores = []
     for i in range(len(queryset)):
-        datapoint = {}
-        datapoint['x'] = i+1
-        datapoint['y'] = queryset[i]['inherent_score']
-        datapoint['label'] = queryset[i]['kode_resiko']
-        datapoint['r'] = 50
-        datapoint['backgroundColor'] = 'rgb(0,0,0)'
-        datapoints.append(datapoint)
+        impact_datapoint = {}
+        impact_datapoint['y'] = queryset[i]['inherent_impact']
+        impact_datapoint['x'] = queryset[i]['inherent_likelihood']
+        impact_datapoint['r'] = 15
+        datapoints.append(impact_datapoint)
         labels.append(queryset[i]['kode_resiko'])
-        color = "rgb({})".format(get_rgb(datapoint['y']))
-        colors.append(color)
+        scores.append(queryset[i]['inherent_score'])
 
-    datapoints_json = json.dumps(datapoints,cls=DjangoJSONEncoder)
-    return render(request,'chart.html',{'datapoints':datapoints_json,'labels':labels,'colors':colors})
+    return render(request,'chart.html',{'datapoints':datapoints,
+        'labels':labels,
+        'impact_colors':impact_colors,
+        'scores':scores
+    })
 
 
 

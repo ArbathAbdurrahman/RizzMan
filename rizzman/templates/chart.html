@@ -1,68 +1,128 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scatter Chart</title>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script> -->
+    <title>Bubble Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> <!-- Updated plugin -->
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-    <h1>Scatter Plot</h1>
-    <canvas id="scatterChart" width="600" height="600"></canvas>
+    <canvas id="myBubbleChart" width="500" height="500"></canvas>
 
     <script>
+        const { jsPDF } = window.jspdf;
+        function pdfdownload(){
+            var dom = document.getElementById('myBubbleChart');
+            html2canvas(dom).then(function(canvas) {
+                var img = canvas.toDataURL("image/png");
+                var doc = new jsPDF();
+                const d = new Date();
+                doc.text(0,10,String(d));
+                doc.addImage(img, 'JPEG', 20, 20);
+                doc.save('test.pdf');
+            });
 
-        const ctx = document.getElementById('scatterChart').getContext('2d');
-        const labels = {{labels|safe}};
-        const myChart = new Chart(ctx, {
-            type: 'bubble', // Bubble chart type
+        }
+    </script>
+
+    <button type='button' onclick='pdfdownload()'>Download PDF</button>
+    <script>
+        function get_rgb(data){
+            if (data < 8){
+                return `rgb(120,231,81)`;
+            }
+            else if(data >= 8 && data <= 15){
+                return `rgb(235,237,83)`;
+            }
+            else if (data > 15){
+                return `rgb(237,106,83)`;
+            }
+        }
+        const ctx = document.getElementById('myBubbleChart').getContext('2d');
+        const data = {{ datapoints|safe }};
+        const labels = {{ labels|safe }};
+        const scores = {{ scores|safe }};
+        var impact_colors = [];
+        {% for i in scores %}
+        impact_colors.push(get_rgb({{ i }}));
+        {% endfor %}
+        const myBubbleChart = new Chart(ctx, {
+            type: 'bubble',
             data: {
                 datasets: [{
-                    label: 'Bubble Dataset',
-                    data: {{ datapoints | safe }},
-                    backgroundColor: {{ colors|safe }},
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    label: 'Chart',
+                    data: data,
+                    backgroundColor: impact_colors,
+                    borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1,
-                    hoverRadius:0
                 }]
             },
+            plugins: [ChartDataLabels],
             options: {
                 responsive: false,
-                plugins: {
-                    datalabels: {
-                        color: '#fff',
-                        font: {
-                            weight: 'bold',
-                            size: 12
-                        },
-                        formatter: (value) => {
-                            return `${labels}`; // Format the label to show x and y values
-                        },
-                        align: 'center',
-                        anchor: 'center'
-                    }
-                },
                 scales: {
                     x: {
-                        min: 1,
-                        max: 50,
-                        type:'linear',
-                        padding:1000
+                        max:6,
+                        min:0,
+                        beginAtZero: true
                     },
                     y: {
-                        type:'linear',
-                        min: 0,
-                        max: 1000,
+                        max:6,
+                        min:0,
+                        beginAtZero: true
+                    }
+                },
+                ticks:{
+                    stepSize:1,
+                },
+                plugins:{
+                    tooltip:{
+                        callbacks:{
+                            title:function(tooltipItem,data){
+                                return "aaaa";
+                            },
+                            label: function(tooltipItem,_data){
+                                var tooltip = []
+                                const index = tooltipItem.dataIndex;
+                                const x = data[index]['x'];
+                                const y = data[index]['y'];
+                                var temp = `Kode Resiko : ${labels[index]}`;
+                                tooltip.push(temp);
+                                temp = `Inherent Likelihood : ${x}`
+                                tooltip.push(temp);
+                                temp = `Inherent Impact : ${y}`;
+                                tooltip.push(temp);
+                                temp = `Inherent Score : ${scores[index]}`;
+                                tooltip.push(temp);
+                                return tooltip;                            
+                            }
+                        }
+                    },
+                    datalabels:{
+                        labels:{
+                            color:'black',
+                        },
+                        formatter: function(value,context){
+                            var total=0;
+                            const index=context.dataIndex;
+                            for(var i=0;i<data.length;i++){
+                                if (scores[index] == scores[i]){
+                                    total++;
+                                }
+                            }
+                            return `${total}`;
+                        },
+                        align: function(context){
+                            return 'center';
+                        }
+
                     }
                 }
-            },
-            plugins: [ChartDataLabels] // Ensure the plugin is added here
+            }
         });
-
     </script>
 </body>
 </html>
+

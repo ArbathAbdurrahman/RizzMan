@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Chart</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> <!-- Updated plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+      .karepmu{
+        display:flex;
+        flex-direction: row;
+      }
+    </style>
+
+
+</head>
+<body>
+    <h1>Scatter Plot</h1>
+    <div class="karepmu">
+      <canvas id="inherent_impact" width="600" height="600"></canvas>
+      <canvas id="inherent_likelihood" width="600" height="600"></canvas>
+    </div>
+    <script>
+const ctx = document.getElementById('inherent_impact').getContext('2d');
+const labels = {{ labels | safe}}; // Labels for the x-axis
+const impact_datapoints = {{ impact_datapoints| safe}}
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels, 
+        datasets: [{
+            label: 'Inherent Impact',
+            data: impact_datapoints, 
+            backgroundColor: {{ impact_colors | safe }}, 
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+        }]
+    },
+    options: {
+        plugins:{
+          datalabels:{
+            display:false
+          },
+        },
+        responsive: false,
+        scales:{
+          x: {
+                title: {
+                    display: true, 
+                    text: 'Data Index', 
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                max:10,
+                min:0,
+            },
+            y: {
+                title: {
+                    display: true, 
+                    text: 'Inherent Impact', 
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                ticks:{
+                  stepSize:1,
+                },
+                beginAtZero: true 
+            }
+        }
+    },
+    plugins: [ChartDataLabels] 
+});
+
+    </script>
+
+    <script>
+      const ctx2 = document.getElementById('inherent_likelihood').getContext('2d');
+const likelihood_datapoints = {{ likelihood_datapoints| safe}}
+const myChart1 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: labels, 
+        datasets: [{
+            label: 'Inherent Likelihood',
+            data: likelihood_datapoints, 
+            backgroundColor: {{ likelihood_colors | safe }}, 
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+        }]
+    },
+    options: {
+        plugins:{
+          datalabels:{
+            display:false
+          },
+        },
+        responsive: false,
+        scales:{
+          x: {
+                title: {
+                    display: true, 
+                    text: 'Data Index', 
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                max:10,
+                min:0,
+            },
+            y: {
+                title: {
+                    display: true, 
+                    text: 'Inherent Impact', 
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                ticks:{
+                  stepSize:1,
+                },
+                beginAtZero: true 
+            }
+        }
+    },
+    plugins: [ChartDataLabels] 
+});
+</script>/
+
+
+</body>
+</html>
