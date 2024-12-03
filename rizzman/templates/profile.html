@@ -2,19 +2,8 @@
 {% load static %}
 
 {% block title %}
-    <title>Profile Rizky</title>
+    <title>Profile</title>
     <style>
-        #loginBtn {
-            display: none;
-        }
-
-        #loginBur {
-            display: none;
-        }
-
-        #profileBtn {
-            display: none;
-        }
         th, td {
             font-size: 18px;
         }
@@ -22,6 +11,9 @@
             text-align: left;
             font-weight: normal;
             padding-right: 10px;
+        }
+        input[name="foto"] {
+            display: none;
         }
     </style>
 {% endblock title %}
@@ -32,7 +24,11 @@
         <div class="bag1">
             <div class="profil cardRec h-auto">
                 <div class="photoProfil">
-                    <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                        {% if user_profile.foto %}
+                            <img src="{{ user_profile.foto.url}}" alt="profil" class="imgPrf">
+                        {% else %}
+                            <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                        {% endif %}
                     <div class="buttonCir w-fit h-fit p-1 items-center justify-center flex"><a onclick="popupEdit()" class="btnTxt font-normal text-[20px] w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
                 </div>
                 <div class="flex flex-col gap-5 basis-2/4">
@@ -41,41 +37,35 @@
                             <tr>
                                 <th>Nama</th>
                                 <td class="w-3">:</td>
-                                <td>Fufufafa</td>
+                                <td>{{user_profile.nama}}</td>
                             </tr>
                             <tr>
-                                <th>NIP</th>
+                                <th>ID</th>
                                 <td>:</td>
-                                <td>888838383</td>
+                                <td>{{user_profile.user}}</td>
                             </tr>
                             <tr>
                                 <th>Alamat</th>
                                 <td>:</td>
-                                <td>Bandung</td>
+                                <td>{{user_profile.alamat}}</td>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir</th>
                                 <td>:</td>
-                                <td>17 Agustus 1945</td>
+                                <td>{{user_profile.tanggal_lahir|date:"d F Y"}}</td>
                             </tr>
                             <tr>
                                 <th>Jabatan</th>
                                 <td>:</td>
-                                <td>Dosen</td>
+                                <td>{{user_profile.jabatan}}</td>
                             </tr>
                             <tr>
                                 <th>Total Pengisian</th>
                                 <td>:</td>
-                                <td>10</td>
+                                <td>{{user_profile.total_pengisian}}</td>
                             </tr>
                         </table>    
                     </div>    
-                    <div class="deskripsi cardCir shadow-none cardAni w-full">
-                        <div class="p-2">
-                            <h1 class="header3 text-[25px]">Deskripsi</h1>
-                            <p class="text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, modi? Vero quibusdam reiciendis deleniti aut impedit asperiores reprehenderit, quisquam earum fugit, voluptatum officiis eius est nam dolores non aspernatur quidem?</p>    
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -90,45 +80,48 @@
         </div>
     </main>
 
-    <div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
-    <div class="container hidden fixed inset-0 justify-center items-center z-50 transition-all duration-200" id="editPop">
-        <div class="editBox overflow-auto">
+<div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
+<div class="container hidden fixed inset-0 justify-center items-center z-50 transition-all duration-200" id="editPop">
+    <div class="editBox overflow-auto">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="editPrfl1">
                 <div class="flex flex-col items-center gap-2">
                     <div class="photoProfile">
-                        <img src="{% static 'img/herta.jpg' %}" alt="profil" class="editPhoto">
-                        <button onclick="coba()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
+                        {% if user_profile.foto %}
+                            <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="editPhoto">
+                        {% else %}
+                            <img src="{% static 'img/herta.jpg' %}" alt="Default Profile Photo" class="editPhoto">
+                        {% endif %}
+                        
+                        <!-- Form foto, ini akan hidden sampai tombol Edit ditekan -->
+                        {{ form.foto }}
+                    
+                        <!-- Tombol Edit -->
+                        <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
                             <i class="fa-solid fa-pen"></i>
                             <p>Edit</p>
                         </button>
                     </div>
-                    <h4 class="header4 text-[18px]">Photo Profile</h4>
+                    
                 </div>
                 <div class="pt-5 flex gap-3 flex-col">
                     <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
-                        <input type="text" name="nama" class="BoxPlchdr cursor-not-allowed" value="Mulyono" readonly disabled>
+                        {{ form.nama }} <!-- Input dari form Django -->
                         <a onclick="ubahNama()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                     </div>
                     <div class="flex items-start flex-col gap-1 w-full">
-                        <h1 class="header3 w-full">23106054143</h1>
-                        <h1 class="header3 w-full">Dosen</h1>
+                        <h1 class="header3 w-full">ID : {{user_profile.user}}</h1>
+                        <h1 class="header3 w-full">Role : {{user_profile.jabatan}}</h1>
                     </div>
                 </div>
             </div>
             <div class="mainEditPrfl">
                 <div class="editPrfl2">
                     <div class="w-fit">
-                        <h4 class="header4 text-[18px]">NIP/NIM</h4>
-                        <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
-                            <input type="number" name="NIP" class="BoxPlchdr cursor-not-allowed remove-arrow" value="23106043045" readonly disabled>
-                            <a onclick="ubahNIP()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
-                        </div>
-                        <p class="text-[13px]">*pastikan mengisi NIP/NIM dengan benar dan tepat</p>
-                    </div>
-                    <div class="w-fit">
                         <h4 class="header4 text-[18px]">Alamat</h4>
                         <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
-                            <input type="text" name="alamat" class="BoxPlchdr cursor-not-allowed" value="Osaka" readonly disabled>
+                            {{ form.alamat }} <!-- Input dari form Django -->
                             <a onclick="ubahAlamat()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
                         <p class="text-[13px] w-fit">
@@ -141,103 +134,87 @@
                     <div class="w-fit">
                         <h4 class="header4 text-[18px]">Tanggal Lahir</h4>
                         <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
-                            <input type="date" name="tanggalLahir" class="BoxPlchdr cursor-not-allowed remove-arrow" readonly disabled>
+                            {{ form.tanggal_lahir }} <!-- Input dari form Django -->
                             <a onclick="ubahTanggalLahir()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
                         <p class="text-[13px]">*pastikan mengisi tanggal lahir dengan benar dan tepat</p>
                     </div>
-                    <div class="w-fit">
-                        <h4 class="header4 text-[18px]">Deskripsi</h4>
-                        <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
-                            <textarea name="deskripsi" class="BoxPlchdr cursor-not-allowed remove-arrow h-[100px]" placeholder="Deskripsi" readonly disabled>What a sigma</textarea>
-                            <a onclick="ubahDeskripsi()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="editFrmBtn">
-                <button class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
-                <button class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
+                <button type="submit" class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
+                <button type="button" class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
             </div>
-
-        </div>
+        </form>
     </div>
+</div>
 
-
-    <script>
-        function ubahNama() {
-            const input = document.querySelector('input[name="nama"]');
-            input.removeAttribute('readonly');
-            input.removeAttribute('disabled');
-            input.classList.remove('cursor-not-allowed');
-        }
-
-        function ubahNIP() {
-            const input = document.querySelector('input[name="NIP"]');
-            input.removeAttribute('readonly');
-            input.removeAttribute('disabled');
-            input.classList.remove('cursor-not-allowed');
-        }
-
-        function ubahAlamat() {
-            const input = document.querySelector('input[name="alamat"]');
-            input.removeAttribute('readonly');
-            input.removeAttribute('disabled');
-            input.classList.remove('cursor-not-allowed');
-        }
-
-        function ubahTanggalLahir() {
-            const input = document.querySelector('input[name="tanggalLahir"]');
-            input.removeAttribute('readonly');
-            input.removeAttribute('disabled');
-            input.classList.remove('cursor-not-allowed');
-        }
-
-        function ubahDeskripsi() {
-            const input = document.querySelector('textarea[name="deskripsi"]');
-            input.removeAttribute('readonly');
-            input.removeAttribute('disabled');
-            input.classList.remove('cursor-not-allowed');
-        }
-
-        function popupEdit() {
-            const overlay = document.getElementById('overlay');
-            const editPop = document.getElementById('editPop');
-            const pageWrapper = document.getElementById('pageWrapper');
+<script>
+    // Fungsi untuk membuka/menutup popup edit
+    function popupEdit() {
+        const overlay = document.getElementById('overlay');
+        const editPop = document.getElementById('editPop');
+        const pageWrapper = document.getElementById('pageWrapper');
+        
+        if (editPop.classList.contains('hidden')) {
+            // Popup dibuka
+            editPop.classList.remove('hidden');
+            editPop.classList.add('popup-enter');
+            overlay.classList.remove('hidden');
+            pageWrapper.classList.add('blur-bg');
             
-            if (editPop.classList.contains('hidden')) {
-                // Saat popup dibuka
-                editPop.classList.remove('hidden');
-                editPop.classList.add('popup-enter'); // Tambahkan animasi masuk
-                overlay.classList.remove('hidden');
-                pageWrapper.classList.add('blur-bg');
-
-                // Hapus kelas animasi setelah animasi selesai
-                setTimeout(() => {
-                    editPop.classList.remove('popup-enter');
-                    editPop.classList.add('flex'); // Tetapkan gaya flex setelah masuk
-                }, 100); // Durasi animasi sesuai dengan CSS (0.3s)
-            } else {
-                // Saat popup ditutup
-                editPop.classList.remove('flex');
-                editPop.classList.add('popup-exit-active'); // Tambahkan animasi keluar
-                overlay.classList.add('hidden');
-                pageWrapper.classList.remove('blur-bg');
-
-                // Sembunyikan popup setelah animasi selesai
-                setTimeout(() => {
-                    editPop.classList.add('hidden');
-                    editPop.classList.remove('popup-exit-active');
-                }, 300); // Durasi animasi sesuai dengan CSS (0.3s)
-            }
-
+            setTimeout(() => {
+                editPop.classList.remove('popup-enter');
+                editPop.classList.add('flex');
+            }, 100);
+        } else {
+            // Popup ditutup
+            editPop.classList.remove('flex');
+            editPop.classList.add('popup-exit-active');
+            overlay.classList.add('hidden');
+            pageWrapper.classList.remove('blur-bg');
+            
+            setTimeout(() => {
+                editPop.classList.add('hidden');
+                editPop.classList.remove('popup-exit-active');
+            }, 300);
         }
+    }
 
-        function coba() {
-            alert('Edit Photo Profile');
-        }
-
-    </script>
+    // Fungsi untuk mengubah status elemen input menjadi edit
+    function editFoto() {
+    // Temukan elemen input file foto (dari form)
+    const fotoInput = document.querySelector('input[name="foto"]');
     
+    // Menampilkan form foto yang tersembunyi
+    fotoInput.style.display = 'block';  // Atau bisa gunakan class toggle
+
+    // Mengubah tampilan tombol edit jika perlu, agar memberi feedback visual kepada pengguna
+    const editButton = document.querySelector('button');
+    editButton.textContent = 'Change Photo'; // Ganti teks tombol
+    }
+    function ubahNama() {
+        const input = document.querySelector('input[name="nama"]');
+        input.removeAttribute('readonly');
+        input.removeAttribute('disabled');
+        input.classList.remove('cursor-not-allowed');
+    }
+
+    function ubahAlamat() {
+        const input = document.querySelector('input[name="alamat"]');
+        input.removeAttribute('readonly');
+        input.removeAttribute('disabled');
+        input.classList.remove('cursor-not-allowed');
+    }
+
+    function ubahTanggalLahir() {
+        const input = document.querySelector('input[name="tanggal_lahir"]');
+        input.removeAttribute('readonly');
+        input.removeAttribute('disabled');
+        input.classList.remove('cursor-not-allowed');
+    }
+    // Fungsi untuk edit foto
+</script>
+
     
 {% endblock content %}

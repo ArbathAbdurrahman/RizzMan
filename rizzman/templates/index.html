@@ -3,30 +3,20 @@
 
 {% block title %}
     <title>RizzMan</title>
-    <style>
-        #profileBtn {
-            display: none;
-        }
-        #logoutBur {
-            display: none;
-        }
-        #formBur {
-            display: none;
-        }
-        #tableBur {
-            display: none;
-        }
-        #loginBur {
-            border-bottom: black 3px solid;
-        }
-    </style>
 {% endblock title %}
 
 {% block content %}
-    <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  -->
-    <!-- ini untuk blur ketika popup login muncul -->
-     <main>
+    <main>
         <div id="pageWrapper" class="mainInd"> 
+            {% if messages %}
+            <div class="mb-4 space-y-2">
+                 {% for message in messages %}
+                 <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
+                     {{ message }}
+                    </div>
+                    {% endfor %}
+            </div>
+            {% endif %}
             <div class="wellcome1">
                 <h1 class="header1">Welcome to RizzMan!</h1>
                 <p class="text-center text-[20px]">Rizzman adalah platform inovatif untuk membantu universitas dalam mengelola dan memantau risiko dengan lebih efektif. Website ini dirancang khusus untuk mendukung pengguna dalam :</p>
@@ -43,7 +33,9 @@
             </div>
             <div class="wellcome1">
                 <p class="text-center text-[20px]">Dengan Rizzman, proses manajemen risiko menjadi lebih terstruktur, transparan, dan mudah diakses. Mari lebih aman dan tanggap risiko dengan menggunakan Rizzman!</p>
-                <button class="buttonCir w-1/2 items-center place-content-center text-[25px]" onclick="loginPopup()">Login</button>
+                {% if not request.user.is_authenticated %}
+                    <button class="buttonCir w-1/2 items-center place-content-center text-[25px]" onclick="loginPopup()">Login</button>
+                {% endif %}
             </div>
          </div>
      </main>

@@ -1,0 +1,511 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Bubble Chart</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> <!-- Updated plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+    /* Reset default styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+    }
+
+    /* Responsive Open Chart Button */
+    #openChartBtn {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    #openChartBtn:hover {
+        background-color: #45a049;
+    }
+
+    /* Popup container */
+    .popup {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+        padding: 20px;
+    }
+
+    /* Popup content */
+    .popup-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 800px;
+        position: relative;
+        text-align: center;
+    }
+
+    /* Close button */
+    .close-btn {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        color: black;
+    }
+
+    /* Responsive Canvas */
+    #myBubbleChart {
+        width: 100% !important;
+        max-width: 100%;
+        height: auto !important;
+        aspect-ratio: 1 / 1;
+    }
+
+    /* Responsive Download Button */
+    button[type='button'] {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 15px auto 0;
+        padding: 10px;
+        background-color: #008CBA;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button[type='button']:hover {
+        background-color: #007B9D;
+    }
+
+    /* Media Queries for Different Devices */
+    @media screen and (max-width: 600px) {
+        .popup-content {
+            width: 95%;
+            margin: 10% auto;
+            padding: 10px;
+        }
+
+        .close-btn {
+            top: 5px;
+            right: 10px;
+            font-size: 24px;
+        }
+
+        #openChartBtn, 
+        button[type='button'] {
+            font-size: 14px;
+            padding: 8px;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .popup-content {
+            margin: 15% auto;
+            padding: 5px;
+        }
+
+        .close-btn {
+            top: 3px;
+            right: 8px;
+            font-size: 22px;
+        }
+    }
+
+    /* Landscape mode adjustments */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+        .popup-content {
+            width: 80%;
+            max-height: 90%;
+            overflow-y: auto;
+        }
+
+        #myBubbleChart {
+            aspect-ratio: 16 / 9;
+        }
+    }
+</style>
+{% endblock title %}
+{% block content %}
+{% if messages %}
+<div class="mb-4 space-y-2">
+     {% for message in messages %}
+     <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
+         {{ message }}
+        </div>
+        {% endfor %}
+</div>
+{% endif %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6 grid">
+        <div class="flex flex-row justify-between mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Daftar Risiko</h1>
+            <a href="{% url 'forms' %}" class="buttonCir font-bold py-2 px-4 rounded">
+                Tambah Risiko Baru
+            </a>
+        </div>
+
+        <!-- Filters and Search -->
+        <form method="get" class="mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- Search Input -->
+                <div class="col-span-1 md:col-span-4">
+                    <input type="text" name="q" placeholder="Cari Risiko..." 
+                           value="{{ search_query }}"
+                           class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Department Filter -->
+                <div class="col-span-1">
+                    <select name="departemen" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Departemen</option>
+                        {% for dept in departments %}
+                            <option value="{{ dept.name }}" 
+                                    {% if dept.name == selected_departemen %}selected{% endif %}>
+                                {{ dept.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-span-1">
+                    <select name="tingkat" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Tingkat</option>
+                        {% for tingkat in tingkat_options %}
+                            <option value="{{ tingkat }}" 
+                                    {% if tingkat == selected_tingkat %}selected{% endif %}>
+                                {{ tingkat }}
+                            </option>
+                        {% endfor %}
+                    </select>                    
+                </div>
+
+                <!-- Risk Level Filter -->
+                <div class="col-span-1">
+                    <select name="risk_level" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Semua Level Risiko</option>
+                        <option value="high" {% if selected_risk_level == 'high' %}selected{% endif %}>Risiko Tinggi</option>
+                        <option value="medium" {% if selected_risk_level == 'medium' %}selected{% endif %}>Risiko Sedang</option>
+                        <option value="low" {% if selected_risk_level == 'low' %}selected{% endif %}>Risiko Rendah</option>
+                    </select>
+                </div>
+
+                <!-- Sort -->
+                <div class="col-span-1">
+                    <select name="sort" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="-created" {% if selected_sort == '-created' %}selected{% endif %}>Terbaru</option>
+                        <option value="created" {% if selected_sort == 'created' %}selected{% endif %}>Terlama</option>
+                        <option value="-inherent_score" {% if selected_sort == '-inherent_score' %}selected{% endif %}>Risiko Tertinggi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 flex flex-col md:flex-row justify-between">
+                <button type="submit" class="buttonCir font-bold py-2 px-4 rounded">
+                    Terapkan Filter
+                </button>
+                <div class="text-gray-600">
+                    Total Risiko: {{ total_risks }} 
+                    (Tinggi: {{ high_risk_count }}, Sedang: {{ medium_risk_count }}, Rendah: {{ low_risk_count }})
+                </div>
+            </div>
+        </form>
+
+        <!-- Risk Table -->
+        <div class="overflow-x-auto rounded-md">
+            <table class="w-full bg-white ">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left">Kode Risiko</th>
+                        <th class="py-3 px-6 text-left">Tujuan</th>
+                        <th class="py-3 px-6 text-center">Departemen</th>
+                        <th class="py-3 px-6 text-center">Skor Risiko</th>
+                        <th class="py-3 px-6 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-600 text-sm font-light">
+                    {% for risk in risks %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-200">
+                        <td class="py-3 px-6 text-left whitespace-nowrap">
+                            <div class="flex items-center">
+                                <span class="font-medium"> {{ risk.tingkat }}-{{ risk.kode_resiko|truncatechars:5 }}</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-6 text-left">
+                            {{ risk.tujuan|truncatechars:50 }}
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            {{ risk.departemen.name }}
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <span class="
+                                {% if risk.inherent_score > 15 %}bg-red-200 text-red-800
+                                {% elif risk.inherent_score > 8 %}bg-yellow-200 text-yellow-800
+                                {% else %}bg-green-200 text-green-800
+                                {% endif %} 
+                                px-3 py-1 rounded-full text-xs">
+                                {{ risk.inherent_score }}
+                            </span>
+                        </td>
+                        <td class="py-3 px-6 text-center">
+                            <div class="flex item-center justify-center gap-2">
+                                <a href="{% url 'risk_detail' risk.pk %}" class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="{% url 'edit_risk' risk.pk %}" class="w-4 mr-2 transform hover:text-green-500 hover:scale-110">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{% url 'delete_risk' risk.pk %}" class="w-4 transform hover:text-red-500 hover:scale-110">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-4 text-gray-500">
+                            Tidak ada risiko yang ditemukan.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="flex justify-center mt-6">
+            <nav class="inline-flex rounded-md shadow">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET.urlencode }}" 
+                       class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        Sebelumnya
+                    </a>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="px-4 py-2 border border-gray-300 bg-blue-500 text-white text-sm font-medium">
+                            {{ num }}
+                        </span>
+                    {% else %}
+                        <a href="?page={{ num }}&{{ request.GET.urlencode }}" 
+                           class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                            {{ num }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}&{{ request.GET.urlencode }}" 
+                       class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        Berikutnya
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+<script>
+    // Optional: Add dynamic filtering without page reload
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        form.addEventListener('change', function() {
+            // Optional: You could add AJAX filtering here
+        });
+    });
+</script>
+
+<!-- Trigger Button -->
+<button id="openChartBtn">Open Bubble Chart</button>
+
+<!-- Popup Container -->
+<div id="chartPopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <canvas id="myBubbleChart"></canvas>
+        <button type='button' onclick='pdfdownload()'>Download PDF</button>
+    </div>
+</div>
+
+<script>
+    const { jsPDF } = window.jspdf;
+    function pdfdownload(){
+        var dom = document.getElementById('myBubbleChart');
+        html2canvas(dom).then(function(canvas) {
+            var img = canvas.toDataURL("image/png");
+            var doc = new jsPDF();
+            const d = new Date();
+            doc.text(0,10,String(d));
+            doc.addImage(img, 'JPEG', 20, 20);
+            doc.save('test.pdf');
+        });
+    }
+
+    // Popup functionality
+    const openChartBtn = document.getElementById('openChartBtn');
+    const chartPopup = document.getElementById('chartPopup');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Open popup
+    openChartBtn.addEventListener('click', function() {
+        chartPopup.style.display = 'block';
+    });
+
+    // Close popup
+    closeBtn.addEventListener('click', function() {
+        chartPopup.style.display = 'none';
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target == chartPopup) {
+            chartPopup.style.display = 'none';
+        }
+    });
+
+    // Color function for risk scores
+    function get_rgb(data){
+        if (data < 8){
+            return `rgb(120,231,81)`;
+        }
+        else if(data >= 8 && data <= 15){
+            return `rgb(235,237,83)`;
+        }
+        else if (data > 15){
+            return `rgb(237,106,83)`;
+        }
+    }
+
+    // Chart rendering
+    const ctx = document.getElementById('myBubbleChart').getContext('2d');
+    const data = {{ datapoints|safe }};
+    const labels = {{ labels|safe }};
+    const scores = {{ scores|safe }};
+    var impact_colors = [];
+    {% for i in scores %}
+    impact_colors.push(get_rgb({{ i }}));
+    {% endfor %}
+    const myBubbleChart = new Chart(ctx, {
+        type: 'bubble',
+        data: {
+            datasets: [{
+                label: 'Chart Risiko',
+                data: data,
+                backgroundColor: impact_colors,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+            }]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title:{
+                        display:true,
+                        text:'Inherent Likelihood',
+                    },
+                    max:6,
+                    min:0,
+                    beginAtZero: true
+                },
+                y: {
+                    title:{
+                        display:true,
+                        text:'Inherent Impact'
+                    },
+                    max:6,
+                    min:0,
+                    beginAtZero: true
+                }
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 10,
+                    top: 10,
+                    bottom: 10
+                }
+            },
+            plugins:{
+                tooltip:{
+                    callbacks:{
+                        title:function(tooltipItem,data){
+                            return "aaaa";
+                        },
+                        label: function(tooltipItem,_data){
+                            var tooltip = []
+                            const index = tooltipItem.dataIndex;
+                            const x = data[index]['x'];
+                            const y = data[index]['y'];
+                            var temp = `Kode Resiko : ${labels[index]}`;
+                            tooltip.push(temp);
+                            temp = `Inherent Likelihood : ${x}`
+                            tooltip.push(temp);
+                            temp = `Inherent Impact : ${y}`;
+                            tooltip.push(temp);
+                            temp = `Inherent Score : ${scores[index]}`;
+                            tooltip.push(temp);
+                            return tooltip;                            
+                        }
+                    }
+                },
+                datalabels:{
+                    labels:{
+                        color:'black',
+                    },
+                    formatter: function(value,context){
+                        var total=0;
+                        const index=context.dataIndex;
+                        for(var i=0;i<data.length;i++){
+                            if (scores[index] == scores[i]){
+                                total++;
+                            }
+                        }
+                        return `${total}`;
+                    },
+                    align: function(context){
+                        return 'center';
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

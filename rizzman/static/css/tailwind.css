@@ -4,6 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 /* Tambahkan CSS kustom di bawah sini */
+<<<<<<< HEAD
 .fufu {
     display: flex;
     justify-content: center;
@@ -21,6 +22,8 @@
     justify-content: center;
     align-items: center;
 } */
+=======
+>>>>>>> 19965b905cf1727d023541385032c212dd2ea187
 
 * {
     margin: 0;
@@ -44,6 +47,7 @@
 }
 
 @layer components {
+    
     .header1 {
         @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
         font-family: "Raleway", sans-serif;
@@ -89,7 +93,7 @@
         @apply flex;
     }
     
-    .form {
+    .formlgnn {
         @apply w-full flex-col justify-center items-start gap-2.5 flex;
     }
 
@@ -148,11 +152,11 @@
     }
 
     .formRisk{
-        @apply space-y-4 w-auto grid grid-cols-4 gap-[20px];
+        @apply w-auto grid grid-cols-2 gap-[20px];
     }
 
     .editPrfl1 {
-        @apply h-full flex flex-row items-start gap-10;
+        @apply h-fit flex flex-row items-start gap-10;
     }
 
     .editPrfl2 {
@@ -160,7 +164,7 @@
     }
 
     .mainEditPrfl {
-        @apply basis-7/12 w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
+        @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
     }
 
     .editPhoto {
@@ -168,7 +172,7 @@
     }
 
     .editFrmBtn {
-        @apply flex flex-row gap-[10px] items-start;
+        @apply flex flex-row gap-[10px] items-start mt-3;
     }
 
     .tabelRsk tr:hover {
@@ -186,11 +190,14 @@
     .mainInd {
         @apply flex flex-col gap-10 p-3 items-center;
     }
-    
+    .infSpan {
+        @apply col-span-2;
+    }
+
     #burgerNav {
         display: none;
         position: absolute;
-        top: -150px;
+        top: -0px;
         width: 100%;
         transition: top 0.4s;
     }
@@ -268,6 +275,10 @@
 
 
 @media screen and (max-width: 1032px) {
+    .infSpan {
+        @apply col-span-2;
+    }
+
     #loginBtn {
         display: none;
     }
@@ -326,13 +337,17 @@
 }
 
 @media screen and (max-width: 640px) {
+    .infSpan {
+        @apply col-span-1
+    }
+
     .loginBox {
         @apply w-[438px];
     }
 
-    /* .editBox {
-        @apply w-[438px] h-[auto] px-5 py-5;
-    } */
+    .editBox {
+        @apply w-[438px] px-5 py-5;
+    }
 
     header {
         @apply px-3;

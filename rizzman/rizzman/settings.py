@@ -14,7 +14,11 @@ SECRET_KEY = 'django-insecure-#@el$fr2nuy#&u*$f4=ssij!qypr0el2ogljs367a0h@)=c*$f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','rizzman.teknohole.com']
+# SECURE_SSL_REDIRECT = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
 
 # Application definition
@@ -26,6 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'rizzman'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +76,9 @@ DATABASES = {
         'PASSWORD': 'admin123',  # Password user PostgreSQL
         'HOST': 'localhost',     # Host database (umumnya 'localhost' untuk lokal)
         'PORT': '5432',          # Port PostgreSQL (default: 5432)
+        'OPTIONS': {
+            'client_encoding': 'utf8',  # Pastikan encoding UTF-8
+        },
     }
 }
 
@@ -121,3 +130,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/profile/'
+LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/'
