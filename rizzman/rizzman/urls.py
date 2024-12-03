@@ -17,5 +17,5 @@ urlpatterns = [
     path('edit/<int:id>/', views.edit_risk, name='edit_risk'),
     path('delete/<int:id>/', views.delete_risk, name='delete_risk'),
     path('risiko/<int:risk_id>/', views.risk_detail, name='risk_detail'),
-    path('<int:pk>/detail/', views.risk_detail, name='risk_detail'),
+    path('detail/<int:id>/', views.risk_detail, name='risk_detail'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #load gambar

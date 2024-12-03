@@ -26,7 +26,6 @@ def index(request):
     else:
         form = CustomAuthenticationForm()
 
-    print(request.user.profile.jabatan.priority)
     context = {
         'title' : 'RizzMan',
         'form' : form,
@@ -124,26 +123,10 @@ def create_risk(request):
         'title': 'Buat Risiko Baru'
     })
 
-@login_required
-def risk_detail(request, risk_id):
-    """
-    View for showing details of a specific risk
-    """
-    try:
-        risk = Risk.objects.get(id=risk_id)
-    except Risk.DoesNotExist:
-        messages.error(request, 'Risiko tidak ditemukan.')
-        return redirect('tabel')
-    
-    return render(request, 'risk_detail.html', {
-        'risk': risk,
-        'title': f'Detail Risiko {risk.kode_resiko}'
-    })
-
 def RiskListView(request):
-    # Start with risks for the current user
-    queryset = Risk.objects.filter(user=request.user)
-
+    # Query awal
+    user_priority = request.user.profile.jabatan.priority  # Ambil nilai priority user
+    queryset = Risk.objects.filter(tingkat__gte=user_priority)
     # Search functionality
     search_query = request.GET.get('q', '').strip()
     if search_query:
@@ -158,7 +141,7 @@ def RiskListView(request):
     if departemen:
         queryset = queryset.filter(departemen__name=departemen)
     
-    # Filtering by Tingkat (Risk Level)
+    # Filtering tingkat
     selected_tingkat = request.GET.get('tingkat')
     if selected_tingkat:
         queryset = queryset.filter(tingkat=selected_tingkat)
@@ -177,7 +160,7 @@ def RiskListView(request):
     queryset = queryset.order_by(sort_by)
 
     # Pagination
-    paginator = Paginator(queryset, 10)  # Show 10 risks per page
+    paginator = Paginator(queryset, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -185,7 +168,7 @@ def RiskListView(request):
     context = {
         'risks': page_obj,
         'departments': Department.objects.all(),
-        'tingkat_options': Risk.objects.values_list('tingkat', flat=True).distinct(),
+        'tingkat_options': Risk.objects.filter(tingkat__gte=user_priority).values_list('tingkat', flat=True).distinct(), # Ambil priority untuk filter
         'search_query': search_query,
         'selected_departemen': departemen,
         'selected_risk_level': risk_level,
@@ -201,10 +184,10 @@ def RiskListView(request):
 
 
     
-def risk_detail(request, pk):
+def risk_detail(request, id):
     try:
         # Ensure the user can only view their own risks
-        risk = get_object_or_404(Risk, pk=pk, user=request.user)
+        risk = get_object_or_404(Risk, id=id)
         
         context = {
             'risk': risk,

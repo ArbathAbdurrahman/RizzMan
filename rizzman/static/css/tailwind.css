@@ -4,23 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 /* Tambahkan CSS kustom di bawah sini */
-.fufu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.fufu img {
-    width: 300px;
-    height: auto;
-    border-radius: 10px;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 * {
     margin: 0;
@@ -44,6 +27,10 @@
 }
 
 @layer components {
+    .cntr {
+        @apply flex justify-center items-center;
+    }
+
     .header1 {
         @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
         font-family: "Raleway", sans-serif;
@@ -64,7 +51,7 @@
     }
 
     .editBox {
-        @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-4/5 px-14 py-5;
+        @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-fit px-14 py-5;
     }
 
     .notifBox {
@@ -89,9 +76,9 @@
         @apply flex;
     }
     
-    /* .form {
+    .formlgnn {
         @apply w-full flex-col justify-center items-start gap-2.5 flex;
-    } */
+    }
 
     .ket {
         @apply flex justify-items-center flex-col w-full;
@@ -152,7 +139,7 @@
     }
 
     .editPrfl1 {
-        @apply h-full flex flex-row items-start gap-10;
+        @apply h-fit flex flex-row items-start gap-10;
     }
 
     .editPrfl2 {
@@ -160,7 +147,7 @@
     }
 
     .mainEditPrfl {
-        @apply basis-7/12 w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
+        @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
     }
 
     .editPhoto {
@@ -168,7 +155,7 @@
     }
 
     .editFrmBtn {
-        @apply flex flex-row gap-[10px] items-start;
+        @apply flex flex-row gap-[10px] items-start mt-3;
     }
 
     .tabelRsk tr:hover {
@@ -190,7 +177,7 @@
     #burgerNav {
         display: none;
         position: absolute;
-        top: -150px;
+        top: -0px;
         width: 100%;
         transition: top 0.4s;
     }

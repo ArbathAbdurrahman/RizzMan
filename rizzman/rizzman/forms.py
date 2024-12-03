@@ -64,70 +64,70 @@ class RiskForm(forms.ModelForm):
 
         widgets = {
                 'tujuan': forms.TextInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'proses_bisnis': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'kelompok_resiko': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'kode_resiko': forms.TextInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'penyebab_resiko': forms.Textarea(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
                     'rows': 3
                 }),
                 'sumber_resiko': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'akibat': forms.Textarea(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
                     'rows': 3
                 }),
                 'akibat_finansial': forms.NumberInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'pemilik_resiko': forms.TextInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'departemen': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'inherent_likelihood': forms.NumberInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'inherent_impact': forms.NumberInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'control': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'memadai': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'status': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'residual_likelihood': forms.NumberInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'residual_impact': forms.NumberInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'perlakuan': forms.Select(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'tindakan_mitigasi': forms.Textarea(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
                     'rows': 3
                 }),
                 'mitigasi_likelihood': forms.NumberInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'mitigasi_impact': forms.NumberInput(attrs={
-                    'class': 'block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 })
             }
 

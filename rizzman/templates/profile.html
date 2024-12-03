@@ -81,7 +81,7 @@
     </main>
 
     <div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
-<div class="container hidden fixed inset-0 justify-center items-center z-50" id="editPop">
+<div class="container hidden fixed inset-0 justify-center items-center z-50 transition-all duration-200" id="editPop">
     <div class="editBox overflow-auto">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -107,7 +107,7 @@
                 </div>
                 <div class="pt-5 flex gap-3 flex-col">
                     <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
-                        <h1 class="header3 w-full">Nama:</h1>{{ form.nama }} <!-- Input dari form Django -->
+                        {{ form.nama }} <!-- Input dari form Django -->
                         <a onclick="ubahNama()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                     </div>
                     <div class="flex items-start flex-col gap-1 w-full">

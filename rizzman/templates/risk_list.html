@@ -1,11 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if messages %}
+<div class="mb-4 space-y-2">
+     {% for message in messages %}
+     <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-600 dark:text-red-400 px-4 py-2 rounded-md text-sm animate-pulse">
+         {{ message }}
+        </div>
+        {% endfor %}
+</div>
+{% endif %}
 <div class="container mx-auto px-4 py-8">
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <div class="flex justify-between items-center mb-6">
+    <div class="bg-white shadow-md rounded-lg p-6 grid">
+        <div class="flex flex-row justify-between mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Daftar Risiko</h1>
-            <a href="{% url 'forms' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            <a href="{% url 'forms' %}" class="buttonCir font-bold py-2 px-4 rounded">
                 Tambah Risiko Baru
             </a>
         </div>
@@ -14,14 +23,14 @@
         <form method="get" class="mb-6">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <!-- Search Input -->
-                <div>
+                <div class="col-span-1 md:col-span-4">
                     <input type="text" name="q" placeholder="Cari Risiko..." 
                            value="{{ search_query }}"
                            class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 
                 <!-- Department Filter -->
-                <div>
+                <div class="col-span-1">
                     <select name="departemen" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">Semua Departemen</option>
                         {% for dept in departments %}
@@ -33,7 +42,7 @@
                     </select>
                 </div>
 
-                <div>
+                <div class="col-span-1">
                     <select name="tingkat" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">Semua Tingkat</option>
                         {% for tingkat in tingkat_options %}
@@ -46,7 +55,7 @@
                 </div>
 
                 <!-- Risk Level Filter -->
-                <div>
+                <div class="col-span-1">
                     <select name="risk_level" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">Semua Level Risiko</option>
                         <option value="high" {% if selected_risk_level == 'high' %}selected{% endif %}>Risiko Tinggi</option>
@@ -56,7 +65,7 @@
                 </div>
 
                 <!-- Sort -->
-                <div>
+                <div class="col-span-1">
                     <select name="sort" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="-created" {% if selected_sort == '-created' %}selected{% endif %}>Terbaru</option>
                         <option value="created" {% if selected_sort == 'created' %}selected{% endif %}>Terlama</option>
@@ -64,8 +73,8 @@
                     </select>
                 </div>
             </div>
-            <div class="mt-4 flex justify-between items-center">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+            <div class="mt-4 flex flex-col md:flex-row justify-between">
+                <button type="submit" class="buttonCir font-bold py-2 px-4 rounded">
                     Terapkan Filter
                 </button>
                 <div class="text-gray-600">
@@ -89,17 +98,17 @@
                 </thead>
                 <tbody class="text-gray-600 text-sm font-light">
                     {% for risk in risks %}
-                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <tr class="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-200">
                         <td class="py-3 px-6 text-left whitespace-nowrap">
                             <div class="flex items-center">
-                                <span class="font-medium">{{ risk.kode_resiko|truncatechars:5 }}</span>
+                                <span class="font-medium"> {{ risk.tingkat }}-{{ risk.kode_resiko|truncatechars:5 }}</span>
                             </div>
                         </td>
                         <td class="py-3 px-6 text-left">
                             {{ risk.tujuan|truncatechars:50 }}
                         </td>
                         <td class="py-3 px-6 text-center">
-                            {{ risk.departemen.name }} {{ risk.tingkat }}
+                            {{ risk.departemen.name }}
                         </td>
                         <td class="py-3 px-6 text-center">
                             <span class="
