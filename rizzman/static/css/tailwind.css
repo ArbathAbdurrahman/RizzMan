@@ -45,7 +45,6 @@
 
 @layer components {
     
-    
     .header1 {
         @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
         font-family: "Raleway", sans-serif;
@@ -66,7 +65,7 @@
     }
 
     .editBox {
-        @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-4/5 px-14 py-5 border-[3px] border-black;
+        @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-4/5 px-14 py-5;
     }
 
     .notifBox {
@@ -160,7 +159,6 @@
 
     .formRisk{
         @apply w-auto grid grid-cols-2 gap-[20px];
-        @apply w-auto grid grid-cols-2 gap-[20px];
     }
 
     .editPrfl1 {
@@ -204,16 +202,6 @@
     .infSpan {
         @apply col-span-2;
     }
-
-    .grafikTbl {
-        @apply  w-auto flex justify-center flex-col items-center h-3/4  p-0 bg-white border-[3px];
-    }
-
-    .btnCloseGrf {
-        @apply absolute top-4 right-4;
-    }
-
-
 
     #burgerNav {
         display: none;
@@ -308,10 +296,6 @@
         @apply col-span-2;
     }
 
-    .infSpan {
-        @apply col-span-2;
-    }
-
     #loginBtn {
         display: none;
     }
@@ -375,16 +359,13 @@
 
 @media screen and (max-width: 640px) {
     .infSpan {
-        @apply col-span-1;
+        @apply col-span-1
     }
 
     .loginBox {
         @apply w-[438px];
     }
 
-    .editBox {
-        @apply w-[438px] px-5 py-5;
-    }
     .editBox {
         @apply w-[438px] px-5 py-5;
     }
