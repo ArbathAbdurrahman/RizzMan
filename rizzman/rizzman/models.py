@@ -55,6 +55,7 @@ class Risk(models.Model):
     proses_bisnis = models.ForeignKey(Bisnis, on_delete=models.SET_NULL, null=True, related_name="risks")
     kelompok_resiko = models.ForeignKey(Kelompok, on_delete=models.SET_NULL, null=True, related_name="risks")
     kode_resiko = models.CharField(max_length=255, unique=True)  # Tidak boleh null
+    uraian_peristiwa = models.TextField()
     penyebab_resiko = models.TextField()
     sumber_resiko = models.CharField(max_length=100,choices=SUMBER_RESIKO_CHOICES)
     akibat = models.TextField()

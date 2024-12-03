@@ -123,6 +123,7 @@ def create_risk(request):
         'title': 'Buat Risiko Baru'
     })
 
+@login_required
 def RiskListView(request):
     # Query awal
     user_priority = request.user.profile.jabatan.priority  # Ambil nilai priority user
@@ -164,6 +165,20 @@ def RiskListView(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
+    queryset = queryset.values()
+    datapoints = []
+    labels = []
+    impact_colors = []
+    scores = []
+    for i in range(len(queryset)):
+        impact_datapoint = {}
+        impact_datapoint['y'] = queryset[i]['inherent_impact']
+        impact_datapoint['x'] = queryset[i]['inherent_likelihood']
+        impact_datapoint['r'] = 15
+        datapoints.append(impact_datapoint)
+        labels.append(queryset[i]['kode_resiko'])
+        scores.append(queryset[i]['inherent_score'])
+
     # Context data
     context = {
         'risks': page_obj,
@@ -178,6 +193,10 @@ def RiskListView(request):
         'medium_risk_count': queryset.filter(inherent_score__range=(8, 15)).count(),
         'low_risk_count': queryset.filter(inherent_score__lt=8).count(),
         'selected_tingkat': selected_tingkat,
+        'datapoints':datapoints,
+        'labels':labels,
+        'impact_colors':impact_colors,
+        'scores':scores
     }
 
     return render(request, 'risk_list.html', context)

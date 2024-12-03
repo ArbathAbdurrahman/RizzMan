@@ -43,6 +43,7 @@ class RiskForm(forms.ModelForm):
             'proses_bisnis', 
             'kelompok_resiko', 
             'kode_resiko', 
+            'uraian_peristiwa', 
             'penyebab_resiko', 
             'sumber_resiko', 
             'akibat', 
@@ -74,6 +75,10 @@ class RiskForm(forms.ModelForm):
                 }),
                 'kode_resiko': forms.TextInput(attrs={
                     'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                }),
+                'uraian_peristiwa': forms.Textarea(attrs={
+                    'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'rows': 3
                 }),
                 'penyebab_resiko': forms.Textarea(attrs={
                     'class': 'bg-slate-100 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',

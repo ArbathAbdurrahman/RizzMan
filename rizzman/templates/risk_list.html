@@ -1,5 +1,162 @@
 {% extends "base.html" %}
 
+{% block title %}
+<title>Bubble Chart</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> <!-- Updated plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+    /* Reset default styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+    }
+
+    /* Responsive Open Chart Button */
+    #openChartBtn {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    #openChartBtn:hover {
+        background-color: #45a049;
+    }
+
+    /* Popup container */
+    .popup {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.4);
+        padding: 20px;
+    }
+
+    /* Popup content */
+    .popup-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 800px;
+        position: relative;
+        text-align: center;
+    }
+
+    /* Close button */
+    .close-btn {
+        color: #aaa;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        color: black;
+    }
+
+    /* Responsive Canvas */
+    #myBubbleChart {
+        width: 100% !important;
+        max-width: 100%;
+        height: auto !important;
+        aspect-ratio: 1 / 1;
+    }
+
+    /* Responsive Download Button */
+    button[type='button'] {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 15px auto 0;
+        padding: 10px;
+        background-color: #008CBA;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button[type='button']:hover {
+        background-color: #007B9D;
+    }
+
+    /* Media Queries for Different Devices */
+    @media screen and (max-width: 600px) {
+        .popup-content {
+            width: 95%;
+            margin: 10% auto;
+            padding: 10px;
+        }
+
+        .close-btn {
+            top: 5px;
+            right: 10px;
+            font-size: 24px;
+        }
+
+        #openChartBtn, 
+        button[type='button'] {
+            font-size: 14px;
+            padding: 8px;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .popup-content {
+            margin: 15% auto;
+            padding: 5px;
+        }
+
+        .close-btn {
+            top: 3px;
+            right: 8px;
+            font-size: 22px;
+        }
+    }
+
+    /* Landscape mode adjustments */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+        .popup-content {
+            width: 80%;
+            max-height: 90%;
+            overflow-y: auto;
+        }
+
+        #myBubbleChart {
+            aspect-ratio: 16 / 9;
+        }
+    }
+</style>
+{% endblock title %}
 {% block content %}
 {% if messages %}
 <div class="mb-4 space-y-2">
@@ -85,8 +242,8 @@
         </form>
 
         <!-- Risk Table -->
-        <div class="overflow-x-auto">
-            <table class="w-full bg-white">
+        <div class="overflow-x-auto rounded-md">
+            <table class="w-full bg-white ">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">Kode Risiko</th>
@@ -121,7 +278,7 @@
                             </span>
                         </td>
                         <td class="py-3 px-6 text-center">
-                            <div class="flex item-center justify-center">
+                            <div class="flex item-center justify-center gap-2">
                                 <a href="{% url 'risk_detail' risk.pk %}" class="w-4 mr-2 transform hover:text-blue-500 hover:scale-110">
                                     <i class="fas fa-eye"></i>
                                 </a>
@@ -180,9 +337,8 @@
         {% endif %}
     </div>
 </div>
-{% endblock %}
 
-{% block extra_js %}
+
 <script>
     // Optional: Add dynamic filtering without page reload
     document.addEventListener('DOMContentLoaded', function() {
@@ -192,4 +348,164 @@
         });
     });
 </script>
+
+<!-- Trigger Button -->
+<button id="openChartBtn">Open Bubble Chart</button>
+
+<!-- Popup Container -->
+<div id="chartPopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn">&times;</span>
+        <canvas id="myBubbleChart"></canvas>
+        <button type='button' onclick='pdfdownload()'>Download PDF</button>
+    </div>
+</div>
+
+<script>
+    const { jsPDF } = window.jspdf;
+    function pdfdownload(){
+        var dom = document.getElementById('myBubbleChart');
+        html2canvas(dom).then(function(canvas) {
+            var img = canvas.toDataURL("image/png");
+            var doc = new jsPDF();
+            const d = new Date();
+            doc.text(0,10,String(d));
+            doc.addImage(img, 'JPEG', 20, 20);
+            doc.save('test.pdf');
+        });
+    }
+
+    // Popup functionality
+    const openChartBtn = document.getElementById('openChartBtn');
+    const chartPopup = document.getElementById('chartPopup');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Open popup
+    openChartBtn.addEventListener('click', function() {
+        chartPopup.style.display = 'block';
+    });
+
+    // Close popup
+    closeBtn.addEventListener('click', function() {
+        chartPopup.style.display = 'none';
+    });
+
+    // Close popup when clicking outside
+    window.addEventListener('click', function(event) {
+        if (event.target == chartPopup) {
+            chartPopup.style.display = 'none';
+        }
+    });
+
+    // Color function for risk scores
+    function get_rgb(data){
+        if (data < 8){
+            return `rgb(120,231,81)`;
+        }
+        else if(data >= 8 && data <= 15){
+            return `rgb(235,237,83)`;
+        }
+        else if (data > 15){
+            return `rgb(237,106,83)`;
+        }
+    }
+
+    // Chart rendering
+    const ctx = document.getElementById('myBubbleChart').getContext('2d');
+    const data = {{ datapoints|safe }};
+    const labels = {{ labels|safe }};
+    const scores = {{ scores|safe }};
+    var impact_colors = [];
+    {% for i in scores %}
+    impact_colors.push(get_rgb({{ i }}));
+    {% endfor %}
+    const myBubbleChart = new Chart(ctx, {
+        type: 'bubble',
+        data: {
+            datasets: [{
+                label: 'Chart Risiko',
+                data: data,
+                backgroundColor: impact_colors,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+            }]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title:{
+                        display:true,
+                        text:'Inherent Likelihood',
+                    },
+                    max:6,
+                    min:0,
+                    beginAtZero: true
+                },
+                y: {
+                    title:{
+                        display:true,
+                        text:'Inherent Impact'
+                    },
+                    max:6,
+                    min:0,
+                    beginAtZero: true
+                }
+            },
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 10,
+                    top: 10,
+                    bottom: 10
+                }
+            },
+            plugins:{
+                tooltip:{
+                    callbacks:{
+                        title:function(tooltipItem,data){
+                            return "aaaa";
+                        },
+                        label: function(tooltipItem,_data){
+                            var tooltip = []
+                            const index = tooltipItem.dataIndex;
+                            const x = data[index]['x'];
+                            const y = data[index]['y'];
+                            var temp = `Kode Resiko : ${labels[index]}`;
+                            tooltip.push(temp);
+                            temp = `Inherent Likelihood : ${x}`
+                            tooltip.push(temp);
+                            temp = `Inherent Impact : ${y}`;
+                            tooltip.push(temp);
+                            temp = `Inherent Score : ${scores[index]}`;
+                            tooltip.push(temp);
+                            return tooltip;                            
+                        }
+                    }
+                },
+                datalabels:{
+                    labels:{
+                        color:'black',
+                    },
+                    formatter: function(value,context){
+                        var total=0;
+                        const index=context.dataIndex;
+                        for(var i=0;i<data.length;i++){
+                            if (scores[index] == scores[i]){
+                                total++;
+                            }
+                        }
+                        return `${total}`;
+                    },
+                    align: function(context){
+                        return 'center';
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 {% endblock %}

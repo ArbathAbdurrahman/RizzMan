@@ -22,31 +22,20 @@
     </div>
     {% endif %}
     <form method="post" class="formRisk">
+        <div class="infSpan mt-4">
+            <h1 class="infSpan header3 font-bold">Informasi Resiko :</h1>
+        </div>
         {% csrf_token %}
+        <!-- Tujuan -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.tujuan.id_for_label }}">Tujuan</label>
             {{ form.tujuan }}
             {% if form.tujuan.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.tujuan.errors }}</span>
+            <span class="text-red-500 text-xs italic">{{ form.tujuan.errors }}</span>
             {% endif %}
         </div>
         
-        <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.proses_bisnis.id_for_label }}">Proses Bisnis</label>
-            {{ form.proses_bisnis }}
-            {% if form.proses_bisnis.errors %}
-            <span class="text-red-500 text-xs italic">{{ form.proses_bisnis.errors }}</span>
-            {% endif %}
-        </div>
-        
-        <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.kelompok_resiko.id_for_label }}">Kelompok Resiko</label>
-            {{ form.kelompok_resiko }}
-            {% if form.kelompok_resiko.errors %}
-            <span class="text-red-500 text-xs italic">{{ form.kelompok_resiko.errors }}</span>
-            {% endif %}
-        </div>
-        
+        <!-- Kode resiko  -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.kode_resiko.id_for_label }}">Kode Resiko</label>
             {{ form.kode_resiko }}
@@ -54,7 +43,46 @@
             <span class="text-red-500 text-xs italic">{{ form.kode_resiko.errors }}</span>
             {% endif %}
         </div>
+        <div class="md:col-span-2">
+            <div class="grid grid-cols-3 gap-3">
+                <!-- Proses bisnis  -->
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.proses_bisnis.id_for_label }}">Proses Bisnis</label>
+                    {{ form.proses_bisnis }}
+                    {% if form.proses_bisnis.errors %}
+                    <span class="text-red-500 text-xs italic">{{ form.proses_bisnis.errors }}</span>
+                    {% endif %}
+                </div>
         
+                <!-- Kelompok resiko  -->
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.kelompok_resiko.id_for_label }}">Kelompok</label>
+                    {{ form.kelompok_resiko }}
+                    {% if form.kelompok_resiko.errors %}
+                    <span class="text-red-500 text-xs italic">{{ form.kelompok_resiko.errors }}</span>
+                    {% endif %}
+                </div>
+                
+                <!-- Sumber resiko -->
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.sumber_resiko.id_for_label }}">Sumber</label>
+                    {{ form.sumber_resiko }}
+                    {% if form.sumber_resiko.errors %}
+                    <span class="text-red-500 text-xs italic">{{ form.sumber_resiko.errors }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Uraian Peristiwa -->
+        <div class="">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.uraian_peristiwa.id_for_label }}">Uraian Peristiwa</label>
+            {{ form.uraian_peristiwa }}
+            {% if form.uraian_peristiwa.errors %}
+            <span class="text-red-500 text-xs italic">{{ form.uraian_peristiwa.errors }}</span>
+            {% endif %}
+        </div>
+        
+        <!-- Penyebab resiko -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.penyebab_resiko.id_for_label }}">Penyebab Resiko</label>
             {{ form.penyebab_resiko }}
@@ -62,15 +90,12 @@
             <span class="text-red-500 text-xs italic">{{ form.penyebab_resiko.errors }}</span>
             {% endif %}
         </div>
-        
-        <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.sumber_resiko.id_for_label }}">Sumber Resiko</label>
-            {{ form.sumber_resiko }}
-            {% if form.sumber_resiko.errors %}
-            <span class="text-red-500 text-xs italic">{{ form.sumber_resiko.errors }}</span>
-            {% endif %}
-        </div>
 
+        <div class="infSpan mt-4">
+            <h1 class="infSpan header3 font-bold">Potensi Kerugian :</h1>
+        </div>
+        
+        <!-- Akibat  -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.akibat.id_for_label }}">Akibat</label>
             {{ form.akibat }}
@@ -79,6 +104,7 @@
             {% endif %}
         </div>
         
+        <!-- Finansial  -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.akibat_finansial.id_for_label }}">Akibat Finansial</label>
             {{ form.akibat_finansial }}
@@ -86,7 +112,11 @@
             <span class="text-red-500 text-xs italic">{{ form.akibat_finansial.errors }}</span>
             {% endif %}
         </div>
-        
+
+        <div class="infSpan mt-4">
+            <h1 class="infSpan header3 font-bold">Informasi Terkait :</h1>
+        </div>
+        <!-- Pemilik -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.pemilik_resiko.id_for_label }}">Pemilik Resiko</label>
             {{ form.pemilik_resiko }}
@@ -94,20 +124,26 @@
             <span class="text-red-500 text-xs italic">{{ form.pemilik_resiko.errors }}</span>
             {% endif %}
         </div>
-        
+
+        <!-- Departemen -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.departemen.id_for_label }}">Departemen</label>
             {{ form.departemen }}
             {% if form.departemen.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.departemen.errors }}</span>
+            <span class="text-red-500 text-xs italic">{{ form.departemen.errors }}</span>
             {% endif %}
         </div>
+
+        <div class="infSpan mt-4">
+            <h1 class="infSpan header3 font-bold">Penilaian Risiko :</h1>
+        </div>
         
+        <!-- Inherent -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.inherent_likelihood.id_for_label }}">Inherent Likelihood</label>
             {{ form.inherent_likelihood }}
             {% if form.inherent_likelihood.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.inherent_likelihood.errors }}</span>
+            <span class="text-red-500 text-xs italic">{{ form.inherent_likelihood.errors }}</span>
             {% endif %}
         </div>
         
@@ -115,34 +151,46 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.inherent_impact.id_for_label }}">Inherent Impact</label>
             {{ form.inherent_impact }}
             {% if form.inherent_impact.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.inherent_impact.errors }}</span>
+            <span class="text-red-500 text-xs italic">{{ form.inherent_impact.errors }}</span>
             {% endif %}
         </div>
         
-        <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.control.id_for_label }}">Control</label>
-            {{ form.control }}
-            {% if form.control.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.control.errors }}</span>
-            {% endif %}
+        <div class="infSpan mt-2">
+            <h1 class="header3 font-bold">Pengendalian :</h1>
         </div>
         
-        <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.memadai.id_for_label }}">Memadai</label>
-            {{ form.memadai }}
-            {% if form.memadai.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.memadai.errors }}</span>
-            {% endif %}
-        </div>
-
-        <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.status.id_for_label }}">Status</label>
-            {{ form.status }}
-            {% if form.status.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.memadai.errors }}</span>
-            {% endif %}
-        </div>
-        
+        <!-- Kontrol -->
+         <div class="md:col-span-2">
+            <div class="grid grid-cols-3 gap-3">
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.control.id_for_label }}">Control</label>
+                    {{ form.control }}
+                    {% if form.control.errors %}
+                     <span class="text-red-500 text-xs italic">{{ form.control.errors }}</span>
+                     {% endif %}
+                </div>
+                    
+                <!-- Memadai  -->
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.memadai.id_for_label }}">Memadai</label>
+                    {{ form.memadai }}
+                    {% if form.memadai.errors %}
+                        <span class="text-red-500 text-xs italic">{{ form.memadai.errors }}</span>
+                    {% endif %}
+                </div>
+             
+                <!-- Status  -->
+                <div class="">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.status.id_for_label }}">Status</label>
+                    {{ form.status }}
+                    {% if form.status.errors %}
+                    <span class="text-red-500 text-xs italic">{{ form.memadai.errors }}</span>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+            
+        <!-- Residual -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.residual_likelihood.id_for_label }}">Residual Likelihood</label>
             {{ form.residual_likelihood }}
@@ -155,10 +203,23 @@
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.residual_impact.id_for_label }}">Residual Impact</label>
             {{ form.residual_impact }}
             {% if form.residual_impact.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.residual_impact.errors }}</span>
+            <span class="text-red-500 text-xs italic">{{ form.residual_impact.errors }}</span>
             {% endif %}
         </div>
         
+        <div class="infSpan mt-4">
+            <h1 class="infSpan header3 font-bold">Penanganan :</h1>
+        </div>
+        
+        <!-- Tindakan mitigasi  -->
+        <div class="">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.tindakan_mitigasi.id_for_label }}">Tindakan Mitigasi</label>
+            {{ form.tindakan_mitigasi }}
+            {% if form.tindakan_mitigasi.errors %}
+                <span class="text-red-500 text-xs italic">{{ form.tindakan_mitigasi.errors }}</span>
+            {% endif %}
+        </div>
+        <!-- Perlakuan -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.perlakuan.id_for_label }}">Perlakuan</label>
             {{ form.perlakuan }}
@@ -167,14 +228,8 @@
             {% endif %}
         </div>
         
-        <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.tindakan_mitigasi.id_for_label }}">Tindakan Mitigasi</label>
-            {{ form.tindakan_mitigasi }}
-            {% if form.tindakan_mitigasi.errors %}
-                <span class="text-red-500 text-xs italic">{{ form.tindakan_mitigasi.errors }}</span>
-            {% endif %}
-        </div>
-        
+
+        <!-- Mitigasi Score -->
         <div class="">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.mitigasi_likelihood.id_for_label }}">Mitigasi Likelihood</label>
             {{ form.mitigasi_likelihood }}
@@ -190,7 +245,8 @@
                 <span class="text-red-500 text-xs italic">{{ form.mitigasi_impact.errors }}</span>
             {% endif %}
         </div>
-        <div class="mt-6 flex justify-end items-end">
+        
+        <div class="infSpan flex items-center justify-end my-4">
             <button type="submit" id="submitFrm" class="px-4 py-2 buttonCir header3 text-[20px]">Submit</button>
         </div>
     </form>
