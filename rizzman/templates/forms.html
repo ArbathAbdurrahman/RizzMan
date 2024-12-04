@@ -23,7 +23,7 @@
     {% endif %}
     <form method="post" class="formRisk">
         <div class="infSpan mt-4">
-            <h1 class="infSpan header3 font-bold">Informasi Resiko :</h1>
+            <h1 class="infSpan header3 font-bold">Informasi Risiko :</h1>
         </div>
         {% csrf_token %}
         <!-- Tujuan -->
@@ -37,7 +37,7 @@
         
         <!-- Kode resiko  -->
         <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.kode_resiko.id_for_label }}">Kode Resiko</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.kode_resiko.id_for_label }}">Kode Risiko</label>
             {{ form.kode_resiko }}
             {% if form.kode_resiko.errors %}
             <span class="text-red-500 text-xs italic">{{ form.kode_resiko.errors }}</span>
@@ -84,7 +84,7 @@
         
         <!-- Penyebab resiko -->
         <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.penyebab_resiko.id_for_label }}">Penyebab Resiko</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.penyebab_resiko.id_for_label }}">Penyebab Risiko</label>
             {{ form.penyebab_resiko }}
             {% if form.penyebab_resiko.errors %}
             <span class="text-red-500 text-xs italic">{{ form.penyebab_resiko.errors }}</span>
@@ -114,11 +114,11 @@
         </div>
 
         <div class="infSpan mt-4">
-            <h1 class="infSpan header3 font-bold">Informasi Terkait :</h1>
+            <h1 class="infSpan header3 font-bold">Pihak Terkait :</h1>
         </div>
         <!-- Pemilik -->
         <div class="">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.pemilik_resiko.id_for_label }}">Pemilik Resiko</label>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.pemilik_resiko.id_for_label }}">Pemilik Risiko</label>
             {{ form.pemilik_resiko }}
             {% if form.pemilik_resiko.errors %}
             <span class="text-red-500 text-xs italic">{{ form.pemilik_resiko.errors }}</span>

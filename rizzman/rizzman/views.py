@@ -161,7 +161,7 @@ def RiskListView(request):
     queryset = queryset.order_by(sort_by)
 
     # Pagination
-    paginator = Paginator(queryset, 10)
+    paginator = Paginator(queryset, 100)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

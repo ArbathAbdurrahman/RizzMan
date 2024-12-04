@@ -301,40 +301,20 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Pagination -->
-        {% if is_paginated %}
-        <div class="flex justify-center mt-6">
-            <nav class="inline-flex rounded-md shadow">
-                {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}&{{ request.GET.urlencode }}" 
-                       class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                        Sebelumnya
-                    </a>
-                {% endif %}
-
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                        <span class="px-4 py-2 border border-gray-300 bg-blue-500 text-white text-sm font-medium">
-                            {{ num }}
-                        </span>
-                    {% else %}
-                        <a href="?page={{ num }}&{{ request.GET.urlencode }}" 
-                           class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                            {{ num }}
-                        </a>
-                    {% endif %}
-                {% endfor %}
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}&{{ request.GET.urlencode }}" 
-                       class="px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                        Berikutnya
-                    </a>
-                {% endif %}
-            </nav>
+        <!-- Paginasi -->
+        <div class="pagination">
+            {% if risks.has_previous %}
+                <a href="?page=1">First</a>
+                <a href="?page={{ risks.previous_page_number }}">Previous</a>
+                <span>Page {{ risks.number }} of {{ total_pages }}</span>
+            {% endif %}
+        
+        
+            {% if risks.has_next %}
+                <a href="?page={{ risks.next_page_number }}">Next</a>
+                <a href="?page={{ total_pages }}">Last</a>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 </div>
 
@@ -399,10 +379,10 @@
 
     // Color function for risk scores
     function get_rgb(data){
-        if (data < 8){
+        if (data < 9){
             return `rgb(120,231,81)`;
         }
-        else if(data >= 8 && data <= 15){
+        else if(data >= 9 && data <= 15){
             return `rgb(235,237,83)`;
         }
         else if (data > 15){
