@@ -4,6 +4,23 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 /* Tambahkan CSS kustom di bawah sini */
+.fufu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fufu img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
 
 * {
     margin: 0;
@@ -74,6 +91,7 @@
     }
     
     .formlgnn {
+    .formlgnn {
         @apply w-full flex-col justify-center items-start gap-2.5 flex;
     }
 
@@ -112,15 +130,23 @@
     }
 
     .profil {
-        @apply p-5 flex flex-row gap-10 m-5;
+        @apply p-10 flex flex-row gap-10 my-[100px] mx-[150px] h-auto basis-3/4;
+    }
+
+    .photoBor {
+        @apply rounded-full w-[250px] h-[250px] border-4 border-black flex justify-center items-center overflow-hidden;
     }
 
     .imgPrf{
-        @apply rounded-full w-[270px] border-4 border-black;
+        @apply w-[100%] overflow-hidden;
+    }
+
+    .imgEditBtn {
+        @apply flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[70%] -left-[3%] text-[14px] z-40;
     }
 
     .photoProfil {
-        @apply flex items-center flex-col gap-4 justify-center;
+        @apply flex flex-col gap-4 justify-center items-center;
     }
 
     .bag1 {
@@ -137,6 +163,7 @@
 
     .editPrfl1 {
         @apply h-fit flex flex-row items-start gap-10;
+        @apply h-fit flex flex-row items-start gap-10;
     }
 
     .editPrfl2 {
@@ -145,6 +172,7 @@
 
     .mainEditPrfl {
         @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
+        @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
     }
 
     .editPhoto {
@@ -152,6 +180,7 @@
     }
 
     .editFrmBtn {
+        @apply flex flex-row gap-[10px] items-start mt-3;
         @apply flex flex-row gap-[10px] items-start mt-3;
     }
 
@@ -181,6 +210,7 @@
     #burgerNav {
         display: none;
         position: absolute;
+        top: -0px;
         top: -0px;
         width: 100%;
         transition: top 0.4s;
@@ -280,15 +310,19 @@
     }
 
     .profil {
-        @apply flex-col gap-1 w-full;
+        @apply flex-col w-full p-5 my-[75px] mx-[100px] basis-full;
     }
 
     .photoProfil {
-        @apply gap-2 flex-row;
+        @apply gap-2 flex-row justify-center items-center w-full;
     }
 
     .imgPrf {
-        @apply w-[180px];
+        @apply w-[100%];
+    }
+
+    .photoBor {
+        @apply w-[200px] h-[200px];
     }
 
     .formRisk {
@@ -300,7 +334,7 @@
     }
 
     .editPrfl1 {
-        @apply pl-0 gap-1 flex-col justify-center items-center;
+        @apply pl-0 gap-1 flex-col justify-center items-center mb-5;
     }
 
     .editPrfl2 {
@@ -348,11 +382,7 @@
     }
 
     .profil {
-        @apply p-4 m-2;
-    }
-
-    .imgPrf {
-        @apply min-w-[140px];
+        @apply p-2 my-10 mx-7 w-full gap-4;
     }
 
     .bag1 {
@@ -378,4 +408,10 @@
     .chartBox {
         @apply h-[53%];
     }
+}
+
+    .btnCloseGrf {
+        @apply top-2 right-2;
+    }
+}
 }

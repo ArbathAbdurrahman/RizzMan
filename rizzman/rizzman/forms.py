@@ -26,6 +26,8 @@ class UserProfileForm(forms.ModelForm):
         widgets = {
             'nama': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly',}),
             'alamat': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly',}),
+            'nama': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly',}),
+            'alamat': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly',}),
             'tanggal_lahir': forms.DateInput(attrs={
                 'class': 'BoxPlchdr cursor-not-allowed remove-arrow',
                 'readonly': 'readonly',
