@@ -204,7 +204,7 @@
     }
 
     .chartBox {
-        @apply relative w-auto h-[80%] flex justify-center items-center flex-col;
+        @apply relative w-auto h-[80%] flex justify-center items-center flex-col bg-white;
     }
 
     #burgerNav {
