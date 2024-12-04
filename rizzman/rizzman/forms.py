@@ -29,7 +29,6 @@ class UserProfileForm(forms.ModelForm):
             'tanggal_lahir': forms.DateInput(attrs={
                 'class': 'BoxPlchdr cursor-not-allowed remove-arrow',
                 'readonly': 'readonly',
-                
                 'type': 'date',  # Pastikan type adalah 'date' untuk mendukung input kalender
             }),
         }

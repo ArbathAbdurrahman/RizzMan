@@ -92,4 +92,26 @@
         x.style.color = isToggled ? "black" : "white";
         isToggled = !isToggled;
     });
+
+    const overlay = document.getElementById('overlay');
+    const loginPop = document.getElementById('loginPop');
+
+    // Open popup
+    function loginPopup() {
+        if (loginPop.style.display === 'none' || loginPop.style.display === '') {
+            loginPop.style.display = 'flex';
+            overlay.style.display = 'block';
+
+            setTimeout(() => {
+                loginPop.style.opacity = '1';
+            }, 100);
+        } else {
+            loginPop.style.opacity = '0';
+            overlay.style.display = 'none';
+
+            setTimeout(() => {
+                loginPop.style.display = 'none';
+            }, 300);
+        }
+    }
 </script>

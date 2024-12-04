@@ -3,6 +3,7 @@
 
 {% block title %}
     <title>Profile</title>
+    <title>Profile</title>
     <style>
         th, td {
             font-size: 18px;
@@ -15,61 +16,74 @@
         input[name="foto"] {
             display: none;
         }
+        input[name="foto"] {
+            display: none;
+        }
     </style>
 {% endblock title %}
 
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  --> 
     <main id="pageWrapper" class="mainPrf p-0 divide-x-4 divide-black">
-        <div class="bag1">
-            <div class="profil cardRec h-auto">
+            <div class="profil cardRec">
                 <div class="photoProfil">
                         {% if user_profile.foto %}
+                        <div class="photoBor">
                             <img src="{{ user_profile.foto.url}}" alt="profil" class="imgPrf">
+                        </div>
                         {% else %}
+                        <div class="photoBor">]
                             <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                        </div>
                         {% endif %}
                     <div class="buttonCir w-fit h-fit p-1 items-center justify-center flex"><a onclick="popupEdit()" class="btnTxt font-normal text-[20px] w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
                 </div>
-                <div class="flex flex-col gap-5 basis-2/4">
-                    <div class="flex flex-col cardCir cardAni shadow-none bg-pink-50 p-4">
+                <div class="flex flex-col gap-5 basis-2/4 justify-center">
+                    <div class="flex flex-col cardCir cardAni shadow-none w-full bg-pink-50 p-4">
                         <table class="user">
                             <tr>
                                 <th>Nama</th>
                                 <td class="w-3">:</td>
                                 <td>{{user_profile.nama}}</td>
+                                <td>{{user_profile.nama}}</td>
                             </tr>
                             <tr>
                                 <th>ID</th>
+                                <th>ID</th>
                                 <td>:</td>
+                                <td>{{user_profile.user}}</td>
                                 <td>{{user_profile.user}}</td>
                             </tr>
                             <tr>
                                 <th>Alamat</th>
                                 <td>:</td>
                                 <td>{{user_profile.alamat}}</td>
+                                <td>{{user_profile.alamat}}</td>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir</th>
                                 <td>:</td>
+                                <td>{{user_profile.tanggal_lahir|date:"d F Y"}}</td>
                                 <td>{{user_profile.tanggal_lahir|date:"d F Y"}}</td>
                             </tr>
                             <tr>
                                 <th>Jabatan</th>
                                 <td>:</td>
                                 <td>{{user_profile.jabatan}}</td>
+                                <td>{{user_profile.jabatan}}</td>
                             </tr>
                             <tr>
                                 <th>Total Pengisian</th>
                                 <td>:</td>
                                 <td>{{user_profile.total_pengisian}}</td>
+                                <td>{{user_profile.total_pengisian}}</td>
                             </tr>
                         </table>    
                     </div>    
+                    </div>    
                 </div>
             </div>
-        </div>
-        <div class="bag2 basis-1/4 p-[10px] bg-gray-200">
+        <div class="bag2 basis-1/4 p-[10px] bg-gray-100 flex-shrink-0">
             <div class="menu m-4 cardCir flex flex-col gap-5 p-[20px]">
                 <h1 class="font-bold text-center text-[30px] header3">Menu</h1>
                 <ul class="flex flex-col gap-10">
@@ -85,34 +99,46 @@
     <div class="editBox overflow-auto">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+<div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
+<div class="container hidden fixed inset-0 justify-center items-center z-50 transition-all duration-200" id="editPop">
+    <div class="editBox overflow-auto">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="editPrfl1">
                 <div class="flex flex-col items-center gap-2">
-                    <div class="photoProfile">
-                        {% if user_profile.foto %}
-                            <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="editPhoto">
-                        {% else %}
-                            <img src="{% static 'img/herta.jpg' %}" alt="Default Profile Photo" class="editPhoto">
-                        {% endif %}
-                        
+                    <div class="fotoPrfl">
+                        <div class="w-fit h-fit relative">
+                            {% if user_profile.foto %}
+                            <div class="photoBor">
+                                <img src="{{ user_profile.foto.url}}" alt="profil" class="imgPrf">
+                            </div>
+                            {% else %}
+                            <div class="photoBor">]
+                                <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                            </div>
+                            {% endif %}
+                            <!-- Tombol Edit -->
+                            <button type="button" onclick="editFoto()" class="imgEditBtn">
+                                <i class="fa-solid fa-pen"></i>
+                                <p>Edit</p>
+                            </button>    
+                        </div>
                         <!-- Form foto, ini akan hidden sampai tombol Edit ditekan -->
                         {{ form.foto }}
-                    
-                        <!-- Tombol Edit -->
-                        <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
-                            <i class="fa-solid fa-pen"></i>
-                            <p>Edit</p>
-                        </button>
                     </div>
-                    
                 </div>
                 <div class="pt-5 flex gap-3 flex-col">
-                    <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
-                        {{ form.nama }} <!-- Input dari form Django -->
-                        <a onclick="ubahNama()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
+                    <div class="w-fit">
+                        <h4 class="header4 text-[18px]">Nama</h4>
+                        <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
+                            {{ form.nama }} <!-- Input dari form Django -->
+                            <a onclick="ubahNama()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
+                        </div>
+                        <p class="text-[13px]">*pastikan mengisi nama dengan benar dan tepat</p>
                     </div>
-                    <div class="flex items-start flex-col gap-1 w-full">
-                        <h1 class="header3 w-full">ID : {{user_profile.user}}</h1>
-                        <h1 class="header3 w-full">Role : {{user_profile.jabatan}}</h1>
+                    <div class="flex items-start flex-col gap-1 w-full cardCir p-2 bg-gray-50 cardAni shadow-none border-[3px]">
+                        <h1 class="header3 text-[20px] font-normal w-full whitespace-pre-wrap">ID     : {{user_profile.user}}</h1>
+                        <h1 class="header3 text-[20px] font-normal w-full whitespace-pre-wrap">Role : {{user_profile.jabatan}}</h1>
                     </div>
                 </div>
             </div>
@@ -121,6 +147,7 @@
                     <div class="w-fit">
                         <h4 class="header4 text-[18px]">Alamat</h4>
                         <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
+                            {{ form.alamat }} <!-- Input dari form Django -->
                             {{ form.alamat }} <!-- Input dari form Django -->
                             <a onclick="ubahAlamat()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
@@ -135,6 +162,7 @@
                         <h4 class="header4 text-[18px]">Tanggal Lahir</h4>
                         <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                             {{ form.tanggal_lahir }} <!-- Input dari form Django -->
+                            {{ form.tanggal_lahir }} <!-- Input dari form Django -->
                             <a onclick="ubahTanggalLahir()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
                         <p class="text-[13px]">*pastikan mengisi tanggal lahir dengan benar dan tepat</p>
@@ -144,55 +172,50 @@
             <div class="editFrmBtn">
                 <button type="submit" class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
                 <button type="button" class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
+                <button type="submit" class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
+                <button type="button" class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
             </div>
         </form>
+        </form>
     </div>
+</div>
 </div>
 
 <script>
     // Fungsi untuk membuka/menutup popup edit
     function popupEdit() {
-        const overlay = document.getElementById('overlay');
         const editPop = document.getElementById('editPop');
-        const pageWrapper = document.getElementById('pageWrapper');
+        const overlay = document.getElementById('overlay');
+        const pageWrapper = document.getElementById('pageWrapper')
         
-        if (editPop.classList.contains('hidden')) {
-            // Popup dibuka
-            editPop.classList.remove('hidden');
-            editPop.classList.add('popup-enter');
-            overlay.classList.remove('hidden');
-            pageWrapper.classList.add('blur-bg');
-            
+        if (editPop.style.display === 'none' || editPop.style.display === '') {
+            editPop.style.display = 'flex';
+            overlay.style.display = 'block';
+            pageWrapper.style.filter = 'blur(5px)';
+
             setTimeout(() => {
-                editPop.classList.remove('popup-enter');
-                editPop.classList.add('flex');
+                editPop.style.opacity = '1';
             }, 100);
         } else {
-            // Popup ditutup
-            editPop.classList.remove('flex');
-            editPop.classList.add('popup-exit-active');
-            overlay.classList.add('hidden');
-            pageWrapper.classList.remove('blur-bg');
-            
+            editPop.style.opacity = '0';
+            overlay.style.display = 'none';
+            pageWrapper.style.filter = 'none';
+
             setTimeout(() => {
-                editPop.classList.add('hidden');
-                editPop.classList.remove('popup-exit-active');
+                editPop.style.display = 'none';
             }, 300);
         }
     }
 
     // Fungsi untuk mengubah status elemen input menjadi edit
     function editFoto() {
-    // Temukan elemen input file foto (dari form)
-    const fotoInput = document.querySelector('input[name="foto"]');
-    
-    // Menampilkan form foto yang tersembunyi
-    fotoInput.style.display = 'block';  // Atau bisa gunakan class toggle
+        const fotoInput = document.querySelector('input[name="foto"]');
+        fotoInput.style.display = 'block';
 
-    // Mengubah tampilan tombol edit jika perlu, agar memberi feedback visual kepada pengguna
-    const editButton = document.querySelector('button');
-    editButton.textContent = 'Change Photo'; // Ganti teks tombol
+        const editButton = document.querySelector('.imgEditBtn');
+        editButton.textContent = 'Change Photo';
     }
+
     function ubahNama() {
         const input = document.querySelector('input[name="nama"]');
         input.removeAttribute('readonly');
@@ -206,6 +229,12 @@
         input.removeAttribute('disabled');
         input.classList.remove('cursor-not-allowed');
     }
+    function ubahAlamat() {
+        const input = document.querySelector('input[name="alamat"]');
+        input.removeAttribute('readonly');
+        input.removeAttribute('disabled');
+        input.classList.remove('cursor-not-allowed');
+    }
 
     function ubahTanggalLahir() {
         const input = document.querySelector('input[name="tanggal_lahir"]');
@@ -213,7 +242,6 @@
         input.removeAttribute('disabled');
         input.classList.remove('cursor-not-allowed');
     }
-    // Fungsi untuk edit foto
 </script>
 
     
