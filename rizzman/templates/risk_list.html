@@ -7,155 +7,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
-    /* Reset default styles */
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
 
-    body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        padding: 20px;
-    }
 
-    /* Responsive Open Chart Button */
-    #openChartBtn {
-        display: block;
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-        padding: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    #openChartBtn:hover {
-        background-color: #45a049;
-    }
-
-    /* Popup container */
-    .popup {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-        padding: 20px;
-    }
-
-    /* Popup content */
-    .popup-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 800px;
-        position: relative;
-        text-align: center;
-    }
-
-    /* Close button */
-    .close-btn {
-        color: #aaa;
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .close-btn:hover {
-        color: black;
-    }
-
-    /* Responsive Canvas */
-    #myBubbleChart {
-        width: 100% !important;
-        max-width: 100%;
-        height: auto !important;
-        aspect-ratio: 1 / 1;
-    }
-
-    /* Responsive Download Button */
-    button[type='button'] {
-        display: block;
-        width: 100%;
-        max-width: 300px;
-        margin: 15px auto 0;
-        padding: 10px;
-        background-color: #008CBA;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    button[type='button']:hover {
-        background-color: #007B9D;
-    }
-
-    /* Media Queries for Different Devices */
-    @media screen and (max-width: 600px) {
-        .popup-content {
-            width: 95%;
-            margin: 10% auto;
-            padding: 10px;
-        }
-
-        .close-btn {
-            top: 5px;
-            right: 10px;
-            font-size: 24px;
-        }
-
-        #openChartBtn, 
-        button[type='button'] {
-            font-size: 14px;
-            padding: 8px;
-        }
-    }
-
-    @media screen and (max-width: 400px) {
-        .popup-content {
-            margin: 15% auto;
-            padding: 5px;
-        }
-
-        .close-btn {
-            top: 3px;
-            right: 8px;
-            font-size: 22px;
-        }
-    }
-
-    /* Landscape mode adjustments */
-    @media screen and (max-height: 500px) and (orientation: landscape) {
-        .popup-content {
-            width: 80%;
-            max-height: 90%;
-            overflow-y: auto;
-        }
-
-        #myBubbleChart {
-            aspect-ratio: 16 / 9;
-        }
-    }
-</style>
 {% endblock title %}
 {% block content %}
 {% if messages %}
@@ -167,13 +20,16 @@
         {% endfor %}
 </div>
 {% endif %}
-<div class="container mx-auto px-4 py-8">
-    <div class="bg-white shadow-md rounded-lg p-6 grid">
-        <div class="flex flex-row justify-between mb-6">
+<div id="pageWrapper2" class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-0 flex-shrink-0 grid">
+        <div class="flex flex-row justify-between mb-6 items-center">
             <h1 class="text-3xl font-bold text-gray-800">Daftar Risiko</h1>
-            <a href="{% url 'forms' %}" class="buttonCir font-bold py-2 px-4 rounded">
+            <div class="flex flex-col gap-2 sm:flex-row sm:gap-4">
+                <button onclick="bubbleChrtPop()" class="buttonCir font-bold">Lihat Chart</button>
+                <a href="{% url 'forms' %}" class="buttonCir font-bold py-2 px-2 rounded">
                 Tambah Risiko Baru
-            </a>
+                </a>
+            </div>
         </div>
 
         <!-- Filters and Search -->
@@ -338,26 +194,15 @@
     </div>
 </div>
 
-
-<script>
-    // Optional: Add dynamic filtering without page reload
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.querySelector('form');
-        form.addEventListener('change', function() {
-            // Optional: You could add AJAX filtering here
-        });
-    });
-</script>
-
-<!-- Trigger Button -->
-<button id="openChartBtn">Open Bubble Chart</button>
-
 <!-- Popup Container -->
-<div id="chartPopup" class="popup">
-    <div class="popup-content">
-        <span class="close-btn">&times;</span>
+<div id="overlay1" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
+<div id="chartPopup" class="container hidden fixed inset-0 justify-center items-center z-50 transition-all duration-200">
+    <div class="cardCir relative grafikTbl">
+        <button class="btnCloseGrf" onclick="bubbleChartPopup()">
+            <i class="fa-solid fa-square-xmark text-[25px]"></i>
+        </button>
         <canvas id="myBubbleChart"></canvas>
-        <button type='button' onclick='pdfdownload()'>Download PDF</button>
+        <button class="buttonCir p-[5px] h-fit" onclick='pdfdownload()'>Download PDF</button>
     </div>
 </div>
 
@@ -376,26 +221,30 @@
     }
 
     // Popup functionality
-    const openChartBtn = document.getElementById('openChartBtn');
+    const overlay = document.getElementById('overlay1');
     const chartPopup = document.getElementById('chartPopup');
-    const closeBtn = document.querySelector('.close-btn');
+    const pageWrapper = document.getElementById('pageWrapper2');
 
     // Open popup
-    openChartBtn.addEventListener('click', function() {
-        chartPopup.style.display = 'block';
-    });
+    function bubbleChrtPop() {
+        if (chartPopup.style.display === 'none' || chartPopup.style.display === '') {
+            chartPopup.style.display = 'flex';
+            overlay.style.display = 'block';
+            pageWrapper.style.filter = 'blur(5px)';
 
-    // Close popup
-    closeBtn.addEventListener('click', function() {
-        chartPopup.style.display = 'none';
-    });
+            setTimeout(() => {
+                chartPopup.style.opacity = '1';
+            }, 100);
+        } else {
+            chartPopup.style.opacity = '0';
+            overlay.style.display = 'none';
+            pageWrapper.style.filter = 'none';
 
-    // Close popup when clicking outside
-    window.addEventListener('click', function(event) {
-        if (event.target == chartPopup) {
-            chartPopup.style.display = 'none';
+            setTimeout(() => {
+                chartPopup.style.display = 'none';
+            }, 300);
         }
-    });
+    }
 
     // Color function for risk scores
     function get_rgb(data){

@@ -24,12 +24,11 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ['foto','nama', 'alamat', 'tanggal_lahir',]
         widgets = {
-            'nama': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly','disabled': 'disabled',}),
-            'alamat': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly','disabled': 'disabled',}),
+            'nama': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly',}),
+            'alamat': forms.TextInput(attrs={'class': 'BoxPlchdr cursor-not-allowed','readonly': 'readonly',}),
             'tanggal_lahir': forms.DateInput(attrs={
                 'class': 'BoxPlchdr cursor-not-allowed remove-arrow',
                 'readonly': 'readonly',
-                'disabled': 'disabled',
                 'type': 'date',  # Pastikan type adalah 'date' untuk mendukung input kalender
             }),
         }
