@@ -92,4 +92,36 @@
         x.style.color = isToggled ? "black" : "white";
         isToggled = !isToggled;
     });
+
+    function loginPopup() {
+    const popup = document.getElementById('loginPop');
+    const overlay = document.getElementById('overlay');
+    const pageWrapper = document.getElementById('pageWrapper');
+
+    if (popup.classList.contains('hidden')) {
+        // Saat popup dibuka
+        popup.classList.remove('hidden');
+        popup.classList.add('popup-enter'); // Tambahkan animasi masuk
+        overlay.classList.remove('hidden');
+        pageWrapper.classList.add('blur-bg');
+
+        // Hapus kelas animasi setelah animasi selesai
+        setTimeout(() => {
+            popup.classList.remove('popup-enter');
+            popup.classList.add('flex'); // Tetapkan gaya flex setelah masuk
+        }, 100); // Durasi animasi sesuai dengan CSS (0.3s)
+    } else {
+        // Saat popup ditutup
+        popup.classList.add('popup-exit-active'); // Tambahkan animasi keluar
+        pageWrapper.classList.remove('blur-bg');
+        popup.classList.add('hidden');
+        popup.classList.remove('popup-exit-active');
+        
+        // Sembunyikan popup setelah animasi selesai
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+            popup.classList.remove('flex');
+        }, 300); // Durasi animasi sesuai dengan CSS (0.3s)
+    }
+}
 </script>

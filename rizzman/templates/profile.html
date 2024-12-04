@@ -169,14 +169,14 @@
             }, 100);
         } else {
             // Popup ditutup
-            editPop.classList.remove('flex');
             editPop.classList.add('popup-exit-active');
             overlay.classList.add('hidden');
             pageWrapper.classList.remove('blur-bg');
+            editPop.classList.remove('popup-exit-active');
+            editPop.classList.add('hidden');
             
             setTimeout(() => {
-                editPop.classList.add('hidden');
-                editPop.classList.remove('popup-exit-active');
+                editPop.classList.remove('flex');
             }, 300);
         }
     }
