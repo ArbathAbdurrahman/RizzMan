@@ -45,6 +45,7 @@
 
 @layer components {
     
+    
     .header1 {
         @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
         font-family: "Raleway", sans-serif;
@@ -90,6 +91,7 @@
         @apply flex;
     }
     
+    .formlgnn {
     .formlgnn {
         @apply w-full flex-col justify-center items-start gap-2.5 flex;
     }
@@ -158,9 +160,11 @@
 
     .formRisk{
         @apply w-auto grid grid-cols-2 gap-[20px];
+        @apply w-auto grid grid-cols-2 gap-[20px];
     }
 
     .editPrfl1 {
+        @apply h-fit flex flex-row items-start gap-10;
         @apply h-fit flex flex-row items-start gap-10;
     }
 
@@ -170,6 +174,7 @@
 
     .mainEditPrfl {
         @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
+        @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
     }
 
     .editPhoto {
@@ -177,6 +182,7 @@
     }
 
     .editFrmBtn {
+        @apply flex flex-row gap-[10px] items-start mt-3;
         @apply flex flex-row gap-[10px] items-start mt-3;
     }
 
@@ -212,6 +218,7 @@
     #burgerNav {
         display: none;
         position: absolute;
+        top: -0px;
         top: -0px;
         width: 100%;
         transition: top 0.4s;
@@ -301,6 +308,10 @@
         @apply col-span-2;
     }
 
+    .infSpan {
+        @apply col-span-2;
+    }
+
     #loginBtn {
         display: none;
     }
@@ -374,6 +385,9 @@
     .editBox {
         @apply w-[438px] px-5 py-5;
     }
+    .editBox {
+        @apply w-[438px] px-5 py-5;
+    }
 
     header {
         @apply px-3;
@@ -414,4 +428,5 @@
     .btnCloseGrf {
         @apply top-2 right-2;
     }
+}
 }
