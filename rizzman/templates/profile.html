@@ -25,9 +25,13 @@
             <div class="profil cardRec h-auto">
                 <div class="photoProfil">
                         {% if user_profile.foto %}
-                            <img src="{{ user_profile.foto.url}}" alt="profil" class="imgPrf">
+                        <div class="ppEdit">
+                            <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
+                        </div>
                         {% else %}
+                        <div class="ppEdit">
                             <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                        </div>
                         {% endif %}
                     <div class="buttonCir w-fit h-fit p-1 items-center justify-center flex"><a onclick="popupEdit()" class="btnTxt font-normal text-[20px] w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
                 </div>
@@ -89,19 +93,29 @@
                 <div class="flex flex-col items-center gap-2">
                     <div class="photoProfile">
                         {% if user_profile.foto %}
-                            <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="editPhoto">
+                        <div class="relative w-fit h-fit">
+                            <div class="ppEdit w-[270px] h-[270px]">
+                                <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
+                            </div>
+                            <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[75%] left-[1%] z-50">
+                                <i class="fa-solid fa-pen"></i>
+                                <p>Edit</p>
+                            </button>
+                        </div>
                         {% else %}
-                            <img src="{% static 'img/herta.jpg' %}" alt="Default Profile Photo" class="editPhoto">
+                        <div class="ppEdit">
+                            <img src="{% static 'img/herta.jpg' %}" alt="Default Profile Photo" class="ImgPrf">
+                            <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
+                                <i class="fa-solid fa-pen"></i>
+                                <p>Edit</p>
+                            </button>
+                        </div>
                         {% endif %}
                         
                         <!-- Form foto, ini akan hidden sampai tombol Edit ditekan -->
                         {{ form.foto }}
                     
                         <!-- Tombol Edit -->
-                        <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
-                            <i class="fa-solid fa-pen"></i>
-                            <p>Edit</p>
-                        </button>
                     </div>
                     
                 </div>
@@ -110,7 +124,7 @@
                         {{ form.nama }} <!-- Input dari form Django -->
                         <a onclick="ubahNama()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                     </div>
-                    <div class="flex items-start flex-col gap-1 w-full">
+                    <div class="flex items-start flex-col gap-1 w-full cardCir bg-gray-50 p-2 mb-5 shadow-none cardAni border-[2px]">
                         <h1 class="header3 w-full">ID : {{user_profile.user}}</h1>
                         <h1 class="header3 w-full">Role : {{user_profile.jabatan}}</h1>
                     </div>

@@ -114,11 +114,15 @@
     .profil {
         @apply p-5 flex flex-row gap-10 m-5;
     }
-
+    
     .imgPrf{
-        @apply rounded-full w-[270px] border-4 border-black;
+        @apply w-[100%];
     }
 
+    .ppEdit {
+        @apply flex justify-center items-center relative overflow-hidden w-[270px] h-[270px] grow-0 rounded-full border-[3px] border-black;
+    }
+    
     .photoProfil {
         @apply flex items-center flex-col gap-4 justify-center;
     }
@@ -177,6 +181,7 @@
     .chartBox {
         @apply relative w-auto h-[80%] flex justify-center items-center flex-col;
     }
+
 
     #burgerNav {
         display: none;
@@ -280,15 +285,11 @@
     }
 
     .profil {
-        @apply flex-col gap-1 w-full;
+        @apply flex-col gap-5 w-full;
     }
 
     .photoProfil {
         @apply gap-2 flex-row;
-    }
-
-    .imgPrf {
-        @apply w-[180px];
     }
 
     .formRisk {
@@ -351,9 +352,6 @@
         @apply p-4 m-2;
     }
 
-    .imgPrf {
-        @apply min-w-[140px];
-    }
 
     .bag1 {
         @apply flex-none;
@@ -377,5 +375,9 @@
 
     .chartBox {
         @apply h-[53%];
+    }
+
+    .ppEdit {
+        @apply w-[180px] h-[180px];
     }
 }
