@@ -28,11 +28,11 @@
             <div class="profil cardRec">
                 <div class="photoProfil">
                         {% if user_profile.foto %}
-                        <div class="photoBor">
-                            <img src="{{ user_profile.foto.url}}" alt="profil" class="imgPrf">
+                        <div class="ppEdit">
+                            <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
                         </div>
                         {% else %}
-                        <div class="photoBor">]
+                        <div class="ppEdit">
                             <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
                         </div>
                         {% endif %}
@@ -101,25 +101,31 @@
             {% csrf_token %}
             <div class="editPrfl1">
                 <div class="flex flex-col items-center gap-2">
-                    <div class="fotoPrfl">
-                        <div class="w-fit h-fit relative">
-                            {% if user_profile.foto %}
-                            <div class="photoBor">
-                                <img src="{{ user_profile.foto.url}}" alt="profil" class="imgPrf">
+                    <div class="photoProfile">
+                        {% if user_profile.foto %}
+                        <div class="relative w-fit h-fit">
+                            <div class="ppEdit w-[270px] h-[270px]">
+                                <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
                             </div>
-                            {% else %}
-                            <div class="photoBor">]
-                                <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
-                            </div>
-                            {% endif %}
-                            <!-- Tombol Edit -->
-                            <button type="button" onclick="editFoto()" class="imgEditBtn">
+                            <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[75%] left-[1%] z-50">
                                 <i class="fa-solid fa-pen"></i>
                                 <p>Edit</p>
-                            </button>    
+                            </button>
                         </div>
+                        {% else %}
+                        <div class="ppEdit">
+                            <img src="{% static 'img/herta.jpg' %}" alt="Default Profile Photo" class="ImgPrf">
+                            <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
+                                <i class="fa-solid fa-pen"></i>
+                                <p>Edit</p>
+                            </button>
+                        </div>
+                        {% endif %}
+                        
                         <!-- Form foto, ini akan hidden sampai tombol Edit ditekan -->
                         {{ form.foto }}
+                    
+                        <!-- Tombol Edit -->
                     </div>
                 </div>
                 <div class="pt-5 flex gap-3 flex-col">
@@ -131,9 +137,9 @@
                         </div>
                         <p class="text-[13px]">*pastikan mengisi nama dengan benar dan tepat</p>
                     </div>
-                    <div class="flex items-start flex-col gap-1 w-full cardCir p-2 bg-gray-50 cardAni shadow-none border-[3px]">
-                        <h1 class="header3 text-[20px] font-normal w-full whitespace-pre-wrap">ID     : {{user_profile.user}}</h1>
-                        <h1 class="header3 text-[20px] font-normal w-full whitespace-pre-wrap">Role : {{user_profile.jabatan}}</h1>
+                    <div class="flex items-start flex-col gap-1 w-full cardCir bg-gray-50 p-2 mb-5 shadow-none cardAni border-[2px]">
+                        <h1 class="header3 w-full">ID : {{user_profile.user}}</h1>
+                        <h1 class="header3 w-full">Role : {{user_profile.jabatan}}</h1>
                     </div>
                 </div>
             </div>

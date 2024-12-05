@@ -126,25 +126,21 @@ main {
     @apply border-[3.4px] border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
 }
 
-.profil {
-    @apply p-10 flex flex-row gap-10 my-[100px] mx-[150px] h-auto basis-3/4;
-}
+    .profil {
+        @apply p-5 flex flex-row gap-10 m-5;
+    }
+    
+    .imgPrf{
+        @apply w-[100%];
+    }
 
-.photoBor {
-    @apply rounded-full w-[250px] h-[250px] border-4 border-black flex justify-center items-center overflow-hidden;
-}
-
-.imgPrf{
-    @apply w-[100%] overflow-hidden;
-}
-
-.imgEditBtn {
-    @apply flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[70%] -left-[3%] text-[14px] z-40;
-}
-
-.photoProfil {
-    @apply flex flex-col gap-4 justify-center items-center;
-}
+    .ppEdit {
+        @apply flex justify-center items-center relative overflow-hidden w-[270px] h-[270px] grow-0 rounded-full border-[3px] border-black;
+    }
+    
+    .photoProfil {
+        @apply flex items-center flex-col gap-4 justify-center;
+    }
 
 .bag1 {
     @apply h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-white;
@@ -200,9 +196,10 @@ main {
     @apply col-span-2;
 }
 
-.chartBox {
-    @apply relative w-auto h-[80%] flex justify-center items-center flex-col bg-white;
-}
+    .chartBox {
+        @apply relative w-auto h-[80%] flex justify-center items-center flex-col;
+    }
+
 
 #burgerNav {
     display: none;
@@ -304,19 +301,11 @@ color: black; /* Warna teks saat hover */
     }
 
     .profil {
-        @apply flex-col w-full p-5 my-[75px] mx-[100px] basis-full;
+        @apply flex-col gap-5 w-full;
     }
 
     .photoProfil {
         @apply gap-2 flex-row justify-center items-center w-full;
-    }
-
-    .imgPrf {
-        @apply w-[100%];
-    }
-
-    .photoBor {
-        @apply w-[200px] h-[200px];
     }
 
     .formRisk {
@@ -376,8 +365,9 @@ color: black; /* Warna teks saat hover */
     }
 
     .profil {
-        @apply p-2 my-10 mx-7 w-full gap-4;
+        @apply p-4 m-2;
     }
+
 
     .bag1 {
         @apply flex-none;
@@ -403,7 +393,7 @@ color: black; /* Warna teks saat hover */
         @apply h-[53%];
     }
 
-    .btnCloseGrf {
-        @apply top-2 right-2;
+    .ppEdit {
+        @apply w-[180px] h-[180px];
     }
 }
