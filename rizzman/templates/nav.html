@@ -3,17 +3,17 @@
 <header class="border-b-4 border-black h-16 flex flex-shrink-0 z-50">
     <div class="flex justify-between w-full flex-row">
         <div class="logo flex flex-row justify-items-center content-center gap-3">
-            <a href="{% url 'home' %}"><img src="{% static 'img/RizzMan.png' %}" alt="logo" class="h-[54px]"></a>
+            <a href="{% url 'home' %}"><img src="{% static 'img/RizzMan.png' %}" alt="logo" class="page-link h-[54px]"></a>
         </div>
         <div class="navBar flex items-center">
             <ul class="flex flex-row gap-[10px] h-auto">
                 {% if request.user.is_authenticated %}
-                <li><a class="buttonRec hidden lg:block" href="{% url 'profile' %}">Profil</a></li>
-                <li><a class="buttonRec hidden lg:block" href="{% url 'tabel' %}">Forms</a></li>
+                <li><a class="page-link buttonRec hidden lg:block" href="{% url 'profile' %}">Profil</a></li>
+                <li><a class="page-link buttonRec hidden lg:block" href="{% url 'tabel' %}">Forms</a></li>
                 {% if request.resolver_match.view_name == 'tabel' %}
-                <li><a class="buttonRec hidden lg:block" href="{% url 'forms' %}">Isi Forms</a></li>
+                <li><a class="page-link buttonRec hidden lg:block" href="{% url 'forms' %}">Isi Forms</a></li>
                 {% else %}
-                <li><a class="buttonRec hidden lg:block" id="logout" href="{% url 'logout' %}">Logout</a></li>
+                <li><a class="page-link buttonRec hidden lg:block" id="logout" href="{% url 'logout' %}">Logout</a></li>
                 {% endif %}
                 {% else %}
                 <li><a class="buttonRec hidden lg:block" id="loginBtn" onclick="loginPopup()">Login</a></li>
@@ -57,11 +57,11 @@
 
 <div id="burgerNav" class="z-10 -top-[160px] transition-all duration-300 ease-in-out">
     <ul class="flex flex-col">
-        <li><div class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href='{% url "profile" %}'>Profil</a></div></li>
-        <li><div class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
-        <li><div class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+        <li><div class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center page-link text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href='{% url "profile" %}'>Profil</a></div></li>
+        <li><div class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle h-auto bg-[#e2feff] hover:bg-[#cdf7fb] p-0"><a class="text-center page-link text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+        <li><div class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center page-link text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
         {% if request.user.is_authenticated %}
-        <li><div class="font-bold font-['Raleway'] border-black hover:shadow-none border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f9ced0] hover:bg-[#ffc1c5] h-auto p-0"><a class="text-center text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href="{% url 'logout' %}">Logout</a></div></li>
+        <li><div class="font-bold font-['Raleway'] border-black hover:shadow-none border-0 border-b-[3px] rounded-none shadow-none flex justify-center align-middle bg-[#f9ced0] hover:bg-[#ffc1c5] h-auto p-0"><a class="text-center page-link text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" href="{% url 'logout' %}">Logout</a></div></li>
         {% else %}
         <li><div class="font-bold font-['Raleway'] hover:shadow-none border-0 rounded-none shadow-none flex justify-center align-middle bg-[#e2feff] hover:bg-[#cdf7fb] h-auto p-0"><a class="text-center text-[20px] hover:text-[25px] transition-all duration-200 w-full h-auto p-3" onclick="loginPopup()">Login</a></div></li>
         {% endif %}

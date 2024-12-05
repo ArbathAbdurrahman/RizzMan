@@ -19,9 +19,9 @@
         {% endfor %}
 </div>
 {% endif %}
-<div class="container mx-auto px-4 py-8" id="pageWrapper1">
+<main class="container mx-auto px-4 py-8" id="pageWrapper1">
     <div class="bg-white shadow-md rounded-lg p-6 grid">
-        <div class="flex flex-row justify-between mb-6">
+        <div class="flex flex-row justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-gray-800">Daftar Risiko</h1>
             <div class="flex sm:flex-row flex-col sm:gap-4 gap-2">
                 <button class="buttonCir font-bold" onclick="chartPopup()">Chart</button>
@@ -171,7 +171,7 @@
             {% endif %}
         </div>
     </div>
-</div>
+</main>
 
 <!-- Popup Container -->
 <div id="overlay1" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>

@@ -24,21 +24,21 @@
 
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  --> 
-    <main id="pageWrapper" class="mainPrf p-0 divide-x-4 divide-black">
-        <div class="profil basis-3/4 cardRec">
+    <main id="pageWrapper" class="mainPrf p-0 flex flex-grow justify-center items-center divide-x-4 divide-black">
+        <div class="profil cardRec">
             <div class="photoProfil">
-                    {% if user_profile.foto %}
-                    <div class="ppEdit">
-                        <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
-                    </div>
-                    {% else %}
-                    <div class="ppEdit">
-                        <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
-                    </div>
-                    {% endif %}
-                <div class="buttonCir w-fit h-fit p-0 items-center justify-center flex"><a onclick="popupEdit()" class="btnTxt font-normal text-[20px] p-2 w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
+                {% if user_profile.foto %}
+                <div class="ppEdit">
+                    <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
+                </div>
+                {% else %}
+                <div class="ppEdit">
+                    <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                </div>
+                {% endif %}
+                <div class="buttonCir w-fit h-fit p-0 items-center justify-center flex"><button onclick="popupEdit()" class="btnTxt font-normal text-[20px] p-2 w-full h-full text-center flex items-center justify-center">Edit Profile</button></div>
             </div>
-            <div class="flex flex-col gap-5 basis-1/4 justify-center">
+            <div class="flex flex-col gap-5 basis-2/5 justify-center">
                 <div class="flex flex-col cardCir cardAni shadow-none w-full bg-pink-50 p-4">
                     <table class="user">
                         <tr>
@@ -75,12 +75,12 @@
                 </div>    
             </div>
         </div>
-        <div class="bag2 basis-1/4 p-[10px] bg-gray-100 flex-shrink-0">
+        <div class="bag2 basis-1/4 p-[10px] bg-gray-100 flex-shrink-0 h-full">
             <div class="menu m-4 cardCir flex flex-col gap-5 p-[20px]">
                 <h1 class="font-bold text-center text-[30px] header3">Menu</h1>
                 <ul class="flex flex-col gap-10">
-                    <li><div class="buttonCir flex justify-center align-middle h-fit p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
-                    <li><div class="buttonCir flex justify-center align-middle h-fit p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+                    <li><div class="buttonCir flex justify-center align-middle h-fit p-0"><a class="page-link text-center font-bold text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+                    <li><div class="buttonCir flex justify-center align-middle h-fit p-0"><a class="page-link text-center font-bold text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
                 </ul>
             </div>
         </div>
