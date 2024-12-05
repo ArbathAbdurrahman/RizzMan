@@ -25,76 +25,67 @@
 {% block content %}
     <!-- Tulis html disini tanpa menambahkan apa yang sudah ada di base.html  --> 
     <main id="pageWrapper" class="mainPrf p-0 divide-x-4 divide-black">
-            <div class="profil cardRec">
-                <div class="photoProfil">
-                        {% if user_profile.foto %}
-                        <div class="ppEdit">
-                            <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
-                        </div>
-                        {% else %}
-                        <div class="ppEdit">
-                            <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
-                        </div>
-                        {% endif %}
-                    <div class="buttonCir w-fit h-fit p-1 items-center justify-center flex"><a onclick="popupEdit()" class="btnTxt font-normal text-[20px] w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
-                </div>
-                <div class="flex flex-col gap-5 basis-2/4 justify-center">
-                    <div class="flex flex-col cardCir cardAni shadow-none w-full bg-pink-50 p-4">
-                        <table class="user">
-                            <tr>
-                                <th>Nama</th>
-                                <td class="w-3">:</td>
-                                <td>{{user_profile.nama}}</td>
-                                <td>{{user_profile.nama}}</td>
-                            </tr>
-                            <tr>
-                                <th>ID</th>
-                                <th>ID</th>
-                                <td>:</td>
-                                <td>{{user_profile.user}}</td>
-                                <td>{{user_profile.user}}</td>
-                            </tr>
-                            <tr>
-                                <th>Alamat</th>
-                                <td>:</td>
-                                <td>{{user_profile.alamat}}</td>
-                                <td>{{user_profile.alamat}}</td>
-                            </tr>
-                            <tr>
-                                <th>Tanggal Lahir</th>
-                                <td>:</td>
-                                <td>{{user_profile.tanggal_lahir|date:"d F Y"}}</td>
-                                <td>{{user_profile.tanggal_lahir|date:"d F Y"}}</td>
-                            </tr>
-                            <tr>
-                                <th>Jabatan</th>
-                                <td>:</td>
-                                <td>{{user_profile.jabatan}}</td>
-                                <td>{{user_profile.jabatan}}</td>
-                            </tr>
-                            <tr>
-                                <th>Total Pengisian</th>
-                                <td>:</td>
-                                <td>{{user_profile.total_pengisian}}</td>
-                                <td>{{user_profile.total_pengisian}}</td>
-                            </tr>
-                        </table>    
-                    </div>    
-                    </div>    
-                </div>
+        <div class="profil basis-3/4 cardRec">
+            <div class="photoProfil">
+                    {% if user_profile.foto %}
+                    <div class="ppEdit">
+                        <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
+                    </div>
+                    {% else %}
+                    <div class="ppEdit">
+                        <img src="{% static 'img/herta.jpg' %}" alt="profil" class="imgPrf">
+                    </div>
+                    {% endif %}
+                <div class="buttonCir w-fit h-fit p-0 items-center justify-center flex"><a onclick="popupEdit()" class="btnTxt font-normal text-[20px] p-2 w-full h-full text-center flex items-center justify-center">Edit Profile</a></div>
             </div>
+            <div class="flex flex-col gap-5 basis-1/4 justify-center">
+                <div class="flex flex-col cardCir cardAni shadow-none w-full bg-pink-50 p-4">
+                    <table class="user">
+                        <tr>
+                            <th>Nama</th>
+                            <td class="w-3">:</td>
+                            <td>{{user_profile.nama}}</td>
+                        </tr>
+                        <tr>
+                            <th>ID</th>
+                            <td>:</td>
+                            <td>{{user_profile.user}}</td>
+                        </tr>
+                        <tr>
+                            <th>Alamat</th>
+                            <td>:</td>
+                            <td>{{user_profile.alamat}}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Lahir</th>
+                            <td>:</td>
+                            <td>{{user_profile.tanggal_lahir|date:"d F Y"}}</td>
+                        </tr>
+                        <tr>
+                            <th>Jabatan</th>
+                            <td>:</td>
+                            <td>{{user_profile.jabatan}}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Pengisian</th>
+                            <td>:</td>
+                            <td>{{user_profile.total_pengisian}}</td>
+                        </tr>
+                    </table>    
+                </div>    
+            </div>
+        </div>
         <div class="bag2 basis-1/4 p-[10px] bg-gray-100 flex-shrink-0">
             <div class="menu m-4 cardCir flex flex-col gap-5 p-[20px]">
                 <h1 class="font-bold text-center text-[30px] header3">Menu</h1>
                 <ul class="flex flex-col gap-10">
-                    <li><div class="buttonCir flex justify-center align-middle h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
-                    <li><div class="buttonCir flex justify-center align-middle h-auto p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
+                    <li><div class="buttonCir flex justify-center align-middle h-fit p-0"><a class="text-center text-[20px] w-full h-auto p-3" href='{% url "forms" %}'>Isi Formulir</a></div></li>
+                    <li><div class="buttonCir flex justify-center align-middle h-fit p-0"><a class="text-center text-[20px] w-full h-auto p-3" href="{% url 'tabel' %}">Lihat Tabel</a></div></li>
                 </ul>
             </div>
         </div>
     </main>
 
-<div id="overlay" class="hidden fixed inset-0 z-40" onclick="popupEdit()"></div>
 <div class="container hidden fixed inset-0 justify-center items-center z-50 transition-all duration-200" id="editPop">
     <div class="editBox overflow-auto">
         <form method="POST" enctype="multipart/form-data">
@@ -149,7 +140,6 @@
                         <h4 class="header4 text-[18px]">Alamat</h4>
                         <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                             {{ form.alamat }} <!-- Input dari form Django -->
-                            {{ form.alamat }} <!-- Input dari form Django -->
                             <a onclick="ubahAlamat()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
                         <p class="text-[13px] w-fit">
@@ -163,7 +153,6 @@
                         <h4 class="header4 text-[18px]">Tanggal Lahir</h4>
                         <div class="flex h-fit flex-row gap-3 w-full max-w-[400px]">
                             {{ form.tanggal_lahir }} <!-- Input dari form Django -->
-                            {{ form.tanggal_lahir }} <!-- Input dari form Django -->
                             <a onclick="ubahTanggalLahir()" class="cursor-pointer"><i class="fa-solid fa-square-pen text-[41px]"></i></a>
                         </div>
                         <p class="text-[13px]">*pastikan mengisi tanggal lahir dengan benar dan tepat</p>
@@ -171,41 +160,36 @@
                 </div>
             </div>
             <div class="editFrmBtn">
-                <button type="submit" class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
-                <button type="button" class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
-                <button type="submit" class="buttonRec bg-green-100 hover:bg-green-200" onclick="popupEdit()">Update</button>
+                <button type="submit" class="buttonRec bg-green-100 hover:bg-green-200">Update</button>
                 <button type="button" class="buttonRec bg-gray-100 hover:bg-gray-200" onclick="popupEdit()">Cancel</button>
             </div>
         </form>
-        </form>
     </div>
-</div>
 </div>
 
 <script>
     // Fungsi untuk membuka/menutup popup edit
     function popupEdit() {
         const editPop = document.getElementById('editPop');
-        const overlay = document.getElementById('overlay');
         const pageWrapper = document.getElementById('pageWrapper')
         
-        if (editPop.style.display === 'none' || editPop.style.display === '') {
-            editPop.style.display = 'flex';
-            overlay.style.display = 'block';
-            pageWrapper.style.filter = 'blur(5px)';
+        if (editPop.classList.contains('hidden')) {
+            editPop.classList.remove('hidden');
+            editPop.classList.add('popup-enter');
+            pageWrapper.classList.add('blur-bg');
 
             setTimeout(() => {
-                editPop.style.opacity = '1';
+                editPop.classList.add('flex');
+                editPop.classList.remove('popup-enter');
             }, 100);
         } else {
             // Popup ditutup
-            editPop.classList.add('popup-exit-active');
-            overlay.classList.add('hidden');
             pageWrapper.classList.remove('blur-bg');
-            editPop.classList.remove('popup-exit-active');
-            editPop.classList.add('hidden');
+            editPop.classList.add('popup-exit-active');
             
             setTimeout(() => {
+                editPop.classList.remove('popup-exit-active');
+                editPop.classList.add('hidden');
                 editPop.classList.remove('flex');
             }, 300);
         }

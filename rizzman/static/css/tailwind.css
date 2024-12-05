@@ -204,10 +204,7 @@ main {
 #burgerNav {
     display: none;
     position: absolute;
-    top: -0px;
-    top: -0px;
     width: 100%;
-    transition: top 0.4s;
 }
 
 #pageWrapper {

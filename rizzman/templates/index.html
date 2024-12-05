@@ -6,8 +6,8 @@
 {% endblock title %}
 
 {% block content %}
-    <main id="pageWrapper">
-        <div class="mainInd"> 
+    <main>
+        <div id="pageWrapper" class="mainInd"> 
             {% if messages %}
             <div class="mb-4 space-y-2">
                  {% for message in messages %}
@@ -33,9 +33,6 @@
             </div>
             <div class="wellcome1">
                 <p class="text-center text-[20px]">Dengan Rizzman, proses manajemen risiko menjadi lebih terstruktur, transparan, dan mudah diakses. Mari lebih aman dan tanggap risiko dengan menggunakan Rizzman!</p>
-                {% if not request.user.is_authenticated %}
-                    <button class="buttonCir w-1/2 items-center place-content-center text-[25px]" onclick="loginPopup()">Login</button>
-                {% endif %}
                 {% if not request.user.is_authenticated %}
                     <button class="buttonCir w-1/2 items-center place-content-center text-[25px]" onclick="loginPopup()">Login</button>
                 {% endif %}

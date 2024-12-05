@@ -213,21 +213,29 @@
         });
     } 
 
-    function chartPopup () {
+    function chartPopup() {
         const chartPop = document.getElementById('chartPop');
-        const pageWrapper1 = document.getElementById('pageWrapper1');
-
+        const pageWrapper = document.getElementById('pageWrapper1');
+        
         if (chartPop.classList.contains('hidden')) {
-            pageWrapper1.style.filter = 'blur(5px)';
-            chartPop.classList.add('flex');
+            chartPop.classList.remove('hidden');
+            chartPop.classList.add('popup-enter');
+            pageWrapper.classList.add('blur-bg');
+
+            setTimeout(() => {
+                chartPop.classList.add('flex');
+                chartPop.classList.remove('popup-enter');
+            }, 100);
+        } else {
+            // Popup ditutup
+            pageWrapper.classList.remove('blur-bg');
+            chartPop.classList.add('popup-exit-active');
             
             setTimeout(() => {
-                chartPop.classList.remove('hidden');
-            },100);
-        } else {
-            chartPop.classList.remove('flex')
-            chartPop.classList.add('hidden')
-            pageWrapper1.style.filter = 'none';
+                chartPop.classList.remove('popup-exit-active');
+                chartPop.classList.add('hidden');
+                chartPop.classList.remove('flex');
+            }, 300);
         }
     }
 
