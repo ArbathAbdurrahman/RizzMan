@@ -141,7 +141,10 @@ class RiskForm(forms.ModelForm):
         
         # Semua harus diisi
         for field_name in self.fields:
-            self.fields[field_name].required = True
+            if field_name == 'status':
+                self.fields[field_name].required = False
+            else: 
+                self.fields[field_name].required = True
             
         # Setup katogori dinamis
         self.fields['departemen'].queryset = Department.objects.all()

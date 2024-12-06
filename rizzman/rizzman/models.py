@@ -46,8 +46,10 @@ class Risk(models.Model):
         (False, 'Tidak'),
     ]
     STATUS_PERLAKUAN = [
-        (True, 'Accept'),
-        (True, 'Reduce'),
+        ('accept', 'Accept'),
+        ('reduce', 'Reduce'),
+        ('avoid', 'Avoid'),
+        ('share', 'Share'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="risks")
@@ -67,11 +69,11 @@ class Risk(models.Model):
     inherent_score = models.PositiveIntegerField(default=0)
     control = models.BooleanField(choices=STATUS_CONTROL)
     memadai = models.BooleanField(choices=MEMADAI_CHOICES)
-    status = models.BooleanField(choices=STATUS_CHOICES)
+    status = models.BooleanField(choices=STATUS_CHOICES,null=True)
     residual_likelihood = models.PositiveIntegerField(default=0)
     residual_impact = models.PositiveIntegerField(default=0)
     residual_score = models.PositiveIntegerField(default=0)
-    perlakuan = models.BooleanField(choices=STATUS_PERLAKUAN)
+    perlakuan = models.CharField(max_length=50,choices=STATUS_PERLAKUAN)
     tindakan_mitigasi = models.TextField()
     mitigasi_likelihood = models.PositiveIntegerField(default=0)
     mitigasi_impact = models.PositiveIntegerField(default=0)
