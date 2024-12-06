@@ -5,7 +5,7 @@
 {% load humanize %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
+<main class="container mx-auto px-4 py-8">
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <div class="bg-green-600 text-white px-6 py-4">
             <h2 class="text-2xl font-bold">Detail Risiko: {{ risk.kode_resiko }}</h2>
@@ -16,6 +16,10 @@
                 <div>
                     <h4 class="text-xl font-semibold mb-4 border-b pb-2">Informasi Risiko</h4>
                     <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="font-medium text-gray-600">Tujuan Resiko:</span>
+                            <span>{{ risk.tujuan }}</span>
+                        </div>
                         <div class="flex justify-between">
                             <span class="font-medium text-gray-600">Kode Risiko:</span>
                             <span>{{ risk.kode_resiko }}</span>
@@ -41,8 +45,8 @@
 
                 <div>
                     <h4 class="text-xl font-semibold mb-4 border-b pb-2">Penilaian Risiko</h4>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="bg-blue-50 p-4 rounded">
+                    <div class="grid md:grid-cols-3 grid-cols-1  gap-4">
+                        <div class="bg-blue-50 p-4 rounded-md">
                             <h5 class="font-semibold text-center">Inherent Risk</h5>
                             <div class="text-center">
                                 <p>Likelihood: {{ risk.inherent_likelihood }}</p>
@@ -56,7 +60,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-blue-50 p-4 rounded">
+                        <div class="bg-blue-50 p-4 rounded-md">
                             <h5 class="font-semibold text-center">Residual Risk</h5>
                             <div class="text-center">
                                 <p>Likelihood: {{ risk.residual_likelihood }}</p>
@@ -70,7 +74,7 @@
                             </div>
                         </div>
 
-                        <div class="bg-blue-50 p-4 rounded">
+                        <div class="bg-blue-50 p-4 rounded-md">
                             <h5 class="font-semibold text-center">Mitigasi Risk</h5>
                             <div class="text-center">
                                 <p>Likelihood: {{ risk.mitigasi_likelihood }}</p>
@@ -92,6 +96,7 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <p class="mb-2"><strong>Sumber Risiko:</strong> {{ risk.get_sumber_resiko_display }}</p>
+                        <p class="mb-2"><strong>Uraian Peristiwa:</strong> {{ risk.uraian_peristiwa }}</p>
                         <p class="mb-2"><strong>Penyebab Risiko:</strong> {{ risk.penyebab_resiko }}</p>
                     </div>
                     <div>
@@ -102,21 +107,34 @@
             </div>
 
             <div class="mt-8">
-                <h4 class="text-xl font-semibold mb-4 border-b pb-2">Mitigasi</h4>
+                <h4 class="text-xl font-semibold mb-4 border-b pb-2 flex flex-col gap-2">Pengendalian</h4>
                 <div class="bg-gray-50 p-4 rounded">
-                    <p class="mb-2"><strong>Perlakuan:</strong> {{ risk.get_perlakuan_display }}</p>
-                    <p><strong>Tindakan Mitigasi:</strong> {{ risk.tindakan_mitigasi }}</p>
+                    <p><strong>Control:</strong> {{ risk.get_perlakuan_display }}</p>
+                    <p id="memadai"><strong>Status:</strong> 
+                        {% if risk.memadai %} Memadai {% else %} Tidak memadai {% endif %} </p>
+                    <p id="proses"><strong>Proses:</strong>
+                        {% if risk.status %} Executed {% else %} Ongoing {% endif %} </p>
                 </div>
             </div>
 
-            <div class="mt-8 flex justify-between items-center">
-                <div>
+            <div class="mt-8">
+                <h4 class="text-xl font-semibold mb-4 border-b pb-2">Mitigasi</h4>
+                <div class="bg-gray-50 p-4 rounded">
+                    <p class="mb-2"><strong>Perlakuan:</strong> {{ risk.get_perlakuan_display }}</p>
+                    <p><strong>Tindakan:</strong> {{ risk.tindakan_mitigasi }}</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-start md:flex-row flex-col md:justify-between items-start">
+                <div class="flex flex-col md:flex-row gap-2">
                     <p class="text-sm text-gray-600">
-                        <strong>Dibuat:</strong> {{ risk.created|date:"d M Y" }} | 
+                        <strong>Dibuat:</strong> {{ risk.created|date:"d M Y" }} 
+                    </p>
+                    <p class="text-sm text-gray-600">
                         <strong>Terakhir Diubah:</strong> {{ risk.modified|date:"d M Y" }}
                     </p>
                 </div>
-                <div class="space-x-4 flex flex-row">
+                <div class="space-x-4 flex flex-row w-full md:w-fit place-content-end">
                     <a href="{% url 'tabel' %}" 
                        class="px-4 py-2 buttonCir bg-yellow-200">
                         Kembali
@@ -129,5 +147,6 @@
             </div>
         </div>
     </div>
-</div>
+
+</main>
 {% endblock %}

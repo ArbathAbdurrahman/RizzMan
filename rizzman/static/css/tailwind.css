@@ -12,6 +12,16 @@
     font-family: "Nunito Sans", sans-serif;
 }
 
+/* animasi reload fade */
+body {
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out; 
+}
+  
+body.loaded {
+    opacity: 1; 
+}
+
 @layer base {
     body {
         @apply flex flex-col h-screen justify-between;
@@ -21,9 +31,9 @@
         @apply w-full h-[68px] px-10 bg-white justify-start items-center gap-2.5 inline-flex;
     }
 
-    main {
+    /* main {
         @apply flex justify-center flex-grow p-[10px] mb-auto;
-    }
+    } */
 }
 
 @layer components {
@@ -32,12 +42,12 @@
         @apply text-black tracking-wide text-4xl font-bold text-center h-auto;
         font-family: "Raleway", sans-serif;
     }
-
+    
     .header3 {
         @apply text-black text-[26px] font-medium h-auto;
         font-family: "Nunito Sans", sans-serif;
     }
-
+    
     .descript {
         @apply text-[#030303] font-normal text-[15px] text-justify;
     }
@@ -46,16 +56,15 @@
     .loginBox {
         @apply w-[700px] h-[353px] bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
     }
-
+    
     .editBox {
         @apply bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-start items-start gap-2.5 flex relative w-5/6 h-4/5 px-14 py-5;
     }
-
+    
     .notifBox {
         @apply w-fit h-fit bg-[#f8eeec] rounded-[20px] shadow-[8px_8px_0px_rgba(0,0,0,1)] flex-col justify-center items-center gap-2.5 inline-flex relative;
     }
-
-
+    
     
     .wlcm {
         @apply w-full h-auto px-10 flex-col justify-center items-center gap-4 inline-flex;
@@ -76,7 +85,7 @@
     .formlgnn {
         @apply w-full flex-col justify-center items-start gap-2.5 flex;
     }
-
+    
     .ket {
         @apply flex justify-items-center flex-col w-full;
     }
@@ -89,36 +98,40 @@
     .BoxPlchdr {
         @apply text-black text-lg font-normal w-full;
     }
-
+    
     .buttonRec {
         @apply h-12 w-auto border-black border-2 p-2.5 bg-[#ffe2e4] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-300 ease-in-out cursor-pointer;
     }
-
+    
     .buttonCir {
         @apply h-12 w-auto flex items-center border-black border-2 p-2.5 bg-[#e5f4f1] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-300 ease-in-out cursor-pointer rounded-md;
     }
-
+    
     .buttonCirRd {
         @apply h-12 w-auto flex items-center border-black border-2 p-2.5 bg-[#ffe2e4] hover:shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all duration-300 ease-in-out cursor-pointer rounded-md;
-
+    
     }
-
+    
     .cardRec {
         @apply border-[3.4px] border-black bg-[#ecf3e4] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit;
     }
-
+    
     .cardCir {
         @apply border-[3.4px] border-black bg-[#f8eeec] shadow-[8px_8px_0px_rgba(0,0,0,1)] place-content-center w-auto h-fit rounded-xl;
     }
 
     .profil {
-        @apply p-5 flex flex-row gap-10 m-5;
+        @apply p-5 flex flex-row gap-10 m-10 basis-3/4 h-fit;
     }
-
+    
     .imgPrf{
-        @apply rounded-full w-[270px] border-4 border-black;
+        @apply w-[100%];
     }
 
+    .ppEdit {
+        @apply flex justify-center items-center relative overflow-hidden w-[270px] h-[270px] grow-0 rounded-full border-[3px] border-black;
+    }
+    
     .photoProfil {
         @apply flex items-center flex-col gap-4 justify-center;
     }
@@ -126,70 +139,72 @@
     .bag1 {
         @apply h-full basis-3/4 p-[10px] w-full flex justify-center align-middle items-center bg-white;
     }
-
+    
     .user {
         @apply flex justify-start;
     }
-
+    
     .formRisk{
         @apply w-auto grid grid-cols-2 gap-[20px];
     }
-
+    
     .editPrfl1 {
         @apply h-fit flex flex-row items-start gap-10;
+        @apply h-fit flex flex-row items-start gap-10;
     }
-
+    
     .editPrfl2 {
         @apply pt-5 pl-10 gap-7 flex flex-col;
     }
-
+    
     .mainEditPrfl {
         @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
+        @apply h-fit w-full border-t-[2px] gap-5 border-gray-600 flex flex-row;
     }
-
+    
     .editPhoto {
         @apply rounded-full w-[180px] border-4 border-black;
     }
-
+    
     .editFrmBtn {
         @apply flex flex-row gap-[10px] items-start mt-3;
+        @apply flex flex-row gap-[10px] items-start mt-3;
     }
-
+    
     .tabelRsk tr:hover {
         @apply bg-gray-100 transition-colors duration-500 ease-in-out;
     }
-
+    
     .wellcome1 {
         @apply flex gap-3 flex-col w-4/6 items-center;
     }
-
+    
     .wellcome2 {
         @apply flex flex-row gap-7 w-3/4;
     }
-
+    
     .mainInd {
         @apply flex flex-col gap-10 p-3 items-center;
     }
     .infSpan {
         @apply col-span-2;
     }
-
-    .chartBox {
-        @apply relative w-auto h-[80%] flex justify-center items-center flex-col;
-    }
-
+    
+        .chartBox {
+            @apply relative w-auto h-[80%] flex justify-center items-center flex-col;
+        }
+    
+    
     #burgerNav {
         display: none;
         position: absolute;
-        top: -0px;
         width: 100%;
-        transition: top 0.4s;
     }
-
+    
     #pageWrapper {
         transition: all 0.4s;
     }
-
+    
     #myBubbleChart {
         width: 85% !important;
         height: 85% !important;
@@ -280,15 +295,11 @@
     }
 
     .profil {
-        @apply flex-col gap-1 w-full;
+        @apply flex-col gap-5 w-full basis-full;
     }
 
     .photoProfil {
-        @apply gap-2 flex-row;
-    }
-
-    .imgPrf {
-        @apply w-[180px];
+        @apply gap-2 flex-row justify-center items-center w-full;
     }
 
     .formRisk {
@@ -300,7 +311,7 @@
     }
 
     .editPrfl1 {
-        @apply pl-0 gap-1 flex-col justify-center items-center;
+        @apply pl-0 gap-1 flex-col justify-center items-center mb-5;
     }
 
     .editPrfl2 {
@@ -348,12 +359,9 @@
     }
 
     .profil {
-        @apply p-4 m-2;
+        @apply p-4 m-4;
     }
 
-    .imgPrf {
-        @apply min-w-[140px];
-    }
 
     .bag1 {
         @apply flex-none;
@@ -377,5 +385,9 @@
 
     .chartBox {
         @apply h-[53%];
+    }
+
+    .ppEdit {
+        @apply w-[180px] h-[180px];
     }
 }
