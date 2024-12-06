@@ -110,7 +110,8 @@ class RiskForm(forms.ModelForm):
                     'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
                 }),
                 'memadai': forms.Select(attrs={
-                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+                    'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500',
+                    'id': 'memadai'
                 }),
                 'status': forms.Select(attrs={
                     'class': 'block bg-slate-100 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
