@@ -180,7 +180,7 @@
                 </div>
              
                 <!-- Status  -->
-                <div class="">
+                <div id="status" style="display: none;">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.status.id_for_label }}">Status</label>
                     {{ form.status }}
                     {% if form.status.errors %}
@@ -250,5 +250,17 @@
         </div>
     </form>
       
+    <script>
+        const memadai = document.getElementById('memadai');
+        const status = document.getElementById('status');
+        
+        memadai.addEventListener('click', () => {
+            if (memadai.value === 'True') {
+                status.style.display = 'block';
+            } else {
+                status.style.display = 'none';
+            }
+        });
+    </script>
 </main>   
 {% endblock content %}
