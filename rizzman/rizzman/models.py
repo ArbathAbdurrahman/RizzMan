@@ -29,9 +29,9 @@ class Kelompok(models.Model):
 class Risk(models.Model):
     """Model untuk risiko."""
     STATUS_CHOICES = [
-        ('executed', 'Executed'),
-        ('ongoing', 'Ongoing'),
-        ('pending', 'Pending'),
+        ('Executed', 'Executed'),
+        ('Ongoing', 'Ongoing'),
+        ('Pending', 'Pending'),
     ]
     SUMBER_RESIKO_CHOICES = [
     ('internal', 'Internal'),

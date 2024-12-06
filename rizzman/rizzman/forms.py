@@ -224,8 +224,8 @@ class RiskForm(forms.ModelForm):
             instance.mitigasi_likelihood * 
             instance.mitigasi_impact
         )
-        if instance.memadai == False:
-            instance.status = 'pending'
+        if instance.memadai is not True:
+            instance.status = 'Pending'
         
         if commit:
             instance.save()

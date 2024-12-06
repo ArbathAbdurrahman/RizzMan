@@ -113,7 +113,7 @@
                     <p id="memadai"><strong>Status:</strong> 
                         {% if risk.memadai %} Memadai {% else %} Tidak memadai {% endif %} </p>
                     <p id="proses"><strong>Proses:</strong>
-                        {% if risk.status %} Executed {% else %} Ongoing {% endif %} </p>
+                        {{ risk.status }}</p>
                 </div>
             </div>
 
