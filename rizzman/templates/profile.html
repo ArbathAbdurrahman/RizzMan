@@ -95,7 +95,7 @@
                     <div class="photoProfile">
                         {% if user_profile.foto %}
                         <div class="relative w-fit h-fit">
-                            <div class="ppEdit w-[270px] h-[270px]">
+                            <div class="ppEdit">
                                 <img src="{{ user_profile.foto.url}}" alt="Profile Photo" class="imgPrf">
                             </div>
                             <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[75%] left-[1%] z-50">
