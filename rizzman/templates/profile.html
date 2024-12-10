@@ -104,9 +104,12 @@
                             </button>
                         </div>
                         {% else %}
-                        <div class="ppEdit">
-                            <img src="{% static 'img/herta.jpg' %}" alt="Default Profile Photo" class="ImgPrf">
-                            <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[155px] text-[14px] z-50">
+                        
+                        <div class="relative w-fit h-fit">
+                            <div class="ppEdit">
+                                <img src="{% static 'img/herta.jpg' %}" alt="Default Profile Photo" class="ImgPrf">
+                            </div>
+                            <button type="button" onclick="editFoto()" class="flex flex-row items-center gap-1 w-fit h-fit px-1 py-[2px] rounded-md bg-gray-800 text-white absolute top-[75%] left-[1%] z-50">
                                 <i class="fa-solid fa-pen"></i>
                                 <p>Edit</p>
                             </button>
