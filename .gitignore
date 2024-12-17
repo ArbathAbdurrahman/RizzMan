@@ -1,12 +1,12 @@
 /venv/
 rizzman/venv/
-rizzman/package-lock.json
-rizzman/package.json
-rizzman/tailwind.config.js
+# rizzman/package-lock.json
+# rizzman/package.json
+# rizzman/tailwind.config.js
 rizzman/node_modules/
 rizzman/media/user_photos/
 rizzman/static/css/output.css
-rizzman/rizzman/settings.py
+# rizzman/rizzman/settings.py
 
 # Python files
 *.pyc
